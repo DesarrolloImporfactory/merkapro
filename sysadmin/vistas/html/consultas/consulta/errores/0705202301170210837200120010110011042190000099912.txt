@@ -1,0 +1,6 @@
+Servicio: AutorizarComprobante
+Clave Acceso: 0705202301170210837200120010110011042190000099912
+Respuesta: Response not of type text/xml: text/html; charset=UTF-8
+
+__________________________________________________________________
+

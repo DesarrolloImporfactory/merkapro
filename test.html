@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        fetch("http://localhost/guias/GenerarGuia/nueva/", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-Token-Guia": "Zc46Um3cI8Eh9vce6hn9"
+            },
+            body: JSON.stringify({
+                "id": 1,
+                "nombre": "Guia 1",
+                "descripcion": "Descripcion de la guia 1",
+                "fecha": "2020-10-10",
+                "id_usuario": 1
+            })
+        }).then(response => response.json()).then(data => console.log(data)).catch(error => console.log(error))
+        fetch("http://192.168.100.22/sysadmin/vistas/ajax/crsf_dropi.php", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-Token-Guia": "Zc46Um3cI8Eh9vce6hn9"
+            },
+            body: JSON.stringify({
+                "correo": "jeimy",
+                "contrasena": "cksamdalsdmas,mdlm!"
+            })
+        }).then(respuesta => console.log(respuesta))
+    </script>
+</body>
+
+</html>

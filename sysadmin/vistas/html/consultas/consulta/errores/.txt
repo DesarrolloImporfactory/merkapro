@@ -1,0 +1,29 @@
+Servicio: AutorizarComprobante
+Clave Acceso: 
+Respuesta: Array
+(
+    [claveAccesoConsultada] => 
+    [autorizaciones] => Array
+        (
+            [autorizacion] => Array
+                (
+                    [estado] => RECHAZADA
+                    [mensajes] => Array
+                        (
+                            [mensaje] => Array
+                                (
+                                    [identificador] => 80
+                                    [mensaje] => ERROR EN LA ESTRUCTURA DE LA CLAVE DE ACCESO
+                                )
+
+                        )
+
+                )
+
+        )
+
+)
+
+
+__________________________________________________________________
+

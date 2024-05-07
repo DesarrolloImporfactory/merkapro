@@ -1,0 +1,12 @@
+Servicio: AutorizarComprobante
+Clave Acceso: 0301202101176815353000121120400003659945897458917
+Respuesta: Array
+(
+    [claveAccesoConsultada] => 0301202101176815353000121120400003659945897458917
+    [numeroComprobantes] => 0
+    [autorizaciones] => 
+)
+
+
+__________________________________________________________________
+

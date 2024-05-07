@@ -1,0 +1,12 @@
+Servicio: AutorizarComprobante
+Clave Acceso: 2802202107079181818400120010020000008981234567811
+Respuesta: Array
+(
+    [claveAccesoConsultada] => 2802202107079181818400120010020000008981234567811
+    [numeroComprobantes] => 0
+    [autorizaciones] => 
+)
+
+
+__________________________________________________________________
+

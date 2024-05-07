@@ -1,0 +1,102 @@
+html, body {
+  background-color: #f2f2f2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.progress-wrap {
+  height: 80px;
+  margin-top: 200px;
+}
+
+#progress-container {
+  display: flex;
+  width: 400px;
+  margin: auto;
+}
+#progress-container * {
+  font-family: "Arial";
+}
+#progress-container p {
+  font-size: 12px;
+  line-height: 12px;
+  position: absolute;
+  margin-top: 60px;
+  width: 75px;
+  float: left;
+  margin-left: -30px !important;
+}
+@media (max-width: 600px) {
+  #progress-container {
+    width: 260px;
+  }
+}
+#progress-container .line {
+  height: 1px;
+  width: 400px;
+  border-bottom: 4px solid #d4d4d4;
+  position: absolute;
+  margin-top: 25px;
+  z-index: 1000;
+}
+@media (max-width: 600px) {
+  #progress-container .line {
+    width: 260px;
+  }
+}
+#progress-container ul {
+  display: flex;
+  width: 100%;
+  list-style: none;
+  padding: 0px;
+  margin: auto;
+  justify-content: space-between;
+  z-index: 2000;
+}
+#progress-container li {
+  display: inline-flex;
+  border: #d4d4d4 solid 4px;
+  background: #f2f2f2;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  color: #d4d4d4;
+  font-size: 20px;
+}
+#progress-container li:before {
+  font-size: 12px;
+  position: absolute;
+  margin-top: 50px;
+  color: #666;
+  margin-right: 100px;
+}
+#progress-container li p {
+  color: #d4d4d4;
+  margin-left: -35px;
+}
+#progress-container .done {
+  font-family: "FontAwesome";
+  border: #8cc43d solid 4px;
+  color: #8cc43d;
+}
+#progress-container .done:after {
+  content: "\f00c";
+}
+#progress-container .done p {
+  color: #8cc43d;
+  
+}
+#progress-container .active {
+  color: #555;
+  border: #555 solid 4px;
+}
+#progress-container .active p {
+  color: #555;
+  margin-left: -35px;
+}

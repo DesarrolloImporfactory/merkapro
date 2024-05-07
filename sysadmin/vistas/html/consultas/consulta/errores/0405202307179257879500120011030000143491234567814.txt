@@ -1,0 +1,12 @@
+Servicio: AutorizarComprobante
+Clave Acceso: 0405202307179257879500120011030000143491234567814
+Respuesta: Array
+(
+    [claveAccesoConsultada] => 0405202307179257879500120011030000143491234567814
+    [numeroComprobantes] => 0
+    [autorizaciones] => 
+)
+
+
+__________________________________________________________________
+
