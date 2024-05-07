@@ -1,18 +1,21 @@
 <?php
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
+date_default_timezone_set("America/Guayaquil");
+
 # conectare la base de datos
-$conexion = @mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+$conexion = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 if (!$conexion) {
-    die("imposible conectarse: " . mysqli_error($conexion));
+    die("Imposible conectarse: " . mysqli_connect_error());
 }
-if (@mysqli_connect_errno()) {
+if (mysqli_connect_errno()) {
     die("Conexión falló: " . mysqli_connect_errno() . " : " . mysqli_connect_error());
 }
-date_default_timezone_set("America/Guayaquil");
-mysqli_query($conexion, "SET NAMES utf8");
-mysqli_query($conexion, "SET CHARACTER_SET utf");
 
-function limpiar($tags)
-{
-    $tags = strip_tags($tags);
-    return $tags;
+mysqli_query($conexion, "SET NAMES 'utf8'");
+mysqli_query($conexion, "SET CHARACTER_SET 'utf8'");
+
+function limpiar($tags) {
+    return strip_tags($tags);
 }

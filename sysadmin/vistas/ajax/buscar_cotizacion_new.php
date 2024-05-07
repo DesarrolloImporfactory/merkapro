@@ -40,7 +40,7 @@ if (
 $server_url = $protocol . $_SERVER['HTTP_HOST'];
 //Finaliza Control de Permisos
 $action = (isset($_REQUEST['action']) && $_REQUEST['action'] != null) ? $_REQUEST['action'] : '';
-if ($action == 'ajax' && ($server_url == "https://marketplace.imporsuit.com")) {
+if ($action == 'ajax' && ($server_url == "https://merkapro.ec")) {
     // escaping, additionally removing everything that could be (html/javascript-) code
     $q      = mysqli_real_escape_string($conexion, (strip_tags($_REQUEST['q'], ENT_QUOTES)));
     $sTable = "facturas_cot, clientes, users";
@@ -177,7 +177,7 @@ if ($action == 'ajax' && ($server_url == "https://marketplace.imporsuit.com")) {
                     <th class="text-center">Cliente</th>
                     <th class="text-center">Localidad</th>
                     <th class="text-center">Tienda</th>
-                    <?php if ($server_url === "https://marketplace.imporsuit.com") { ?>
+                    <?php if ($server_url === "https://merkapro.ec") { ?>
                         <th class="text-center">Proveedor</th>
                     <?php } ?>
                     <th class="text-center">Transportadora</th>
@@ -380,7 +380,7 @@ if ($action == 'ajax' && ($server_url == "https://marketplace.imporsuit.com")) {
                         <td class="text-center align-middle"><span class="text-link" onclick="abrirModalTienda('<?php echo $tienda; ?>')" data-bs-toggle="modal" data-bs-target="#tiendaModal"> <?php echo $tienda; ?></span>
                         </td>
 
-                        <?php if ($server_url === "https://marketplace.imporsuit.com") { ?>
+                        <?php if ($server_url === "https://merkapro.ec") { ?>
                             <td class="text-center align-middle"><span class="text-link" onclick="abrirModalTienda('<?php echo $proveedor; ?>')"> <?php echo $proveedor; ?></span></td>
                         <?php } ?>
                         <td class="text-center align-middle"><?php if (empty($transportadora)) {
@@ -852,7 +852,7 @@ if ($action == 'ajax' && ($server_url == "https://marketplace.imporsuit.com")) {
                         </td>
                         <td class="text-center align-middle">
                             <?php if ($drogshipin == 3 || $drogshipin == 4) {
-                                if (strpos($guia_numero, "IMP") === 0 && $server_url == "https://marketplace.imporsuit.com") {
+                                if (strpos($guia_numero, "IMP") === 0 && $server_url == "https://merkapro.ec") {
                             ?>
                                     <select style="width: 100px" onchange="obtener_datos('<?php echo $id_factura; ?>')" id="estado_sistema<?php echo $id_factura; ?>" class='form-control <?php echo $label_class; ?>' name='mod_estado' id='mod_estado'>
                                         <option value="">-- Selecciona --</option>
@@ -1037,7 +1037,7 @@ if ($action == 'ajax' && ($server_url == "https://marketplace.imporsuit.com")) {
                     <th class="text-center">Cliente</th>
                     <th class="text-center">Localidad</th>
                     <th class="text-center">Tienda</th>
-                    <?php if ($server_url === "https://marketplace.imporsuit.com") { ?>
+                    <?php if ($server_url === "https://merkapro.ec") { ?>
                         <th class="text-center">Proveedor</th>
                     <?php } ?>
                     <th class="text-center">Transportadora</th>
@@ -1066,9 +1066,12 @@ if ($action == 'ajax' && ($server_url == "https://marketplace.imporsuit.com")) {
                     $ciudad_cot   = $row['ciudad_cot'];
                     //echo $ciudad_cot;
                     $ciudad_cot   = get_row("ciudad_cotizacion", "ciudad", "id_cotizacion", $ciudad_cot);
-                    if ($ciudad_cot == 0) {
+                   
+                    if (empty($ciudad_cot) || $ciudad_cot ===0) {
                         $ciudad_cot = get_row('ciudad_laar', 'nombre', 'codigo', $row['ciudad_cot']);
                     }
+
+                   
 
                     $observacion   = $row['observacion'];
                     $direccion   = $row['c_principal'] . ' y ' . $row['c_secundaria'] . '-' . $row['referencia'];
@@ -1243,7 +1246,7 @@ if ($action == 'ajax' && ($server_url == "https://marketplace.imporsuit.com")) {
                         <td class="text-center align-middle"><span class="text-link" onclick="abrirModalTienda('<?php echo $tienda; ?>')" data-bs-toggle="modal" data-bs-target="#tiendaModal"> <?php echo $tienda; ?></span>
                         </td>
 
-                        <?php if ($server_url === "https://marketplace.imporsuit.com") { ?>
+                        <?php if ($server_url === "https://merkapro.ec") { ?>
                             <td class="text-center align-middle"><span class="text-link" onclick="abrirModalTienda('<?php echo $proveedor; ?>')"> <?php echo $proveedor; ?></span></td>
                         <?php } ?>
                         <td class="text-center align-middle"><?php if (empty($transportadora)) {
@@ -1766,7 +1769,7 @@ if ($action == 'ajax' && ($server_url == "https://marketplace.imporsuit.com")) {
                         <td class="text-center align-middle">
 
                             <?php if ($drogshipin == 3 || $drogshipin == 4) {
-                                if (strpos($guia_numero, "IMP") === 0 && $server_url == "https://marketplace.imporsuit.com") {
+                                if (strpos($guia_numero, "IMP") === 0 && $server_url == "https://merkapro.ec") {
 
                             ?>
                                     <select style="width: 100px" onchange="obtener_datos('<?php echo $id_factura; ?>')" id="estado_sistema<?php echo $id_factura; ?>" class='form-control <?php echo $label_class; ?>' name='mod_estado' id='mod_estado'>
