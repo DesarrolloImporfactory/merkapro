@@ -22,7 +22,7 @@
     ) {
       $("body").removeClass("fixed-left").addClass("fixed-left-void");
       // Cambia a la imagen cuando el menú está en estado "enlarged"
-      $("#mi-imagen").attr("src", "https://marketplace.imporsuit.com/sysadmin/img/logo_imporsuit.png");
+      $("#mi-imagen").attr("src", "https://marketplace.imporsuit.com/sysadmin/img/MERKATODO-LOGO-MINI.png");
       $("#mi-imagen").css("cssText", "width: 40px !important; height: 40px");
     } else if (
       !$("#wrapper").hasClass("enlarged") &&
@@ -32,7 +32,7 @@
       // Cambia de nuevo a la imagen original cuando el menú no está en estado "enlarged"
       $("#mi-imagen").attr(
         "src",
-        "https://marketplace.imporsuit.com/sysadmin/img/LOGOS-IMPORSUIT.png"
+        "https://marketplace.imporsuit.com/sysadmin/img/MERKATODO-LOGO.png"
       );
       $("#mi-imagen").css("cssText", "width: 100px !important;");
     }
