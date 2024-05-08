@@ -21,6 +21,8 @@ get_cadena($user_id);
 $modulo = "Wallets";
 permisos($modulo, $cadena_permisos);
 
+
+
 ?>
 <?php require 'includes/header_start.php'; ?>
 

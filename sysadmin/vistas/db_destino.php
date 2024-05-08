@@ -1,6 +1,6 @@
 {
     "DB_HOST": "localhost",
-    "DB_USER": "imporsuit_wilcrokurbancollection",
-    "DB_PASS": "Impor2@23",
-    "DB_NAME": "imporsuit_wilcrokurbancollection"
+    "DB_USER": "imporsuit_merkatodo",
+    "DB_PASS": "imporsuit_merkatodo",
+    "DB_NAME": "imporsuit_merkatodo"
 }

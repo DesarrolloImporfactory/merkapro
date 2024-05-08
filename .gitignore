@@ -9,8 +9,7 @@
 /sysadmin/vistas/assets/comprobantes/autorizados/
 /sysadmin/vistas/ajax/landing_producto/
 sysadmin/vistas/db.php
-sysadmin/vistas/db_destino_marketplace.php
-/sysadmin/vistas/db_destino_marketplace.php
+
 sysadmin/vistas/xml/firmas
 sysadmin/vistas/xml/comprobantes
 testeos/

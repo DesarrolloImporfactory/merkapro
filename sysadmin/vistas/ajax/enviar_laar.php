@@ -108,7 +108,7 @@ $tipo_origen = get_row('facturas_cot', 'drogshipin', 'id_factura', $id_pedido_co
 if ($_SERVER['HTTP_HOST'] == 'localhost') {
     $or_marketplace = 'http://localhost/official/imporsuitv01/';
 } else {
-    $or_marketplace = 'https://marketplace.imporsuit.com/';
+    $or_marketplace = 'https://merkapro.ec/';
 }
 $archivo_origen = $or_marketplace . 'sysadmin/vistas/db1.php';
 $contenido = file_get_contents($archivo_origen);
