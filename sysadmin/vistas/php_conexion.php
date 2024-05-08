@@ -13,9 +13,6 @@ if (mysqli_connect_errno()) {
     die("Conexión falló: " . mysqli_connect_errno() . " : " . mysqli_connect_error());
 }
 
-mysqli_query($conexion, "SET NAMES 'utf8'");
-mysqli_query($conexion, "SET CHARACTER_SET 'utf8'");
-
 function limpiar($tags) {
     return strip_tags($tags);
 }
