@@ -398,7 +398,7 @@ GROUP BY tienda;";
                         isset($_SERVER['HTTP_X_FORWARDED_PROTO']) &&
                         $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https'
                     ) {
-                        $protocol = 'https://';
+                        $protocol = 'http://';
                     } else {
                         $protocol = 'http://';
                     }
