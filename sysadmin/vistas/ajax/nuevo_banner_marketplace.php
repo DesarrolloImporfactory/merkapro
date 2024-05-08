@@ -20,7 +20,7 @@ include 'is_logged.php'; //Archivo verifica que el usario que intenta acceder a 
        $sql = "INSERT INTO banner_marketplace (texto_banner,titulo,texto_boton,enlace_boton,alineacion)
        VALUES ('$texto_slider2','$titulo_slider2','$texto_btn_slider2','$enlace_btn_slider2','$alineacion')";
         $query_new_insert = mysqli_query($conexion_marketplace, $sql);
-
+        echo mysqli_error($conexion_marketplace);
         if ($query_new_insert) {
             $messages[] = "Texto ha sido ingresada con Exito.";
         } else {
