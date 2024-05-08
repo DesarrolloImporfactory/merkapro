@@ -252,7 +252,7 @@ if ($action == 'ajax') {
 
                 $count_tienda = mysqli_query($conexion_marketplace, "SELECT * FROM plataformas WHERE url_imporsuit LIKE '%" . $tienda ."%'");
                 $row_tienda         = mysqli_fetch_array($count_tienda);
-                $telefono_tienda    = $row_tienda['whatsapp'];
+                $telefono_tienda    = @$row_tienda['whatsapp'];
                 $telefonoFormateado = formatPhoneNumber($telefono_tienda);
 
                 ?>

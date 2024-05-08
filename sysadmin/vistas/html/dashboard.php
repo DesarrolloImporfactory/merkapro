@@ -1288,11 +1288,7 @@ if ($query_ciudades_despacho) {
         }).then(response => response.json()).then(data => {
             if (data === "cambios") {
 
-                $('#modalData').modal({
-                    backdrop: 'static',
-                    keyboard: false,
-                    show: true
-                });
+              
             } else {
                 localStorage.setItem('datos', "existe");
             }
