@@ -50,7 +50,7 @@ $simbolo_moneda = get_row('perfil', 'moneda', 'id_perfil', 1);
 					var imagen = document.getElementById('mi-imagen'); // Asegúrate de tener un elemento img con id="mi-imagen"
 
 					if (window.matchMedia("(max-width: 768px)").matches) {
-						// Si la pantalla es menor o igual a 768px de ancho, usa la imagen para móviles
+						// Si la pantalla es menor o igual a 768px de ancho, usa la imagen para móviless
 						imagen.src = 'https://marketplace.imporsuit.com/sysadmin/img/MERKATODO-LOGO-MINI.png';
 						imagen.style.width = '40px'; // Establece el ancho deseado para móviles
 						imagen.style.height = '40px';
