@@ -347,7 +347,7 @@ $simbolo_moneda = get_row('perfil', 'moneda', 'id_perfil', 1);
 					</ul>
 				</li>
 
-				<?php if ($dominio_completo == 'https://marketplace.imporsuit.com') { ?>
+				<?php if ($dominio_completo == 'https://merkapro.ec') { ?>
 				<li>
 					<a href="administrar_marketplace.php" class="waves-effect waves-primary"><i class="ti-home"></i><span> Adminmistrar tiendas </span></a>
 				</li>
