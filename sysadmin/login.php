@@ -62,7 +62,7 @@ if ($login->isUserLoggedIn() == true) {
         }
 
         body {
-            background: url(img/login/login.png);
+            background: url(img/login/login_m.png);
             background-repeat: no-repeat;
             background-size: cover;
             height: 100% !important;
@@ -78,7 +78,7 @@ if ($login->isUserLoggedIn() == true) {
             include 'vistas/funciones.php';
             $url = get_row('perfil', 'logo_url', 'id_perfil', 1);
             $resultado = str_replace("../../", "", $url);
-            echo $resultado;
+
             if(empty($url) || $url == null){
                 $resultado  = "https://marketplace.imporsuit.com/sysadmin/img/MERKATODO-LOGO.png";
             }
