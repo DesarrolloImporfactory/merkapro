@@ -24,6 +24,8 @@ if (empty($_POST['provinica'])) {
     $codigo_postal  = mysqli_real_escape_string($conexion, (strip_tags($_POST["codigo_postal"], ENT_QUOTES)));
     $telefono  = mysqli_real_escape_string($conexion, (strip_tags($_POST["telefono"], ENT_QUOTES)));
     $celular  = mysqli_real_escape_string($conexion, (strip_tags($_POST["celular"], ENT_QUOTES)));
+    $postal = mysqli_real_escape_string($conexion, (strip_tags($_POST["codigo_postal"], ENT_QUOTES)));
+    
     
     
 

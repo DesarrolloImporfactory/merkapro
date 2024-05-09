@@ -40,12 +40,12 @@ if ($login->isUserLoggedIn() == true) {
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width,initial-scale=1">
-        <meta name="description" content="Constructor Imporsuit">
-        <meta name="author" content="Imporsuit">
+        <meta name="description" content="Constructor Merkapro">
+        <meta name="author" content="Merkapro">
 
         <link rel="shortcut icon" href="assets/images/favicon.png">
 
-        <title>Imporsuit</title>
+        <title>Merkapro</title>
 
         <link href="assets/plugins/switchery/switchery.min.css" rel="stylesheet" />
 
@@ -78,6 +78,10 @@ if ($login->isUserLoggedIn() == true) {
             include 'vistas/funciones.php';
             $url = get_row('perfil', 'logo_url', 'id_perfil', 1);
             $resultado = str_replace("../../", "", $url);
+            echo $resultado;
+            if(empty($url) || $url == null){
+                $resultado  = "https://marketplace.imporsuit.com/sysadmin/img/MERKATODO-LOGO.png";
+            }
             //echo $resultado;
             // $nombre_empresa= get_row('perfil','nombre_empresa', 'id_perfil', 1);
             // echo $url;
@@ -201,7 +205,7 @@ if ($login->isUserLoggedIn() == true) {
             // obtiene el item del localstorage 
             var item = localStorage.getItem('actualizacion');
             // si el item es null, entonces no se ha actualizado
-            if (window.location.origin != "https://yapando.imporsuit.com" && window.location.origin != "https://ecuashop.imporsuit.com" && window.location.origin != "https://onlytap.imporsuit.com") {
+            if (window.location.origin != "https://yapando.Merkapro.com" && window.location.origin != "https://ecuashop.Merkapro.com" && window.location.origin != "https://onlytap.Merkapro.com") {
                 if (item == null) {
                     // se crea el item en el localstorage
                     localStorage.setItem('actualizacion', 1);
