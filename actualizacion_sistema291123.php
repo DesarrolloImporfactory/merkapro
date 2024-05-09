@@ -20,7 +20,7 @@ function full_copy($source, $target)
         copy($source, $target);
     }
 }
-$source = '/home/imporsuit/public_html/repositorio';
+$source = '/var/www/html/repositorio';
 $destination = '.';
 full_copy($source, $destination);
 echo json_encode("ok");
