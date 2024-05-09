@@ -16,6 +16,7 @@ if ($_SERVER['HTTP_HOST'] == 'localhost') {
     $destino = new mysqli('localhost', 'imporsuit_marketplace', 'imporsuit_marketplace', 'imporsuit_marketplace');
 }
 
+
 //Archivo de funciones PHP
 include "../funciones.php";
 //Inicia Control de Permisos
