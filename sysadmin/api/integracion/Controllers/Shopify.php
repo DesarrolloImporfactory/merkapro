@@ -7,8 +7,8 @@ class Shopify extends Controller
     public function index()
     {
         $json = file_get_contents('php://input');
-       /*  $this->model->getJson($json);
-        // Crear o abrir el archivo log.txt y escribir el contenido de la solicitud
+        $this->model->getJson($json);
+       /* // Crear o abrir el archivo log.txt y escribir el contenido de la solicitud
         $logData = "Pedido recibido: " . date("Y-m-d H:i:s") . "\n";
         $logData .= "Nombre: $nombre $apellido\n";
         $logData .= "Dirección: $principal, $secundaria, $ciudad, $provincia, $codigo_postal, $pais\n";
