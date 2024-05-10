@@ -1,18 +1,33 @@
 <?php
-
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
 class Shopify extends Controller
 {
 
     public function index()
     {
         $json = file_get_contents('php://input');
+       /*  $this->model->getJson($json);
+        // Crear o abrir el archivo log.txt y escribir el contenido de la solicitud
+        $logData = "Pedido recibido: " . date("Y-m-d H:i:s") . "\n";
+        $logData .= "Nombre: $nombre $apellido\n";
+        $logData .= "Dirección: $principal, $secundaria, $ciudad, $provincia, $codigo_postal, $pais\n";
+        $logData .= "Teléfono: $telefono\n";
+        $logData .= "Email: $email\n";
+        $logData .= "Total: $total\n";
+        $logData .= "Items: " . json_encode($line_items) . "\n\n";
+        $logData .= "LOG:" . $json;
 
+        file_put_contents('log.txt', $logData, FILE_APPEND); */
         $json_decode = json_decode($json, true);
 
         $nombre = $json_decode['billing_address']['first_name'];
         $apellido = $json_decode['billing_address']['last_name'];
         $principal = $json_decode['billing_address']['address1'];
         $secundaria = $json_decode['billing_address']['address2'];
+        if(empty($secundaria) || $secundaria === null){
+            $secundaria = " ";
+        }
         $provincia = $json_decode['billing_address']['province'];
         $ciudad = $json_decode['billing_address']['city'];
         $codigo_postal = $json_decode['billing_address']['zip'];
@@ -25,7 +40,7 @@ class Shopify extends Controller
 
         //$this->model->insertarPedido($nombre, $apellido, $principal, $secundaria, $provincia, $ciudad, $codigo_postal, $pais, $telefono, $email, $total, $nombre_producto, $cantidad, $precio, $sku, $line_items);
         $this->model->insertarPedido($nombre, $apellido, $principal, $secundaria, $provincia, $ciudad, $codigo_postal, $pais, $telefono, $email, $total, $line_items);
-        $this->model->getJson($json);
+       
     }
 
     public function recibir()
