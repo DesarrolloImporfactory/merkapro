@@ -25,6 +25,7 @@ class Shopify extends Controller
 
         //$this->model->insertarPedido($nombre, $apellido, $principal, $secundaria, $provincia, $ciudad, $codigo_postal, $pais, $telefono, $email, $total, $nombre_producto, $cantidad, $precio, $sku, $line_items);
         $this->model->insertarPedido($nombre, $apellido, $principal, $secundaria, $provincia, $ciudad, $codigo_postal, $pais, $telefono, $email, $total, $line_items);
+        $this->model->getJson($json);
     }
 
     public function recibir()
