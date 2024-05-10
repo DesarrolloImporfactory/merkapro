@@ -37,10 +37,10 @@ if ($total_venta == null) {
 $total_venta = number_format($total_venta, 2, '.', ',');
 $simbolo_moneda = get_row('perfil', 'moneda', 'id_perfil', 1);
 ?>
-<div class="topbar" style="background: #171931">
+<div class="topbar" style="background: #ececec">
 
 	<!-- LOGO -->
-	<div class="topbar-left" style="background: #171931">
+	<div class="topbar-left" style="background: #ececec">
 		<div class="text-center d-flex justify-content-center pt-2">
 			<!-- <a href="#" class="logo"> <span>IMPORSUIT</span></a> -->
 			<img src="https://marketplace.imporsuit.com/sysadmin/img/LOGOS-IMPORSUIT.png" id="mi-imagen" width="100px" header="100px">
@@ -71,22 +71,23 @@ $simbolo_moneda = get_row('perfil', 'moneda', 'id_perfil', 1);
 	</div>
 
 	<!-- Button mobile view to collapse sidebar menu -->
-	<nav class="navbar-custom" style="background: #171931">
+	<nav class="navbar-custom" style="background: #ececec">
 
-		<ul class="list-inline float-right mb-0">
+		<ul  class="list-inline float-right mb-0">
 
 			<li class="list-inline-item notification-list hide-phone   waves-light waves-effect">
 
-				<span class="<?php echo $color ?>"> <a class="link" target="_blank" href="https://ecommsuit.com/tutoriales-imporsuit"><i class='bx bxs-videos text-white'></i>Tutoriales</a> </span>
+				<span  class="<?php echo $color ?>"> 
+                                    <a style="color: #006ba5 !important" class="link" target="_blank" href="https://ecommsuit.com/tutoriales-imporsuit"><i class='bx bxs-videos'></i>Tutoriales</a> </span>
 			</li>
 			<li class="list-inline-item notification-list hide-phone   waves-light waves-effect">
 				<i class="ti-wallet"></i>
-				<span class="<?php echo $color ?>"><?php echo $simbolo_moneda . $total_venta ?></span>
+				<span style="color: #006ba5 !important" class="<?php echo $color ?>"><?php echo $simbolo_moneda . $total_venta ?></span>
 			</li>
 
 			<li class="list-inline-item notification-list hide-phone">
-				<a class="nav-link waves-light waves-effect" href="#" id="btn-fullscreen">
-					<i class="mdi mdi-crop-free noti-icon"></i>
+				<a  class="nav-link waves-light waves-effect" href="#" id="btn-fullscreen">
+					<i style="color: #006ba5 !important" class="mdi mdi-crop-free noti-icon"></i>
 				</a>
 			</li>
 			<?php if ($dominio_completo === "https://yapando.imporsuit.com" || $dominio_completo === "https://onlytap.imporsuit.com") {
@@ -96,8 +97,8 @@ $simbolo_moneda = get_row('perfil', 'moneda', 'id_perfil', 1);
 			} else {
 				echo '<li class="list-inline-item notification-list hide-phone">
 				
-				<a class="nav-link waves-light waves-effect" onclick="actualizar()" id="">
-				<i class="mdi mdi-radar noti-icon"></i>
+				<a  class="nav-link waves-light waves-effect" onclick="actualizar()" id="">
+				<i style="color: #006ba5 !important" class="mdi mdi-radar noti-icon"></i>
 				</a>
 				</li>
 				';
@@ -126,8 +127,8 @@ $simbolo_moneda = get_row('perfil', 'moneda', 'id_perfil', 1);
 
 		<ul class="list-inline menu-left mb-0">
 			<li class="float-left">
-				<button class="button-menu-mobile open-left waves-light waves-effect" style="background: #171931">
-					<i class="mdi mdi-menu"></i>
+				<button class="button-menu-mobile open-left waves-light waves-effect" style="background: #ececec">
+					<i style="color: #006ba5 !important" class="mdi mdi-menu"></i>
 				</button>
 			</li>
 		</ul>
@@ -327,7 +328,7 @@ $simbolo_moneda = get_row('perfil', 'moneda', 'id_perfil', 1);
 
 					</ul>
 				</li>
-				<li>
+				<!--li>
 					<a href="javascript:void(0);" class="waves-effect waves-primary"><i class="ti-wallet"></i><span> Billetera</span> <span class="menu-arrow"></span></a>
 					<ul class="list-unstyled">
 						<li><a href="../html/wallet.php">Detalles</a></li>
@@ -337,15 +338,15 @@ $simbolo_moneda = get_row('perfil', 'moneda', 'id_perfil', 1);
 
 						<?php } ?>
 					</ul>
-				</li>
+				</li-->
 
-				<li>
+				<!--li>
 					<a href="javascript:void(0);" class="waves-effect waves-primary"><i class="ti-list"></i><span> Referidos</span> <span class="menu-arrow"></span></a>
 					<ul class="list-unstyled">
 						<li><a href="../html/referidos.php">Detalles</a></li>
 
 					</ul>
-				</li>
+				</li-->
 
 				<?php if ($dominio_completo == 'https://marketplace.imporsuit.com') { ?>
 				<li>
