@@ -62,7 +62,7 @@ if ($login->isUserLoggedIn() == true) {
         }
 
         body {
-            background: url(img/login/login_m.png);
+            background: url(img/login/logo_o.jpg);
             background-repeat: no-repeat;
             background-size: cover;
             height: 100% !important;
