@@ -150,7 +150,7 @@ while ($r = $query->fetch_object()) {
 													<button type="button" class="btn btn-success btn-rounded waves-effect waves-light" data-toggle="modal" data-target="#nuevoProducto"><i class="fa fa-plus"></i> Agregar</button>
 												</div>
 												<div class="btn-group pull-right">
-													<button type="button" class="btn btn-primary btn-rounded waves-effect waves-light" data-toggle="modal" data-target="#stock_ad"><i class="fa fa-archive"></i> Atributos</button>
+                                                                                                    <button type="button" class="btn btn-primary btn-rounded waves-effect waves-light" data-toggle="modal" onclick="producto_id(1)" data-target="#stock_ad"><i class="fa fa-archive"></i> Atributos</button>
 												</div>
 
 											</div>
@@ -612,7 +612,7 @@ while ($r = $query->fetch_object()) {
 
 
 	function producto_id(id) {
-		//alert(id)
+	alert(id)
 		$('#id_producto').val(id);
 		$.ajax({
 			url: '../ajax/buscar_atributo_producto.php?action=ajax&id_producto=' + id,

@@ -1308,7 +1308,7 @@ mysqli_query($conexion, "CREATE TABLE `banner_adicional` (
 mysqli_query($conexion, "UPDATE `perfil` SET `nodevolucion` = '1' WHERE `perfil`.`id_perfil` = 1;");
 
 
-$conexion_tienda  = mysqli_connect("localhost", "imporsuit_marketplace", "imporsuit_marketplace", "imporsuit_marketplace");
+$conexion_tienda  = mysqli_connect("localhost", "root", "Mark2demasiado..", "imporsuit_marketplace");
 $url = $_SERVER['HTTP_HOST'];
 
 $data = mysqli_query($conexion_tienda, "SELECT * from plataformas where url_imporsuit like '%$url%' ");
