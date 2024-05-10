@@ -1,6 +1,8 @@
   <?php
     // session_start();
     //include 'sysadmin/vistas/ajax/is_logged.php'; 
+    error_reporting(E_ALL);
+ini_set('display_errors', '1');
     require_once "sysadmin/vistas/db.php";
     //echo DB_HOST;
     require_once "sysadmin/vistas/php_conexion.php";
@@ -11,8 +13,9 @@
     if ($_SERVER['HTTP_HOST'] == 'localhost') {
         $or_marketplace = 'http://localhost/official/imporsuitv01/';
     } else {
-        $or_marketplace = 'https://marketplace.imporsuit.com/';
+        $or_marketplace = 'https://merkapro.ec/';
     }
+    
     $archivo_origen = $or_marketplace . 'sysadmin/vistas/db1.php';
     // echo $archivo_origen;
     $contenido = file_get_contents($archivo_origen);
@@ -395,7 +398,7 @@ GROUP BY tienda;";
                         isset($_SERVER['HTTP_X_FORWARDED_PROTO']) &&
                         $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https'
                     ) {
-                        $protocol = 'https://';
+                        $protocol = 'http://';
                     } else {
                         $protocol = 'http://';
                     }

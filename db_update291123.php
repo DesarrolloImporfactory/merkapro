@@ -2224,7 +2224,7 @@ mysqli_query($conexion, "INSERT INTO ciudad_cotizacion (id_cotizacion,provincia,
 	 (767,'AZUAY','ZONA FRANCA',0,1,0,'','TE','','','','','','',''),
 	 (768,'CHIMBORAZO','SANTA ROSA DE AGUA CLARA',0,0,0,'TE','0','0','0','0','0','0','0','0'),
 	 (769,'CHIMBORAZO','YARUQUIES',1,1,1,'TE','TE','TN','0','201001008','201001008011','1026','57711','680'),
-	 (770,'EL ORO','SANTA ROSA',1,1,0,'TE','TE','0','0','0','0','0','0','32');");
+	 (770,'EL ORO','SANTA ROSA',1,1,0,'TE','TE','0','0','201001009','201001009009','0','0','32');");
 mysqli_query($conexion, "INSERT INTO ciudad_cotizacion (id_cotizacion,provincia,ciudad,cobertura_servientrega,cobertura_laar,cobertura_gintracom,trayecto_servientrega,trayecto_laar,trayecto_gintracom,codigo_provincia_servientrega,codigo_provincia_laar,codigo_ciudad_laar,codigo_provincia_gintracom,codigo_ciudad_gintracom,codigo_ciudad_servientrega) VALUES
 	 (771,'GUAYAS','VELASCO IBARRA (EL EMPALME)',0,1,0,'0','TE','0','0','201001002','201001002069','0','0','0'),
 	 (772,'GUAYAS','VILLA NUEVA',1,0,0,'TE','0','0','0','0','0','0','0','565'),

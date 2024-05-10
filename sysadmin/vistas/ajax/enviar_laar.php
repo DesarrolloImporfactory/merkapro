@@ -67,10 +67,10 @@ $row_cnt = mysqli_num_rows($query);
 if ($row_cnt > 0) {
     while ($row = mysqli_fetch_array($query)) {
         $numero_sig = $row['id_guia'] + 1;
-        $guia_sistema = 'MT' . $numero_sig;
+        $guia_sistema = 'MKT' . $numero_sig;
     }
 } else {
-    $guia_sistema = "MT1";
+    $guia_sistema = "MKT1";
 }
 if (
     isset($_SERVER['HTTPS']) &&
@@ -108,7 +108,7 @@ $tipo_origen = get_row('facturas_cot', 'drogshipin', 'id_factura', $id_pedido_co
 if ($_SERVER['HTTP_HOST'] == 'localhost') {
     $or_marketplace = 'http://localhost/official/imporsuitv01/';
 } else {
-    $or_marketplace = 'https://marketplace.imporsuit.com/';
+    $or_marketplace = 'https://merkapro.ec/';
 }
 $archivo_origen = $or_marketplace . 'sysadmin/vistas/db1.php';
 $contenido = file_get_contents($archivo_origen);

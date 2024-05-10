@@ -512,7 +512,7 @@ if ($query_ciudades_despacho) {
                                     $result = $conexion_marketplace->query($sql); // Volver a ejecutar la consulta
                                     while ($row = $result->fetch_assoc()) {
                                         $banner = $row['fondo_banner'];
-                                        $banner = "https://marketplace.imporsuit.com/sysadmin/" . str_replace("../../", "", $banner);
+                                        $banner = "https://merkapro.ec/sysadmin/" . str_replace("../../", "", $banner);
 
                                         $alignment = ['1' => 'text-left', '2' => 'text-center', '3' => 'text-right'][$row['alineacion']] ?? 'text-center';
                                         echo '<div class="carousel-item' . ($first ? ' active' : '') . '">';
@@ -1288,11 +1288,7 @@ if ($query_ciudades_despacho) {
         }).then(response => response.json()).then(data => {
             if (data === "cambios") {
 
-                $('#modalData').modal({
-                    backdrop: 'static',
-                    keyboard: false,
-                    show: true
-                });
+              
             } else {
                 localStorage.setItem('datos', "existe");
             }

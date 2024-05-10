@@ -4,14 +4,12 @@
 /sysadmin/vistas/xml/comprobantes
 /sysadmin/vistas/assets/js/lib_firma_sri/errores
 /sysadmin/vistas/assets/js/lib_firma_sri/src/services/uploads
-/sysadmin/img/
 /uploads/
 /nbproject/
 /sysadmin/vistas/assets/comprobantes/autorizados/
 /sysadmin/vistas/ajax/landing_producto/
 sysadmin/vistas/db.php
-sysadmin/vistas/db_destino_marketplace.php
-/sysadmin/vistas/db_destino_marketplace.php
+
 sysadmin/vistas/xml/firmas
 sysadmin/vistas/xml/comprobantes
 testeos/
@@ -20,3 +18,4 @@ sysadmin/vistas/assets/js/lib_firma_sri/errores
 sysadmin/vistas/assets/js/lib_firma_sri/src/services/uploads
 update.sh
 sysadmin/vistas/db.php
+sysadmin/vistas/ajax/save/

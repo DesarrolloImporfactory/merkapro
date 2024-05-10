@@ -16,6 +16,7 @@ if ($_SERVER['HTTP_HOST'] == 'localhost') {
     $destino = new mysqli('localhost', 'imporsuit_marketplace', 'imporsuit_marketplace', 'imporsuit_marketplace');
 }
 
+
 //Archivo de funciones PHP
 include "../funciones.php";
 //Inicia Control de Permisos
@@ -252,7 +253,7 @@ if ($action == 'ajax') {
 
                 $count_tienda = mysqli_query($conexion_marketplace, "SELECT * FROM plataformas WHERE url_imporsuit LIKE '%" . $tienda ."%'");
                 $row_tienda         = mysqli_fetch_array($count_tienda);
-                $telefono_tienda    = $row_tienda['whatsapp'];
+                $telefono_tienda    = @$row_tienda['whatsapp'];
                 $telefonoFormateado = formatPhoneNumber($telefono_tienda);
 
                 ?>

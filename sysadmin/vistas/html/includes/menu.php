@@ -43,20 +43,20 @@ $simbolo_moneda = get_row('perfil', 'moneda', 'id_perfil', 1);
 	<div class="topbar-left" style="background: #ececec">
 		<div class="text-center d-flex justify-content-center pt-2">
 			<!-- <a href="#" class="logo"> <span>IMPORSUIT</span></a> -->
-			<img src="https://marketplace.imporsuit.com/sysadmin/img/LOGOS-IMPORSUIT.png" id="mi-imagen" width="100px" header="100px">
+			<img src="https://marketplace.imporsuit.com/sysadmin/img/MERKATODO-LOGO.png" id="mi-imagen" width="100px" header="100px">
 			<script>
 				// Función para cambiar la imagen según el tamaño de la ventana
 				function cambiarImagenPorTamaño() {
 					var imagen = document.getElementById('mi-imagen'); // Asegúrate de tener un elemento img con id="mi-imagen"
 
 					if (window.matchMedia("(max-width: 768px)").matches) {
-						// Si la pantalla es menor o igual a 768px de ancho, usa la imagen para móviles
-						imagen.src = 'https://marketplace.imporsuit.com/sysadmin/img/logo_imporsuit.png';
+						// Si la pantalla es menor o igual a 768px de ancho, usa la imagen para móviless
+						imagen.src = 'https://marketplace.imporsuit.com/sysadmin/img/MERKATODO-LOGO-MINI.png';
 						imagen.style.width = '40px'; // Establece el ancho deseado para móviles
 						imagen.style.height = '40px';
 					} else {
 						// Si la pantalla es mayor a 768px de ancho, usa la imagen para escritorio
-						imagen.src = 'https://marketplace.imporsuit.com/sysadmin/img/LOGOS-IMPORSUIT.png';
+						imagen.src = 'https://marketplace.imporsuit.com/sysadmin/img/MERKATODO-LOGO.png';
 						imagen.style.width = '100px';
 					}
 				}
@@ -348,7 +348,7 @@ $simbolo_moneda = get_row('perfil', 'moneda', 'id_perfil', 1);
 					</ul>
 				</li-->
 
-				<?php if ($dominio_completo == 'https://marketplace.imporsuit.com') { ?>
+				<?php if ($dominio_completo == 'https://merkapro.ec') { ?>
 				<li>
 					<a href="administrar_marketplace.php" class="waves-effect waves-primary"><i class="ti-home"></i><span> Adminmistrar tiendas </span></a>
 				</li>

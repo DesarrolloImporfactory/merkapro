@@ -10,7 +10,9 @@ if (empty($_GET['id'])) {
     // escaping, additionally removing everything that could be (html/javascript-) code
 
     //$contenido      = $_POST['contenido'];
+
     $id      = $_GET['id'];
+    //echo 'asdasd';
     $id_categoria      = $_GET['id_cat'];
 
     // check if user or email address already exists
@@ -28,6 +30,20 @@ if (empty($_GET['id'])) {
         die('Error en la conexión a la base de datos de destino: ' . $destino->connect_error);
     }
 
+
+    if (
+        isset($_SERVER['HTTPS']) &&
+        ($_SERVER['HTTPS'] == 'on' || $_SERVER['HTTPS'] == 1) ||
+        isset($_SERVER['HTTP_X_FORWARDED_PROTO']) &&
+        $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https'
+    ) {
+        $protocol = 'https://';
+    } else {
+        $protocol = 'http://';
+    }
+    $server_url = $protocol . $_SERVER['HTTP_HOST'];
+
+    
     // Realiza una consulta para seleccionar todos los registros de la tabla de origen
     $sql = "SELECT * FROM $tabla where id_producto=$id";
     $query_check_user_name = mysqli_query($conexion, $sql);
