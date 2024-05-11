@@ -155,7 +155,7 @@ $row           = mysqli_fetch_array($query_empresa);
 													<div class="col-sm-4">
 														<select class='form-control input-sm' name="moneda" required>
 															<?php
-$sql   = "select name, symbol from  currencies group by symbol order by name ";
+$sql   = "select name, symbol from  currencies ";
     $query = mysqli_query($conexion, $sql);
     while ($rw = mysqli_fetch_array($query)) {
         $simbolo = $rw['symbol'];
