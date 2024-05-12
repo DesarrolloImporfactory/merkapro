@@ -214,7 +214,7 @@ if ($action == 'ajax') {
                         <td class='text-center'>
                             <?php
                             if ($image_path == null) {
-                                echo '<img src="../../img/productos/default.jpg" class="" width="60">';
+                                echo '<img src="../../img_sistema/productos/default.jpg" class="" width="60">';
                             } else {
                                 echo '<img src="' . $image_path . '" class="" width="60">';
                             }
@@ -309,7 +309,7 @@ if ($action == 'ajax') {
                             <a class="" href="landin.php?id=<?php echo $id_producto; ?>" data-target="#nuevoLanding" onclick="obtener_datos_landing('<?php echo $id_producto; ?>');carga_img1('<?php echo $id_producto; ?>')"> <img style="width: 30px" src="../../img/landing.png" alt="" /></a>
                         </td>
                         <td>
-                            <a class="" href="#" data-toggle="modal" data-target="#editarProducto2" onclick="obtener_datos('<?php echo $id_producto; ?>');carga_img('<?php echo $id_producto; ?>');"> <img style="width: 40px" src="../../img/3342177.png" alt="" /></a>
+                            <a class="" href="#" data-toggle="modal" data-target="#editarProducto2" onclick="obtener_datos('<?php echo $id_producto; ?>');carga_img('<?php echo $id_producto; ?>');"> <img style="width: 40px" src="../../img_sistema/3342177.png" alt="" /></a>
                         </td>
 
                         <?php
@@ -319,7 +319,7 @@ if ($action == 'ajax') {
                                 if ($tienda == "") { ?>
                                     <!--a class="" href="#" data-toggle="modal" data-target="#nuevoLanding" onclick="obtener_datos_landing('<?php echo $id_producto; ?>');carga_img1('<?php echo $id_producto; ?>')"> <img style="width: 30px" src="../../img/landing.png" alt=""/></a-->
 
-                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#subirProducto" onclick="asignar_id_producto('<?php echo $id_producto; ?>');carga_img('<?php echo $id_producto; ?>');"><img style="width: 30px" src="../../img/subir_producto.png" alt="" /></a>
+                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#subirProducto" onclick="asignar_id_producto('<?php echo $id_producto; ?>');carga_img('<?php echo $id_producto; ?>');"><img style="width: 30px" src="../../img_sistema/subir_producto.png" alt="" /></a>
                                     <?php
 
 
