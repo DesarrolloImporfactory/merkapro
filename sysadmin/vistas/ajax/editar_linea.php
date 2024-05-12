@@ -16,7 +16,7 @@ if (empty($_POST['mod_id'])) {
     $id_linea    = intval($_POST['mod_id']);
     $online    = intval($_POST['mod_online']);
     $tipo    = intval($_POST['mod_tipo']);
-    $padre   = intval($_POST['mod_linea_padre']);
+    $padre   = intval(@$_POST['mod_linea_padre']);
 
     $sql = "UPDATE lineas SET  nombre_linea='" . $nombre . "',
                                 estado_linea='" . $estado . "',
