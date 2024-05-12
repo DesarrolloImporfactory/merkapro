@@ -23,9 +23,9 @@ if (!empty($row)) {
     if (!empty($row2)) {
         $precio = $row2['precio'];
 
-        $pt = $precio_total * 0.03;
+        $pt = $precio_total;
         if ($recaudo == 1) {
-            $precio_total =  $pt + $precio;
+            $precio_total =  $precio;
         } else {
             $precio_total =  $precio;
         }
