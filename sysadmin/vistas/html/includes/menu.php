@@ -75,11 +75,7 @@ $simbolo_moneda = get_row('perfil', 'moneda', 'id_perfil', 1);
 
 		<ul  class="list-inline float-right mb-0">
 
-			<li class="list-inline-item notification-list hide-phone   waves-light waves-effect">
-
-				<span  class="<?php echo $color ?>"> 
-                                    <a style="color: #006ba5 !important" class="link" target="_blank" href="https://ecommsuit.com/tutoriales-imporsuit"><i class='bx bxs-videos'></i>Tutoriales</a> </span>
-			</li>
+			
 			<li class="list-inline-item notification-list hide-phone   waves-light waves-effect">
 				<i class="ti-wallet"></i>
 				<span style="color: #006ba5 !important" class="<?php echo $color ?>"><?php echo $simbolo_moneda . $total_venta ?></span>
