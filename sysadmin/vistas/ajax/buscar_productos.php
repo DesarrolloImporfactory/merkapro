@@ -306,7 +306,7 @@ if ($action == 'ajax') {
 
                         <td>
                             <!--a class="" href="#" data-toggle="modal" data-target="#nuevoLanding" onclick="obtener_datos_landing('<?php echo $id_producto; ?>');carga_img1('<?php echo $id_producto; ?>')"> <img style="width: 30px" src="../../img/landing.png" alt=""/></a-->
-                            <a class="" href="landin.php?id=<?php echo $id_producto; ?>" data-target="#nuevoLanding" onclick="obtener_datos_landing('<?php echo $id_producto; ?>');carga_img1('<?php echo $id_producto; ?>')"> <img style="width: 30px" src="../../img/landing.png" alt="" /></a>
+                            <a class="" href="landin.php?id=<?php echo $id_producto; ?>" data-target="#nuevoLanding" onclick="obtener_datos_landing('<?php echo $id_producto; ?>');carga_img1('<?php echo $id_producto; ?>')"> <img style="width: 30px" src="../../img_sistema/landing.png" alt="" /></a>
                         </td>
                         <td>
                             <a class="" href="#" data-toggle="modal" data-target="#editarProducto2" onclick="obtener_datos('<?php echo $id_producto; ?>');carga_img('<?php echo $id_producto; ?>');"> <img style="width: 40px" src="../../img_sistema/3342177.png" alt="" /></a>
