@@ -8,7 +8,7 @@ class Shopify extends Controller
     {
         $json = file_get_contents('php://input');
         $this->model->getJson($json);
-       /* // Crear o abrir el archivo log.txt y escribir el contenido de la solicitud
+        /* // Crear o abrir el archivo log.txt y escribir el contenido de la solicitud
         $logData = "Pedido recibido: " . date("Y-m-d H:i:s") . "\n";
         $logData .= "Nombre: $nombre $apellido\n";
         $logData .= "Dirección: $principal, $secundaria, $ciudad, $provincia, $codigo_postal, $pais\n";
@@ -25,7 +25,7 @@ class Shopify extends Controller
         $apellido = $json_decode['billing_address']['last_name'];
         $principal = $json_decode['billing_address']['address1'];
         $secundaria = $json_decode['billing_address']['address2'];
-        if(empty($secundaria) || $secundaria === null){
+        if (empty($secundaria) || $secundaria === null) {
             $secundaria = " ";
         }
         $provincia = $json_decode['billing_address']['province'];
@@ -38,9 +38,10 @@ class Shopify extends Controller
 
         $line_items = $json_decode['line_items'];
 
+        $discount = $json_decode['current_total_discounts'];
+
         //$this->model->insertarPedido($nombre, $apellido, $principal, $secundaria, $provincia, $ciudad, $codigo_postal, $pais, $telefono, $email, $total, $nombre_producto, $cantidad, $precio, $sku, $line_items);
-        $this->model->insertarPedido($nombre, $apellido, $principal, $secundaria, $provincia, $ciudad, $codigo_postal, $pais, $telefono, $email, $total, $line_items);
-       
+        $this->model->insertarPedido($nombre, $apellido, $principal, $secundaria, $provincia, $ciudad, $codigo_postal, $pais, $telefono, $email, $total, $line_items, $discount);
     }
 
     public function recibir()
