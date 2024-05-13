@@ -172,11 +172,13 @@ class ShopifyModel extends Query
             }
             echo "debug5";
             if ($discount > 0) {
+                echo $discount;
                 $porcentaje_discount = ($discount / $total) * 100;
+                echo $porcentaje_discount;
             } else {
                 $porcentaje_discount = 0;
             }
-            $this->insertarDetalleFactura_local($nueva_factura_numero_formateada, $cantidad, $precio, $sku, $discount);
+            $this->insertarDetalleFactura_local($nueva_factura_numero_formateada, $cantidad, $precio, $sku, $porcentaje_discount);
         }
         return array($query_factura_cot);
     }
