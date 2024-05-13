@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width,initial-scale=1">
-	<meta name="description" content="Constructor Imporsuit">
-	<meta name="author" content="Imporsuit">
+	<meta name="description" content="Constructor Merkapro">
+	<meta name="author" content="Merkapro">
 
 	<link rel="shortcut icon" href="sysadmin/assets/images/favicon.png">
 	<!-- daterange picker -->
