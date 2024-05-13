@@ -173,7 +173,9 @@ class ShopifyModel extends Query
             echo "debug5";
             if ($discount > 0) {
                 echo $discount;
-                $porcentaje_discount = ($discount / $total) * 100;
+                $valor_completo = $precio * $cantidad;
+                $porcentaje_discount = ($discount / $valor_completo) * 100;
+                $porcentaje_discount = round($porcentaje_discount, 2);
                 echo $porcentaje_discount;
             } else {
                 $porcentaje_discount = 0;
