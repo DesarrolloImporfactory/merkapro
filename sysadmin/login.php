@@ -136,7 +136,7 @@ if ($login->isUserLoggedIn() == true) {
                 ?>
                 <div class="card-d card-outline card-top-primary shadow-xl">
                     <div class="card-header-d  bg-white text-center">
-                        <h2 class="text-bold">CONSTRUCTOR</h2>
+                        <h2 class="text-bold"></h2>
                         <p></p>
                     </div>
                     <div class="card-body px-4 py-2">
