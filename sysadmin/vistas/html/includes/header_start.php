@@ -9,8 +9,8 @@ require_once "../funciones.php";
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width,initial-scale=1">
-	<meta name="description" content="Constructor Imporsuit">
-	<meta name="author" content="Imporsuit">
+	<meta name="description" content="Constructor Merkapro">
+	<meta name="author" content="Merkapro">
 
 	<link rel="shortcut icon" href="<?php
 									if (get_row('perfil', 'favicon', 'id_perfil', '1') == "") {
@@ -29,7 +29,7 @@ require_once "../funciones.php";
 
 
 
-	<title>IMPORSUIT</title>
+	<title>MERKAPRO</title>
 
 	<!-- Sweet Alert css -->
 	<link href="../../assets/plugins/switchery/switchery.min.css" rel="stylesheet" />
