@@ -112,6 +112,7 @@ class ShopifyModel extends Query
         $ultima_factura_local_numero = $ultima_factura_local_numero + 1;
         echo "debug";
         $query_factura_cot = $this->insert($sql_factura_cot, $factura_data);
+        $vueltas = 0;
         foreach ($line_items as $key => $value) {
 
             $es_drogshipin = $this->buscarProducto($value['sku']);
@@ -171,7 +172,7 @@ class ShopifyModel extends Query
                 echo "b";
             }
             echo "debug5";
-            if ($discount > 0) {
+            if ($discount > 0 && $vueltas == 0) {
                 echo $discount;
                 $valor_completo = $precio * $cantidad;
                 $porcentaje_discount = ($discount / $valor_completo) * 100;
@@ -181,6 +182,7 @@ class ShopifyModel extends Query
                 $porcentaje_discount = 0;
             }
             $this->insertarDetalleFactura_local($nueva_factura_numero_formateada, $cantidad, $precio, $sku, $porcentaje_discount);
+            $vueltas++;
         }
         return array($query_factura_cot);
     }
