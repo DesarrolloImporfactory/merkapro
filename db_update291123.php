@@ -1308,21 +1308,21 @@ mysqli_query($conexion, "CREATE TABLE `banner_adicional` (
 mysqli_query($conexion, "UPDATE `perfil` SET `nodevolucion` = '1' WHERE `perfil`.`id_perfil` = 1;");
 
 
-$conexion_tienda  = mysqli_connect("localhost", "root", "Mark2demasiado..", "imporsuit_marketplace");
-$url = $_SERVER['HTTP_HOST'];
+//$conexion_tienda  = mysqli_connect("localhost", "root", "Mark2demasiado..", "imporsuit_marketplace");
+//$url = $_SERVER['HTTP_HOST'];
+//
+//$data = mysqli_query($conexion_tienda, "SELECT * from plataformas where url_imporsuit like '%$url%' ");
+//$plataforma = mysqli_fetch_assoc($data);
+//$id = $plataforma["id_plataforma"];
 
-$data = mysqli_query($conexion_tienda, "SELECT * from plataformas where url_imporsuit like '%$url%' ");
-$plataforma = mysqli_fetch_assoc($data);
-$id = $plataforma["id_plataforma"];
 
+//mysqli_query($conexion, "ALTER TABLE `perfil` ADD `id_plataforma` INT NULL AFTER `alineacion_slider`;");
+//
+//mysqli_query($conexion, "UPDATE `perfil` SET `id_plataforma` = '$id' WHERE `perfil`.`id_perfil` = 1;");
+//
+//mysqli_query($conexion, "ALTER TABLE `clientes` DROP INDEX `codigo_producto`;");
 
-mysqli_query($conexion, "ALTER TABLE `perfil` ADD `id_plataforma` INT NULL AFTER `alineacion_slider`;");
-
-mysqli_query($conexion, "UPDATE `perfil` SET `id_plataforma` = '$id' WHERE `perfil`.`id_perfil` = 1;");
-
-mysqli_query($conexion, "ALTER TABLE `clientes` DROP INDEX `codigo_producto`;");
-
-mysqli_close($conexion_tienda);
+//mysqli_close($conexion_tienda);
 
 
 mysqli_query($conexion, "ALTER TABLE `productos` ADD `aplica_iva` INT NULL DEFAULT '0' AFTER `id_marketplace`;");
