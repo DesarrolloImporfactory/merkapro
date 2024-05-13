@@ -171,13 +171,17 @@ class ShopifyModel extends Query
                 echo "b";
             }
             echo "debug5";
-            $precio = $precio - $discount;
-            $this->insertarDetalleFactura_local($nueva_factura_numero_formateada, $cantidad, $precio, $sku);
+            if ($discount > 0) {
+                $porcentaje_discount = $discount / $total * 100;
+            } else {
+                $porcentaje_discount = 0;
+            }
+            $this->insertarDetalleFactura_local($nueva_factura_numero_formateada, $cantidad, $precio, $sku, $discount);
         }
         return array($query_factura_cot);
     }
 
-    private function insertarDetalleFactura_local($numero_factura, $cantidad, $precio, $sku)
+    private function insertarDetalleFactura_local($numero_factura, $cantidad, $precio, $sku, $discount = 0)
     {
         $ultima_factura = $this->select("SELECT MAX(id_factura) AS factura FROM facturas_cot;");
         $ultima_factura_numero = $ultima_factura[0]['factura'];
@@ -186,7 +190,7 @@ class ShopifyModel extends Query
         echo $id_producto;
 
         $sql_detalle_factura_cot = "INSERT INTO `detalle_fact_cot` ( `id_factura`, `numero_factura`, `id_producto`, `cantidad`, `desc_venta`, `precio_venta`, `drogshipin_tmp`, `id_producto_origen`) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?);";
-        $detalle_fac_data = array($ultima_factura_numero, $numero_factura, $id_producto, $cantidad, NULL, $precio, 1, $id_producto);
+        $detalle_fac_data = array($ultima_factura_numero, $numero_factura, $id_producto, $cantidad, $discount, $precio, 1, $id_producto);
         $query_detalle_factura_cot = $this->insert($sql_detalle_factura_cot, $detalle_fac_data);
         return array($query_detalle_factura_cot);
     }

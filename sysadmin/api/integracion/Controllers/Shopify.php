@@ -39,6 +39,9 @@ class Shopify extends Controller
         $line_items = $json_decode['line_items'];
 
         $discount = $json_decode['current_total_discounts'];
+        if ($discount == null || $discount == "" || $discount == 0 || empty($discount)) {
+            $discount = 0;
+        }
 
         //$this->model->insertarPedido($nombre, $apellido, $principal, $secundaria, $provincia, $ciudad, $codigo_postal, $pais, $telefono, $email, $total, $nombre_producto, $cantidad, $precio, $sku, $line_items);
         $this->model->insertarPedido($nombre, $apellido, $principal, $secundaria, $provincia, $ciudad, $codigo_postal, $pais, $telefono, $email, $total, $line_items, $discount);
