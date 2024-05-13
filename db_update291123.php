@@ -2396,6 +2396,11 @@ mysqli_query($conexion, "ALTER TABLE `perfil` ADD `envioGratis_checkout` VARCHAR
 
 mysqli_query($conexion, "ALTER TABLE `novedades` CHANGE `estado_novedad` `estado_novedad` INT NOT NULL;");
 
+mysqli_query($conexion, "ALTER TABLE `detalle_fact_cot` CHANGE `desc_venta` `desc_venta` DOUBLE NULL DEFAULT NULL;");
+
+
+
+
 mysqli_close($conexion); // Cerramos la link con la base de datos
 
 echo json_encode("ok");
