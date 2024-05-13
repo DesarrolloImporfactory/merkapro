@@ -66,7 +66,7 @@ $respuesta = mysqli_fetch_row($respuesta);
                                         <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#Shopify">
                                             Conectar
                                         </button>
-                                        <a href="https://www.youtube.com/watch?v=2jKBA8kjEvo" target="_blank" class="btn btn-outline-danger">Ver Video</a>
+                                        
                                     </div>
                                 </div>
                                 <div class="col bg-white rounded-5 shadow-xl m-3 py-3 px-4">
