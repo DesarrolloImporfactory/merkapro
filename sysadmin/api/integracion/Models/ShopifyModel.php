@@ -120,7 +120,7 @@ class ShopifyModel extends Query
             $nombre_producto = $value['name'];
             $cantidad = $value['quantity'];
             $precio = $value['price'];
-            $precio = $precio - $discount;
+
             $sku = $value['sku'];
             echo "debug2";
             echo $es_drogshipin;
