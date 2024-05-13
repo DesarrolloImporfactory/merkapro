@@ -1,3 +1,3 @@
 <footer class="footer text-right">
-	2024 © Imporsuit
+	2024 © Merkapro
 </footer>
