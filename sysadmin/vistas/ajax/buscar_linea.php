@@ -130,7 +130,7 @@ while ($row = mysqli_fetch_array($query)) {
          if ($tipo==1){
         
         ?> 
-             <a class="" href="#" data-toggle="modal" data-target="#imagenLinea" onclick="carga_img_l('<?php echo $id_linea; ?>')"><img style="width: 40px" src="../../img/3342177.png" alt=""/></a></td>
+             <a class="" href="#" data-toggle="modal" data-target="#imagenLinea" onclick="carga_img_l('<?php echo $id_linea; ?>')"><img style="width: 40px" src="../../img_sistema/3342177.png" alt=""/></a></td>
        <?php 
        // echo $tipo;
          }
