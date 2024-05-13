@@ -171,6 +171,7 @@ class ShopifyModel extends Query
                 echo "b";
             }
             echo "debug5";
+            $precio = $precio - $discount;
             $this->insertarDetalleFactura_local($nueva_factura_numero_formateada, $cantidad, $precio, $sku);
         }
         return array($query_factura_cot);
