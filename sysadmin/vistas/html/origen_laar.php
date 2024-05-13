@@ -129,7 +129,7 @@ $row           = mysqli_fetch_array($query_empresa);
 													</div>
 												</div>
 												<div class="form-group row">
-													<label for="fiscal" class="col-sm-3 col-form-label">Identificción:</label>
+													<label for="fiscal" class="col-sm-3 col-form-label">Identificación:</label>
 													<div class="col-sm-6">
 														<input type="text" class="form-control" required name="identificacion" value="<?php echo $row['identificacion'] ?>" autocomplete="off" >
 													</div>
