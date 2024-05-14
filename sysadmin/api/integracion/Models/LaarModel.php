@@ -217,7 +217,7 @@ class LaarModel extends Query
 
         if (strlen($ciudad_cot) > 4) {
             echo $ciudad_cot;
-            if (strpos($ciudad_cot, "IMP") === 0) {
+            if (strpos($ciudad_cot, "MKT") === 0) {
                 $valor_base = $this->select("SELECT precio FROM ciudad_laar WHERE codigo = '$ciudad_cot'");
                 $valor_base = $valor_base[0]['precio'];
             } else if (is_numeric($no_guia)) {
@@ -230,7 +230,7 @@ class LaarModel extends Query
                 echo $valor_base;
             }
         } else {
-            if (strpos($no_guia, "IMP") === 0) {
+            if (strpos($no_guia, "MKT") === 0) {
 
                 echo $ciudad_cot;
                 $valor_base = $this->select("SELECT trayecto_laar from ciudad_cotizacion where id_cotizacion = '$ciudad_cot'");
