@@ -376,7 +376,7 @@ if ($action == 'ajax' && ($server_url == "https://merkapro.ec")) {
                         <td class="align-middle"><input type="checkbox" name="item" id="<?php echo $numero_factura; ?>"></td>
                         <td class="align-middle text-center"><label class='badge badge-purple'><?php echo $numero_factura; ?></label><br><span class="fs-xs"><?php echo $tipo_venta_m; ?></span> </td>
                         <td class="align-middle">
-                            <span>
+                            <span class="text-center align-middle">
                                 <strong>
                                     <?php echo $total_venta; ?>
                                 </strong>

@@ -130,7 +130,7 @@ class ShopifyModel extends Query
                 $proveedor_server = $this->buscarProveedor($sku);
                 if ($proveedor_server != false) {
                     $conexion_proveedor = $this->obtener_conexion($proveedor_server);
-                    $conexion_marketplace = $this->obtener_conexion('https://marketplace.imporsuit.com');
+                    $conexion_marketplace = $this->obtener_conexion('https://merkapro.ec');
                     $proveedor_server = $this->conseguirUltimaFactura($conexion_proveedor);
                 }
                 echo "net";
