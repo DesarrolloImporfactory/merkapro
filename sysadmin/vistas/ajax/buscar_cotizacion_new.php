@@ -206,11 +206,11 @@ if ($action == 'ajax' && ($server_url == "https://merkapro.ec")) {
                     $ciudad_cot   = $row['ciudad_cot'];
                     //echo $ciudad_cot;
                     $ciudad_cot   = get_row('ciudad_cotizacion', 'ciudad', 'id_cotizacion', $ciudad_cot);
-                    if (empty($ciudad_cot) || $ciudad_cot ===0) {
+                    if (empty($ciudad_cot) || $ciudad_cot === 0) {
                         $ciudad_cot = get_row('ciudad_laar', 'nombre', 'codigo', $row['ciudad_cot']);
                     }
 
-                   
+
 
                     $observacion   = $row['observacion'];
                     $direccion   = $row['c_principal'] . ' y ' . $row['c_secundaria'] . '-' . $row['referencia'];
@@ -1068,12 +1068,12 @@ if ($action == 'ajax' && ($server_url == "https://merkapro.ec")) {
                     $ciudad_cot   = $row['ciudad_cot'];
                     //echo $ciudad_cot;
                     $ciudad_cot   = get_row("ciudad_cotizacion", "ciudad", "id_cotizacion", $ciudad_cot);
-                   
-                    if (empty($ciudad_cot) || $ciudad_cot ===0) {
+
+                    if (empty($ciudad_cot) || $ciudad_cot === 0) {
                         $ciudad_cot = get_row('ciudad_laar', 'nombre', 'codigo', $row['ciudad_cot']);
                     }
 
-                   
+
 
                     $observacion   = $row['observacion'];
                     $direccion   = $row['c_principal'] . ' y ' . $row['c_secundaria'] . '-' . $row['referencia'];
@@ -1194,7 +1194,7 @@ if ($action == 'ajax' && ($server_url == "https://merkapro.ec")) {
                                     $proveedor_url = $proveedor;
                                     $proveedor = str_replace('https://', '', $proveedor);
                                     $proveedor = str_replace('http://', '', $proveedor);
-                                    $proveedor = str_replace('.merkapro.com', '', $proveedor);
+                                    $proveedor = str_replace('.merkapro.ec', '', $proveedor);
                                     $proveedor = strtoupper($proveedor);
                                 } else {
                                     $proveedor = "NO ENCONTRADO BUG";
@@ -1212,7 +1212,7 @@ if ($action == 'ajax' && ($server_url == "https://merkapro.ec")) {
                             $proveedor_url = $proveedor;
                             $proveedor = str_replace('https://', '', $proveedor);
                             $proveedor = str_replace('http://', '', $proveedor);
-                            $proveedor = str_replace('.merkapro.com', '', $proveedor);
+                            $proveedor = str_replace('.merkapro.ec', '', $proveedor);
                             $proveedor = strtoupper($proveedor);
 
                             break;
@@ -1225,7 +1225,7 @@ if ($action == 'ajax' && ($server_url == "https://merkapro.ec")) {
 
                     $tienda = str_replace('https://', '', $tienda);
                     $tienda = str_replace('http://', '', $tienda);
-                    $tienda = str_replace('.merkapro.com', '', $tienda);
+                    $tienda = str_replace('.merkapro.ec', '', $tienda);
                     $tienda = strtoupper($tienda);
                     $badge_transportadoras = "badge ";
                     if ($transportadora == "SERVIENTREGA") {
