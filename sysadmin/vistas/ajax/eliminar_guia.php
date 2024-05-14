@@ -9,7 +9,7 @@ $authData = array(
 
 $guia = $_POST['guia'];
 
-if (strpos($guia, "MKTP") !== 0 && !is_numeric($guia)) {
+if (strpos($guia, "MKP") !== 0 && !is_numeric($guia)) {
     $authUrl = "https://fast.imporsuit.com/GenerarGuia/anular/" . $guia;
     $authHeaders = array(
         'accept: application/json',
