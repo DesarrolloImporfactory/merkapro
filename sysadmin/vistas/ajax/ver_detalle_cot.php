@@ -25,7 +25,7 @@ if ($prove_temp == null) {
     $prove_temp = $server_url;
 }
 $id_factura_origen = get_row("facturas_cot", "id_factura_origen", "numero_factura", $numero_factura);
-if ($server_url != "https://marketplace.imporsuit.com") $id_factura_origen = get_row("facturas_cot", "id_factura", "numero_factura", $numero_factura);
+if ($server_url != "https://merkapro.ec") $id_factura_origen = get_row("facturas_cot", "id_factura", "numero_factura", $numero_factura);
 $archivo_tienda = $prove_temp . '/sysadmin/vistas/db1.php';
 $archivo_destino_tienda = "../db_destino_guia.php";
 $contenido_tienda = file_get_contents($archivo_tienda);
@@ -37,7 +37,7 @@ $base_d = $get_data['DB_NAME'];
 
 $conexionAX = mysqli_connect($host_d, $user_d, $pass_d, $base_d);
 $sql = "SELECT * from facturas_cot fc inner join detalle_fact_cot dc on fc.numero_factura = dc.numero_factura INNER join productos p on p.id_producto = dc.id_producto where fc.id_factura = '$id_factura_origen'";
-if ($server_url != "https://marketplace.imporsuit.com") {
+if ($server_url != "https://merkapro.ec") {
     $query = mysqli_query($conexion, $sql);
     $query2 = mysqli_query($conexion, $sql);
 } else {
@@ -50,7 +50,7 @@ $rw = mysqli_fetch_array($query);
 $count = 0;
 if ($rw["guia_enviada"] == 1) {
     $sql_guia = "SELECT * from guia_laar where id_pedido = '$id_factura_origen'";
-    if ($server_url != "https://marketplace.imporsuit.com") {
+    if ($server_url != "https://merkapro.ec") {
         $query_guia = mysqli_query($conexion, $sql_guia);
     } else {
         $query_guia = mysqli_query($conexionAX, $sql_guia);
@@ -99,7 +99,7 @@ $dominio_actual = $protocol . $_SERVER['HTTP_HOST'];
                     <span># Orden: <?php echo $nf ?></span> <br>
                     <span>Fecha: <?php echo $rw["fecha_factura"] ?></span> <br>
                     <?php if ($rw["guia_enviada"] == 1) {
-                        if ($dominio_actual == "https://marketplace.imporsuit.com") {
+                        if ($dominio_actual == "https://merkapro.ec") {
                             $transportista = get_row("guia_laar", "id_transporte", "tienda_venta ='" . $rw["tienda"] . "' and id_pedido", $rw["id_factura"]);
                             $cod = $rw["cod"];
                         } else {
