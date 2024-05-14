@@ -89,7 +89,13 @@ $favicon = $row['favicon'];
 
 											<div class="col-md-9">
 												<div class="card-box">
-													<br>
+													<div style="background-color: lightyellow" class="card-box">
+														<a href="../../doc/Términos y Condiciones para Proveedores de Imporsuit.pdf"></a>
+														<label class="form-check-label" for="flexSwitchCheckChecked"><strong>Deseas ser proveedor de Imporsuit?</strong><br><a target="blank" href="../../doc/Términos y Condiciones para Proveedores de Imporsuit.pdf">Leer términos y condiciones</a> <br>Al marcar esta casilla, usted acepta y se compromete a cumplir con los Términos y Condiciones. </label>
+														<input style="width: 30px; height: 30px" class="" type="checkbox" role="switch" id="flotar" <?php if (get_row('perfil', 'habilitar_proveedor', 'id_perfil', 1) == 1) { ?> checked<?php } ?>>
+
+
+													</div><br>
 													<div class="form-group row">
 														<label for="inputPassword3" class="col-sm-3  col-form-label">Razón Social:</label>
 														<div class="col-sm-9">
