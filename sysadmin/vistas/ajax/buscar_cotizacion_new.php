@@ -62,7 +62,7 @@ if ($action == 'ajax' && ($server_url == "https://merkapro.ec")) {
         $sWhere .= "";
     }
 
-    if ($server_url == "https://yapando.merkapro.com" || $server_url == "https://onlytap.merkapro.com") {
+    if ($server_url == "https://yapando.merkapro.ec" || $server_url == "https://onlytap.merkapro.ec") {
         $sTable .= ", detalle_fact_cot";
         $sWhere .= " and detalle_fact_cot.numero_factura = facturas_cot.numero_factura";
     }
@@ -330,7 +330,7 @@ if ($action == 'ajax' && ($server_url == "https://merkapro.ec")) {
                                     $proveedor_url = $proveedor;
                                     $proveedor = str_replace('https://', '', $proveedor);
                                     $proveedor = str_replace('http://', '', $proveedor);
-                                    $proveedor = str_replace('.merkapro.com', '', $proveedor);
+                                    $proveedor = str_replace('.merkapro.ec', '', $proveedor);
                                     $proveedor = strtoupper($proveedor);
                                 } else {
                                     $proveedor = "NO ENCONTRADO BUG";
@@ -348,7 +348,7 @@ if ($action == 'ajax' && ($server_url == "https://merkapro.ec")) {
                             $proveedor_url = $proveedor;
                             $proveedor = str_replace('https://', '', $proveedor);
                             $proveedor = str_replace('http://', '', $proveedor);
-                            $proveedor = str_replace('.merkapro.com', '', $proveedor);
+                            $proveedor = str_replace('.merkapro.ec', '', $proveedor);
                             $proveedor = strtoupper($proveedor);
 
                             break;
@@ -361,7 +361,7 @@ if ($action == 'ajax' && ($server_url == "https://merkapro.ec")) {
 
                     $tienda = str_replace('https://', '', $tienda);
                     $tienda = str_replace('http://', '', $tienda);
-                    $tienda = str_replace('.merkapro.com', '', $tienda);
+                    $tienda = str_replace('.merkapro.ec', '', $tienda);
                     $tienda = strtoupper($tienda);
                     $badge_transportadoras = "badge ";
                     if ($transportadora == "SERVIENTREGA") {
@@ -963,7 +963,7 @@ if ($action == 'ajax' && ($server_url == "https://merkapro.ec")) {
     $sTable = "facturas_cot, clientes, users";
     $sWhere = "";
     $sWhere .= " WHERE facturas_cot.id_cliente=clientes.id_cliente and facturas_cot.id_vendedor=users.id_users";
-    if ($server_url == "https://yapando.merkapro.com" || $server_url == "https://onlytap.merkapro.com") {
+    if ($server_url == "https://yapando.merkapro.ec" || $server_url == "https://onlytap.merkapro.ec") {
         $sTable .= ", detalle_fact_cot";
         $sWhere .= " and detalle_fact_cot.numero_factura = facturas_cot.numero_factura";
     }
@@ -1696,7 +1696,7 @@ if ($action == 'ajax' && ($server_url == "https://merkapro.ec")) {
                                                                                                                         }
                                                                                                                     } else if (strpos($guia_numero, "I00") === 0) {
                                                                                                                         $span_estado = 'badge-danger';
-                                                                                                                        $url = "https://guias.merkapro.com/Gintracom/label/" . $guia_numero;
+                                                                                                                        $url = "https://guias.merkapro.ec/Gintracom/label/" . $guia_numero;
                                                                                                                         $tracking = "https://ec.gintracom.site/web/site/tracking?guia=" . $guia_numero . "&tipo=GUIA";
                                                                                                                     } else {
                                                                                                                         $guia_numero = '<span class="badge badge-warning text-black">GUIA NO ENVIADA</span>';
