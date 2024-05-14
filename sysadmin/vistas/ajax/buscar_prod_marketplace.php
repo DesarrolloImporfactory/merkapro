@@ -199,7 +199,7 @@ if ($action == 'ajax') {
 
                                 <a data-toggle="modal" style="width: 100%" data-target="#editarProducto" onclick="obtener_datos('<?php echo $id_producto; ?>');carga_img('<?php echo $id_producto; ?>');" class="btn bg-info text-white formulario">Descripcion</a>
                             </div><br> <?php 
-                            echo 'tienda'.$tienda;
+                            echo 'tienda'.$tienda; 
                             echo 'server'.$server_url;
                                   
                             if ($tienda <> $server_url) {
