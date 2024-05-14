@@ -168,9 +168,14 @@ if ($action == 'ajax') {
                                 <strong>Precio Sugerido:</strong> $ <?php echo number_format($precio_especial, 2, '.', ''); ?></br>
                                 <?php 
                                 $tienda_mostrar = str_replace('https://', '', $tienda);
-                                $tienda_mostrar = str_replace('http://', '', $tienda);
-                                $tienda_mostrar = str_replace('.imporsuit.com', '', $tienda);
-                                $tienda_mostrar = strtoupper($tienda); ?>
+                                $tienda_mostrar = str_replace('http://', '', $tienda_mostrar);
+                                $tienda_mostrar = str_replace('.imporsuit.com', '', $tienda_mostrar);
+                                $tienda_mostrar = strtoupper($tienda_mostrar); 
+                                
+                                $server_url_mostrar = str_replace('https://', '', $server_url);
+                                $server_url_mostrar = str_replace('http://', '', $server_url_mostrar);
+                                $server_url_mostrar = str_replace('.imporsuit.com', '', $server_url_mostrar);
+                                $server_url_mostrar = strtoupper($server_url_mostrar); ?>
                             </p>
                             <span class="text-link" onclick="abrirModalTienda('<?php echo $tienda; ?>')" data-bs-toggle="modal" data-bs-target="#tiendaModal"><strong>Proveedor:</strong> <?php echo $tienda_mostrar ?></strong></span>
 
@@ -202,7 +207,7 @@ if ($action == 'ajax') {
                             </div><br> <?php 
                             
                                   
-                            if ($tienda <> $server_url) {
+                            if ($tienda_mostrar <> $server_url_mostrar) {
                                         ?>
 
                                 <a class='btn btn-primary formulario' style="width: 100%" href="../ajax/importar.php?id=<?php echo $id_producto; ?>" title="Importar" onclick="recibir(<?php echo $id_producto ?>)">
@@ -222,7 +227,7 @@ if ($action == 'ajax') {
                 <input type="hidden" value="<?php echo $online; ?>" id="online<?php echo $id_producto; ?>">
                 <input type="hidden" value="<?php echo $codigo_producto; ?>" id="codigo_producto<?php echo $id_producto; ?>">
                 <input type="hidden" value="<?php echo $nombre_producto; ?>" id="nombre_producto<?php echo $id_producto; ?>">
-                <input type="hidden" value="<?php echo $descripcion_producto; ?>" id="descripcion_producto<?php echo $id_producto; ?>">
+                <input type="hidden" value="<?php echo @$descripcion_producto; ?>" id="descripcion_producto<?php echo $id_producto; ?>">
                 <input type="hidden" value="<?php echo $linea_producto; ?>" id="linea_producto<?php echo $id_producto; ?>">
                 <input type="hidden" value="<?php echo $id_proveedor; ?>" id="proveedor_producto<?php echo $id_producto; ?>">
                 <!--<input type="hidden" value="<?php echo $med_producto; ?>" id="med_producto<?php echo $id_producto; ?>">-->
