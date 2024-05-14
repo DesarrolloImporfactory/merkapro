@@ -166,12 +166,13 @@ if ($action == 'ajax') {
                             <p class="card-text"><strong>Stock</strong> <?php echo stock($stock_producto); ?></br>
                                 <strong>Precio Proveedor:</strong> $ <?php echo number_format($costo_producto, 2, '.', ''); ?></br>
                                 <strong>Precio Sugerido:</strong> $ <?php echo number_format($precio_especial, 2, '.', ''); ?></br>
-                                <?php $tienda = str_replace('https://', '', $tienda);
-                                $tienda = str_replace('http://', '', $tienda);
-                                $tienda = str_replace('.imporsuit.com', '', $tienda);
-                                $tienda = strtoupper($tienda); ?>
+                                <?php 
+                                $tienda_mostrar = str_replace('https://', '', $tienda);
+                                $tienda_mostrar = str_replace('http://', '', $tienda);
+                                $tienda_mostrar = str_replace('.imporsuit.com', '', $tienda);
+                                $tienda_mostrar = strtoupper($tienda); ?>
                             </p>
-                            <span class="text-link" onclick="abrirModalTienda('<?php echo $tienda; ?>')" data-bs-toggle="modal" data-bs-target="#tiendaModal"><strong>Proveedor:</strong> <?php echo $tienda ?></strong></span>
+                            <span class="text-link" onclick="abrirModalTienda('<?php echo $tienda; ?>')" data-bs-toggle="modal" data-bs-target="#tiendaModal"><strong>Proveedor:</strong> <?php echo $tienda_mostrar ?></strong></span>
 
                             <!-- modal proveedor -->
                             <div class="modal fade" id="tiendaModal" tabindex="-1" aria-labelledby="tiendaModalLabel" aria-hidden="true">
@@ -199,8 +200,7 @@ if ($action == 'ajax') {
 
                                 <a data-toggle="modal" style="width: 100%" data-target="#editarProducto" onclick="obtener_datos('<?php echo $id_producto; ?>');carga_img('<?php echo $id_producto; ?>');" class="btn bg-info text-white formulario">Descripcion</a>
                             </div><br> <?php 
-                            echo 'tienda'.$tienda; 
-                            echo 'server'.$server_url;
+                            
                                   
                             if ($tienda <> $server_url) {
                                         ?>
