@@ -133,7 +133,7 @@ $dominio_actual = $protocol . $_SERVER['HTTP_HOST'];
                                 <th>Factura</th>
                                 <th>Producto</th>
                                 <th>Cantidad</th>
-                                <th>Precio</th>
+                                <th>Precio del Producto</th>
                                 <th>Subtotal</th>
                             </tr>
                         </thead>
@@ -153,10 +153,6 @@ $dominio_actual = $protocol . $_SERVER['HTTP_HOST'];
                             }
                             ?>
 
-                            <tr>
-                                <td colspan="4" class="text-right">Total</td>
-                                <td><?php echo number_format($count, 2) ?></td>
-                            </tr>
                         </tbody>
                     </table>
                     <h4>Historial de estados</h4>
