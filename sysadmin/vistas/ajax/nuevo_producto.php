@@ -15,7 +15,6 @@ if (empty($_POST['codigo'])) {
     !empty($_POST['nombre']) &&
     $_POST['linea'] != "" &&
     $_POST['proveedor'] != "" &&
-    !empty($_POST['costo']) &&
     !empty($_POST['precio']) &&
     !empty($_POST['minimo'])
 ) {
