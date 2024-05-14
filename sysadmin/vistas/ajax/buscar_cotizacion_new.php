@@ -1245,11 +1245,11 @@ if ($action == 'ajax' && ($server_url == "https://merkapro.ec")) {
 
                         <td class="text-center align-middle fs-7"><span class="font-weight-bold"> <?php echo $nombre; ?> </span> <br> <span class=""><?php echo $direccion; ?></span><br> <span><?php echo  "telf: " .  $telefono; ?></span></td>
                         <td class="text-center align-middle"><?php echo '<strong>' . $provincia . '</strong>' . '<br>' . $ciudad_cot; ?></td>
-                        <td class="text-center align-middle"><span class="text-link" onclick="abrirModalTienda('<?php echo $tienda; ?>')" data-bs-toggle="modal" data-bs-target="#tiendaModal"> <?php echo $tienda; ?></span>
+                        <td class="text-center align-middle"><a href="<?php echo $tienda_url; ?>" class="text-link"> <?php echo $tienda; ?></a>
                         </td>
 
                         <?php if ($server_url === "https://merkapro.ec") { ?>
-                            <td class="text-center align-middle"><span class="text-link" onclick="abrirModalTienda('<?php echo $proveedor; ?>')"> <?php echo $proveedor; ?></span></td>
+                            <td class="text-center align-middle"><a href="<?php echo $tienda_url; ?>" class="text-link"> <?php echo $proveedor; ?></a></td>
                         <?php } ?>
                         <td class="text-center align-middle"><?php if (empty($transportadora)) {
                                                                     echo "<span class='badge badge-warning text-black'>NA</span>";
