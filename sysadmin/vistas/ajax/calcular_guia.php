@@ -66,7 +66,7 @@ if ($seguro == 1) {
 } else {
     $seguro = 0;
 }
-$valor_envio = $valor_base + $cod + $seguro;
+$valor_envio = $valor_base;
 
 $valor_texto = "Precio de envío $" . number_format($valor_envio, 2);
 
