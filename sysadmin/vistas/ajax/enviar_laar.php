@@ -67,10 +67,10 @@ $row_cnt = mysqli_num_rows($query);
 if ($row_cnt > 0) {
     while ($row = mysqli_fetch_array($query)) {
         $numero_sig = $row['id_guia'] + 1;
-        $guia_sistema = 'MKTP' . $numero_sig;
+        $guia_sistema = 'MKP' . $numero_sig;
     }
 } else {
-    $guia_sistema = "MKTP1";
+    $guia_sistema = "MKP1";
 }
 if (
     isset($_SERVER['HTTPS']) &&

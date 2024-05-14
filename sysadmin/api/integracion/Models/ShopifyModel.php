@@ -52,7 +52,10 @@ class ShopifyModel extends Query
             echo "no existe";
             return false;
         }
-        $total = $total - $discount;
+        if ($discount > 0) {
+
+            $total = $total - $discount;
+        }
         $ultima_factura_sql = "SELECT MAX(numero_factura) AS factura FROM facturas_cot;";
         $ultima_factura = $this->select($ultima_factura_sql);
         $ultima_factura_numero = $ultima_factura[0]['factura'];
@@ -130,7 +133,7 @@ class ShopifyModel extends Query
                 $proveedor_server = $this->buscarProveedor($sku);
                 if ($proveedor_server != false) {
                     $conexion_proveedor = $this->obtener_conexion($proveedor_server);
-                    $conexion_marketplace = $this->obtener_conexion('https://marketplace.imporsuit.com');
+                    $conexion_marketplace = $this->obtener_conexion('https://merkapro.ec');
                     $proveedor_server = $this->conseguirUltimaFactura($conexion_proveedor);
                 }
                 echo "net";

@@ -41,7 +41,6 @@ if ($server_url != "https://merkapro.ec") {
     $query = mysqli_query($conexion, $sql);
     $query2 = mysqli_query($conexion, $sql);
 } else {
-
     $query = mysqli_query($conexionAX, $sql);
     $query2 = mysqli_query($conexionAX, $sql);
 }

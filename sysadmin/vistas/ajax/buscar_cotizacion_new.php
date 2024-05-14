@@ -375,7 +375,13 @@ if ($action == 'ajax' && ($server_url == "https://merkapro.ec")) {
                     <tr class="align-middle">
                         <td class="align-middle"><input type="checkbox" name="item" id="<?php echo $numero_factura; ?>"></td>
                         <td class="align-middle text-center"><label class='badge badge-purple'><?php echo $numero_factura; ?></label><br><span class="fs-xs"><?php echo $tipo_venta_m; ?></span> </td>
-                        <td class="align-middle"> <button onclick="ver_detalle_cot('<?php echo $numero_factura ?>')" class="btn btn-sm btn-outline-primary"> Ver detalle</button> <br><span><?php echo $año; ?></span> <br><span><?php echo $hora . " " . $apm; ?> </span> </td>
+                        <td class="align-middle">
+                            <span class="text-center align-middle">
+                                <strong>
+                                    <?php echo $total_venta; ?>
+                                </strong>
+                            </span> <br> <button onclick="ver_detalle_cot('<?php echo $numero_factura ?>')" class="btn btn-sm btn-outline-primary"> Ver detalle</button> <br><span><?php echo $año; ?></span> <br><span><?php echo $hora . " " . $apm; ?> </span>
+                        </td>
 
                         <td class="text-center align-middle fs-7"><span class="font-weight-bold"> <?php echo $nombre; ?> </span> <br> <span class=""><?php echo $direccion; ?></span><br> <span><?php echo  "telf: " .  $telefono; ?></span></td>
                         <td class="text-center align-middle"><?php echo '<strong>' . $provincia . '</strong>' . '<br>' . $ciudad_cot; ?></td>
@@ -1084,7 +1090,7 @@ if ($action == 'ajax' && ($server_url == "https://merkapro.ec")) {
                     $guia_enviada   = $row['guia_enviada'];
                     $drogshipin   = $row['drogshipin'];
                     $transportadora  = $row['transporte'];
-
+                    $monto_factura   = $row['monto_factura'];
 
                     $tienda   = $row['tienda'];
                     if ($tienda == null || $tienda == '') {
@@ -1241,7 +1247,9 @@ if ($action == 'ajax' && ($server_url == "https://merkapro.ec")) {
                     <tr class="align-middle">
                         <td class="align-middle"><input type="checkbox" name="item" id="<?php echo $numero_factura; ?>"></td>
                         <td class="align-middle text-center"><label class='badge badge-purple'><?php echo $numero_factura; ?></label><br><span class="fs-xs"><?php echo $tipo_venta_m; ?></span> </td>
-                        <td class="align-middle text-center "> <button onclick="ver_detalle_cot('<?php echo $numero_factura ?>')" class="btn btn-sm btn-outline-primary"> Ver detalle</button> <br> <span><?php echo $año; ?></span> <br><span><?php echo $hora . " " . $apm; ?> </span> </td>
+                        <td class="align-middle text-center "> <span>
+                                <strong><?php echo $total_venta; ?></strong>
+                            </span> <br /> <button onclick="ver_detalle_cot('<?php echo $numero_factura ?>')" class="btn btn-sm btn-outline-primary"> Ver detalle</button> <br> <span><?php echo $año; ?></span> <br><span><?php echo $hora . " " . $apm; ?> </span> </td>
 
                         <td class="text-center align-middle fs-7"><span class="font-weight-bold"> <?php echo $nombre; ?> </span> <br> <span class=""><?php echo $direccion; ?></span><br> <span><?php echo  "telf: " .  $telefono; ?></span></td>
                         <td class="text-center align-middle"><?php echo '<strong>' . $provincia . '</strong>' . '<br>' . $ciudad_cot; ?></td>
