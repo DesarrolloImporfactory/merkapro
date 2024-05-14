@@ -8,9 +8,7 @@ if (empty($_POST['codigo'])) {
     $errors[] = "Selecciona una Linea del producto";
 } else if ($_POST['proveedor'] == "") {
     $errors[] = "Selecciona un Proveedor";
-} else if (empty($_POST['costo'])) {
-    $errors[] = "Costo de Producto vacío";
-} else if (empty($_POST['precio'])) {
+}else if (empty($_POST['precio'])) {
     $errors[] = "Precio de venta vacío";
 } else if (
     !empty($_POST['codigo']) &&
