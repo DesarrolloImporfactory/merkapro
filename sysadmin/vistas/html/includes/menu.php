@@ -228,15 +228,15 @@ $simbolo_moneda = get_row('perfil', 'moneda', 'id_perfil', 1);
 
 					<ul class="list-unstyled">
 						<!--li><a href="../html/new_cotizacion.php">Agregar Pedido</a></li-->
-						<li><a href="../html/new_cotizacion.php">Ingresar Pedidos</a></li>
+						<li><a href="../html/new_cotizacion.php">Nuevo Pedido</a></li>
 
 						<?php if ($pais == 1) {
 
 						?>
-							<li><a href="../html/bitacora_cotizacion_new.php">Pedidos</a></li>
+							<li><a href="../html/bitacora_cotizacion_new.php">Pedidos Ingresados</a></li>
 						<?php  } else {
 						?>
-							<li><a href="../html/bitacora_cotizacion_p.php">Pedidos</a></li>
+							<li><a href="../html/bitacora_cotizacion_p.php">Pedidos Ingresados</a></li>
 						<?php
 						} ?>
 
