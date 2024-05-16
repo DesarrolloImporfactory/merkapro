@@ -94,10 +94,10 @@ if ($action == 'ajax') {
 .card {
     display: flex;
     flex-direction: column;
-    border: 1px solid #ccc;
-    border-radius: 8px;
+    height: 100%;
     margin: 10px;
-    overflow: hidden; /* Evita que los contenidos se salgan del borde redondeado */
+    border: 1px solid #ccc; /* Opcional: agrega un borde sutil */
+    border-radius: 8px; /* Opcional: bordes redondeados para una apariencia más suave */
 }
 
 .card-img-top {
@@ -110,41 +110,43 @@ if ($action == 'ajax') {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    flex-grow: 1;
+    flex-grow: 1; /* Permite que el cuerpo de la tarjeta crezca para llenar el espacio */
     padding: 10px;
 }
 
-.card-text {
+.card-title, .card-text {
     font-size: 12px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
-    margin-bottom: 10px; /* Espacio antes de los botones */
+    margin-bottom: 5px; /* Espacio entre elementos del texto */
 }
 
-/* Asegura que los botones se apilen verticalmente y llenen el ancho */
-.btn-container {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-}
-
+/* Mejora el estilo de los botones */
 .btn {
-    width: 100%;
-    padding: 8px 0;
-    border: none;
-    background-color: #007bff;
-    color: white;
+    width: 100%; /* Hace que todos los botones ocupen todo el ancho */
+    padding: 8px 0; /* Añade padding vertical para más visibilidad */
+    margin-top: 5px; /* Espacio encima del primer botón */
+    border-radius: 4px; /* Bordes redondeados para los botones */
+    text-align: center; /* Asegura que el texto esté centrado */
+    background-color: #007bff; /* Color de fondo para botones principales */
+    color: white; /* Color de texto para botones principales */
+    border: none; /* Elimina el borde predeterminado */
     cursor: pointer;
-    text-align: center;
-    border-radius: 0; /* Elimina el borde redondeado en los botones si no es deseado */
-    margin-bottom: 5px; /* Espacio entre botones */
 }
 
 .btn:last-child {
-    margin-bottom: 0; /* Elimina el margen del último botón */
+    background-color: #ffc107; /* Color diferente para el último botón, opcional */
+}
+
+.card-text {
+    overflow: hidden; /* Evita desbordamientos de texto */
+    text-overflow: ellipsis; /* Pone puntos suspensivos si el texto es muy largo */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3; /* Limita el texto a tres líneas */
+}
+
+.text-link {
+    cursor: pointer; /* Hace el texto clickeable */
+    color: #007bff; /* Color para simular un enlace */
 }
 
 
@@ -254,7 +256,6 @@ if ($action == 'ajax') {
                 </div>
             </div>
             <!-- fin modal proveedor -->
-            <div class="btn-container">
             <div class="d-flex gap-3 justify-content-center">
                 <a data-toggle="modal" style="width: 100%" data-target="#editarProducto" onclick="obtener_datos('<?php echo $id_producto; ?>');carga_img('<?php echo $id_producto; ?>');" class="btn bg-info text-white formulario">Descripcion</a>
                 <br>
@@ -266,7 +267,6 @@ if ($action == 'ajax') {
                 }
                 ?>
             </div>
-                </div>
         </div>
     </div>
 </div>
