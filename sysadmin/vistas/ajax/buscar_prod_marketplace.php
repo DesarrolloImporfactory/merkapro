@@ -94,28 +94,52 @@ if ($action == 'ajax') {
 .caja {
     display: flex;
     flex-direction: column;
-    height: 100%; /* Ajusta según sea necesario para mantener la uniformidad */
+    height: 100%; /* Altura completa del contenedor padre si es necesario */
+    margin: 10px; /* Espaciado entre tarjetas */
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    align-items: stretch; /* Alinea los items de la tarjeta a lo largo */
 }
 
 .card-img-top {
-    width: 100%; /* Asegura que la imagen ocupe todo el ancho del card */
-    height: 280px; /* Altura fija para todas las imágenes */
+    height: 150px; /* Altura fija para todas las imágenes */
     object-fit: cover; /* Asegura que la imagen se recorte para llenar el espacio sin distorsionarse */
+    width: 100%; /* Ocupa todo el ancho posible */
 }
 
 .card-body {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
+    justify-content: space-between; /* Espacia contenido internamente */
 }
 
-.card-title, .card-text, .text-link {
+.card-title, .card-text {
     font-size: 12px; /* Tamaño de texto uniforme */
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap; /* No permite que el texto se extienda más de una línea */
 }
 
 .card-text {
-    flex-grow: 1; /* Ocupa todo el espacio vertical disponible */
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Limita a tres líneas de texto */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
+
+.btn {
+    margin-top: 5px; /* Espacio sobre los botones */
+}
+
+.text-link {
+    cursor: pointer; /* Hace el texto clickeable */
+}
+
 
  </style>
         <div class="row">
