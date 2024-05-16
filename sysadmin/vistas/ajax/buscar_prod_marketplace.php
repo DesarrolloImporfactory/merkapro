@@ -162,8 +162,8 @@ if ($action == 'ajax') {
 
                         ?>
                         <div class="card-body">
-                            <h5 style="font-size: 8px" class="card-title"><strong><?php echo strtoupper($nombre_producto) ; ?></strong></h5>
-                            <p class="card-text"><strong>Stock</strong> <?php echo stock($stock_producto); ?></br>
+                            <h5 style="font-size: 12px" class="card-title"><strong><?php echo strtoupper($nombre_producto) ; ?></strong></h5>
+                            <p style="font-size: 12px" class="card-text"><strong>Stock</strong> <?php echo stock($stock_producto); ?></br>
                                 <strong>Precio Proveedor:</strong> $ <?php echo number_format($costo_producto, 2, '.', ''); ?></br>
                                 <strong>Precio Sugerido:</strong> $ <?php echo number_format($precio_especial, 2, '.', ''); ?></br>
                                 <?php 
