@@ -258,7 +258,8 @@ if ($action == 'ajax') {
             <!-- fin modal proveedor -->
             <div class="d-flex gap-3 justify-content-center">
                 <a data-toggle="modal" style="width: 100%" data-target="#editarProducto" onclick="obtener_datos('<?php echo $id_producto; ?>');carga_img('<?php echo $id_producto; ?>');" class="btn bg-info text-white formulario">Descripcion</a>
-                <br>
+               </div>
+            <div class="d-flex gap-3 justify-content-center">
                 <?php
                 if ($tienda_mostrar != $server_url_mostrar) {
                     echo "<a class='btn btn-primary formulario' style='width: 100%' href='../ajax/importar.php?id=$id_producto' title='Importar' onclick='recibir($id_producto)'>Importar</a>";
