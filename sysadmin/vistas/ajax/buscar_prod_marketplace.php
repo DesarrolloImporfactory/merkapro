@@ -91,53 +91,62 @@ if ($action == 'ajax') {
         $simbolo_moneda = get_row('perfil', 'moneda', 'id_perfil', 1);
 ?>
  <style>
-.caja {
-    display: flex;
-    flex-direction: column;
-    height: 100%; /* Altura completa del contenedor padre si es necesario */
-    margin: 10px; /* Espaciado entre tarjetas */
-}
-
 .card {
     display: flex;
     flex-direction: column;
     height: 100%;
-    align-items: stretch; /* Alinea los items de la tarjeta a lo largo */
+    margin: 10px;
+    border: 1px solid #ccc; /* Opcional: agrega un borde sutil */
+    border-radius: 8px; /* Opcional: bordes redondeados para una apariencia más suave */
 }
 
 .card-img-top {
-    height: 150px; /* Altura fija para todas las imágenes */
-    object-fit: cover; /* Asegura que la imagen se recorte para llenar el espacio sin distorsionarse */
-    width: 100%; /* Ocupa todo el ancho posible */
+    height: 150px;
+    object-fit: cover;
+    width: 100%;
 }
 
 .card-body {
-    flex-grow: 1;
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* Espacia contenido internamente */
+    justify-content: space-between;
+    flex-grow: 1; /* Permite que el cuerpo de la tarjeta crezca para llenar el espacio */
+    padding: 10px;
 }
 
 .card-title, .card-text {
-    font-size: 12px; /* Tamaño de texto uniforme */
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap; /* No permite que el texto se extienda más de una línea */
+    font-size: 12px;
+    margin-bottom: 5px; /* Espacio entre elementos del texto */
+}
+
+/* Mejora el estilo de los botones */
+.btn {
+    width: 100%; /* Hace que todos los botones ocupen todo el ancho */
+    padding: 8px 0; /* Añade padding vertical para más visibilidad */
+    margin-top: 5px; /* Espacio encima del primer botón */
+    border-radius: 4px; /* Bordes redondeados para los botones */
+    text-align: center; /* Asegura que el texto esté centrado */
+    background-color: #007bff; /* Color de fondo para botones principales */
+    color: white; /* Color de texto para botones principales */
+    border: none; /* Elimina el borde predeterminado */
+    cursor: pointer;
+}
+
+.btn:last-child {
+    background-color: #ffc107; /* Color diferente para el último botón, opcional */
 }
 
 .card-text {
+    overflow: hidden; /* Evita desbordamientos de texto */
+    text-overflow: ellipsis; /* Pone puntos suspensivos si el texto es muy largo */
     display: -webkit-box;
-    -webkit-line-clamp: 3; /* Limita a tres líneas de texto */
     -webkit-box-orient: vertical;
-    overflow: hidden;
-}
-
-.btn {
-    margin-top: 5px; /* Espacio sobre los botones */
+    -webkit-line-clamp: 3; /* Limita el texto a tres líneas */
 }
 
 .text-link {
     cursor: pointer; /* Hace el texto clickeable */
+    color: #007bff; /* Color para simular un enlace */
 }
 
 
