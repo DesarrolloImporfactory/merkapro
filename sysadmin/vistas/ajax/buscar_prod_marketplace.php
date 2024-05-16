@@ -177,7 +177,7 @@ if ($action == 'ajax') {
                                 $server_url_mostrar = str_replace('.imporsuit.com', '', $server_url_mostrar);
                                 $server_url_mostrar = strtoupper($server_url_mostrar); ?>
                             </p>
-                            <span class="text-link" onclick="abrirModalTienda('<?php echo $tienda; ?>')" data-bs-toggle="modal" data-bs-target="#tiendaModal"><strong>Proveedor:</strong> <?php echo $tienda_mostrar ?></strong></span>
+                            <span style="font-size: 12px" class="text-link" onclick="abrirModalTienda('<?php echo $tienda; ?>')" data-bs-toggle="modal" data-bs-target="#tiendaModal"><strong>Proveedor:</strong> <?php echo $tienda_mostrar ?></strong></span>
 
                             <!-- modal proveedor -->
                             <div class="modal fade" id="tiendaModal" tabindex="-1" aria-labelledby="tiendaModalLabel" aria-hidden="true">
