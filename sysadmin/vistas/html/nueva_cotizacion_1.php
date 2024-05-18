@@ -776,7 +776,6 @@ $destino_marketplace = mysqli_connect("localhost", "imporsuit_marketplace", "imp
                      });
                  }
              }); 
-            $.Notification.notify('error', 'bottom right', 'ERROR!', 'EL SERVICIO NO ESTÁ DISPONIBLE EN ESTE MOMENTO')
 
         }
         if (transportadora === "4") {
