@@ -80,7 +80,7 @@ function load(page) {
     url += "&" + urlParams.join("&");
   }
   if (q == "") {
-    url += "q=" + q;
+    url += "&q=" + q;
   }
 
   url += "&filtro=" + filtroG;
