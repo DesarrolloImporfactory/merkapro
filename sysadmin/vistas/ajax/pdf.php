@@ -70,7 +70,7 @@ file_put_contents($htmlOutputPath, $dompdf->output());
 if (is_array($pdfs)) {
     $downloadedPdfs = [$htmlOutputPath]; // Incluir el HTML PDF al principio del array
     foreach ($pdfs as $pdfUrl) {
-        if (strpos($pdfUrl, 'IMP') === 0) {
+        if (strpos($pdfUrl, 'MKP') === 0) {
             $pdfContent = file_get_contents("https://api.laarcourier.com:9727/guias/pdfs/DescargarV2?guia=" . $pdfUrl);
         } else if (strpos($pdfUrl, 'FAST') === 0) {
             $pdfContent = file_get_contents("https://fast.imporsuit.com/GenerarGuia/descargar/" . $pdfUrl);
