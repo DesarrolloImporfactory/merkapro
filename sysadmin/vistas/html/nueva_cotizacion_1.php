@@ -47,6 +47,10 @@ $destino_marketplace = mysqli_connect("localhost", "imporsuit_marketplace", "imp
     .image-bn:hover {
         filter: grayscale(0%);
     }
+    
+    .div_seleccion:hover {
+        filter: grayscale(0%);
+    }
 
     .formulario {
         border-radius: 25px;
@@ -270,8 +274,8 @@ $destino_marketplace = mysqli_connect("localhost", "imporsuit_marketplace", "imp
                                                                         </div>
                                                                         <!-- Segunda Columna -->
                                                                         <div class="col-6 col-md-2">
-                                                                            <div id="card1" class="card formulario p-1">
-                                                                                <img style="width: 100%;" id="tr1" onclick="seleccionar_transportadora(1)" src="../../img_sistema/laar.png" class="card-img-top image-bn interactive-image formulario" alt="Selecciona Servientrega">
+                                                                            <div id="card1" onclick="seleccionar_transportadora(1)" class="card formulario p-1 div_imagen">
+                                                                                <img style="width: 100%;" id="tr1"  src="../../img_sistema/laar.png" class="card-img-top image-bn interactive-image laar_img formulario" alt="Selecciona Servientrega">
                                                                                 <div class="card-body" style="text-align: center;">
                                                                                     <strong id="precio_laar">---</strong>
                                                                                 </div>
@@ -279,8 +283,8 @@ $destino_marketplace = mysqli_connect("localhost", "imporsuit_marketplace", "imp
                                                                         </div>
                                                                         <!-- Tercera Columna -->
                                                                         <div class="col-6 col-md-2">
-                                                                            <div id="card2" class="card formulario p-1">
-                                                                                <img style="width: 100%;" id="tr2" onclick="seleccionar_transportadora(2)" src="../../img_sistema/speed.png" class="card-img-top image-bn interactive-image formulario" alt="Selecciona Guia Local">
+                                                                            <div id="card2" onclick="seleccionar_transportadora(2)" class="card formulario p-1">
+                                                                                <img style="width: 100%;" id="tr2"  src="../../img_sistema/speed.png" class="card-img-top image-bn interactive-image formulario" alt="Selecciona Guia Local">
                                                                                 <div class="card-body" style="text-align: center;">
                                                                                     <strong id="aplica">NO APLICA</strong>
                                                                                 </div>
