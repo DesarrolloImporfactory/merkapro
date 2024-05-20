@@ -58,112 +58,34 @@ function load(page) {
   var estado = $("#estado_q").val();
   var numero = $("#numero_q").val();
   var transportadora = $("#transporte").val();
-  var url = "";
+  var url = "../ajax/buscar_cotizacion_new.php?action=ajax&page=" + page;
 
-  if (tienda != 0) {
-    url =
-      "../ajax/buscar_cotizacion_new.php?action=ajax&page=" +
-      page +
-      "&q=" +
-      q +
-      "&tienda=" +
-      tienda +
-      "&numero=" +
-      numero +
-      "&transportadora=" +
-      transportadora;
-  } else if (estado != 0) {
-    url =
-      "../ajax/buscar_cotizacion_new.php?action=ajax&page=" +
-      page +
-      "&q=" +
-      q +
-      "&estado=" +
-      estado +
-      "&numero=" +
-      numero +
-      "&transportadora=" +
-      transportadora;
-  } else if (tienda != 0 && estado != 0) {
-    url =
-      "../ajax/buscar_cotizacion_new.php?action=ajax&page=" +
-      page +
-      "&q=" +
-      q +
-      "&tienda=" +
-      tienda +
-      "&estado=" +
-      estado +
-      "&numero=" +
-      numero +
-      "&transportadora=" +
-      transportadora;
-  }
-  if (tienda != 0 && estado != 0 && numero != 0) {
-    url =
-      "../ajax/buscar_cotizacion_new.php?action=ajax&page=" +
-      page +
-      "&q=" +
-      q +
-      "&tienda=" +
-      tienda +
-      "&estado=" +
-      estado +
-      "&numero=" +
-      numero +
-      "&transportadora=" +
-      transportadora;
-  }
-  if (tienda != 0 && numero != 0) {
-    url =
-      "../ajax/buscar_cotizacion_new.php?action=ajax&page=" +
-      page +
-      "&q=" +
-      q +
-      "&tienda=" +
-      tienda +
-      "&numero=" +
-      numero +
-      "&transportadora=" +
-      transportadora;
-  }
-  if (transportadora != 0 && numero != 0) {
-    url =
-      "../ajax/buscar_cotizacion_new.php?action=ajax&page=" +
-      page +
-      "&q=" +
-      q +
-      "&transportadora=" +
-      transportadora +
-      "&numero=" +
-      numero;
-  }
-  if (transportadora == 0 && numero != 0 && tienda == 0 && estado == 0) {
-    url =
-      "../ajax/buscar_cotizacion_new.php?action=ajax&page=" +
-      page +
-      "&q=" +
-      q +
-      "&numero=" +
-      numero;
-  } else {
-    url =
-      "../ajax/buscar_cotizacion_new.php?action=ajax&page=" +
-      page +
-      "&q=" +
-      q +
-      "&numero=" +
-      numero +
-      "&transportadora=" +
-      transportadora;
+  var params = {
+    q: q,
+    tienda: tienda,
+    estado: estado,
+    numero: numero,
+    transportadora: transportadora,
+  };
+
+  // Construir los parámetros de la URL
+  var urlParams = [];
+  for (var key in params) {
+    if (params[key] != 0) {
+      urlParams.push(key + "=" + params[key]);
+    }
   }
 
-  url = url + "&filtro=" + filtroG;
+  if (urlParams.length > 0) {
+    url += "&" + urlParams.join("&");
+  }
+
+  url += "&filtro=" + filtroG;
 
   $("#loader").fadeIn("slow");
   $.ajax({
     url: url,
-    beforeSend: function (objeto) {
+    beforeSend: function () {
       $("#loader").html('<img src="../../img/ajax-loader.gif"> Cargando...');
     },
     success: function (data) {
@@ -237,6 +159,9 @@ function buscar_estado(estado) {
   }
   if (numero == 0) {
     numero = "";
+  }
+  if (transportadora == 0) {
+    transportadora = "";
   }
   page = 1;
   $("#loader").fadeIn("slow");
