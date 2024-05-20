@@ -34,7 +34,7 @@ function combinePdfs($pdfPaths, $outputPath)
 $factura = $_POST['factura'];
 $pdfs = $_POST['pdf'];
 date_default_timezone_set('America/Guayaquil');
-$date = date('Ymd-');
+$date = date('Ymd');
 $time = date('hisA');
 $formattedTime = strtolower(substr($time, 0, -2)) . substr($time, -2);
 

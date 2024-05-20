@@ -46,7 +46,7 @@ if (isset($_POST['factura']) && isset($_POST['tipo'])) {
         $get_data =  json_decode($contenido_tienda, true);
 
         $id_factura_origen = $row['id_factura_origen'];
-        if ($tienda == "https://imporshop.imporsuit.com" || $tienda == $server_url || empty($id_factura_origen)) {
+        if ($tienda == "https://merkatodo.merkapro.ec" || $tienda == $server_url || empty($id_factura_origen)) {
             $id_factura_origen = $row['id_factura'];
         }
         if ($drogshipin == 4) {
@@ -95,7 +95,7 @@ if (isset($_POST['factura']) && isset($_POST['tipo'])) {
             }
             $sql_command = "SELECT * FROM guia_laar g inner join facturas_cot f on g.id_pedido = f.id_factura inner join detalle_fact_cot dt on f.numero_factura = dt.numero_factura inner join productos p on p.id_producto = dt.id_producto WHERE g.id_pedido = '" . $id_factura_origen . "'";
 
-            if ($tienda == "https://imporshop.imporsuit.com" || $tienda == $server_url || $drogshipin == 1) {
+            if ($tienda == "https://merkatodo.merkapro.ec" || $tienda == $server_url || $drogshipin == 1) {
                 $result = mysqli_query($conexion, $sql_command);
             } else {
 
@@ -130,7 +130,7 @@ if (isset($_POST['factura']) && isset($_POST['tipo'])) {
                 }
                 $transporte = $id_transporte;
                 if ($transporte == 1) {
-                    $transporte = ' ';
+                    $transporte = 'Laar Courier';
                 } else {
                     $transporte = 'Motorizado';
                 }
@@ -287,7 +287,7 @@ if (isset($_POST['factura']) && isset($_POST['tipo'])) {
                 $get_data =  json_decode($contenido_tienda, true);
 
                 $id_factura_origen = $row['id_factura_origen'];
-                if ($tienda == "https://imporshop.imporsuit.com" || $tienda == $server_url) {
+                if ($tienda == "https://merkatodo.merkapro.ec" || $tienda == $server_url) {
                     $id_factura_origen = $row['id_factura'];
                 }
                 if ($drogshipin == 4) {
@@ -332,7 +332,7 @@ if (isset($_POST['factura']) && isset($_POST['tipo'])) {
                         echo "Fallo al conectar a MySQL: (" . $conexion_destino->connect_errno . ") " . $conexion_destino->connect_error;
                     }
                     $sql_command = "SELECT * FROM guia_laar g inner join facturas_cot f on g.id_pedido = f.id_factura inner join detalle_fact_cot dt on f.numero_factura = dt.numero_factura inner join productos p on p.id_producto = dt.id_producto WHERE g.id_pedido = '" . $id_factura_origen . "'";
-                    if ($tienda == "https://imporshop.imporsuit.com" || $tienda == $server_url) {
+                    if ($tienda == "https://merkatodo.merkapro.ec" || $tienda == $server_url) {
                         $result = mysqli_query($conexion, $sql_command);
                     } else {
 
@@ -399,7 +399,7 @@ if (isset($_POST['factura']) && isset($_POST['tipo'])) {
                     TRANSPORTADORA
                     </td>
                     <td>
-                    TRANSPORTADORA: 
+                    TRANSPORTADORA: " . $transporte . "
                     </td>
                 </tr>
                 <tr>
