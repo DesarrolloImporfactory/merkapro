@@ -37,8 +37,8 @@ date_default_timezone_set('America/Guayaquil');
 $date = date('Ymd-');
 $time = date('hisA');
 $formattedTime = strtolower(substr($time, 0, -2)) . substr($time, -2);
-$nombrepdf = 'MerkaPRO-GUIAS-' . $date . $formattedTime . "-";
-$combinedPdfPath = generateUniqueFilename($nombrepdf, __DIR__ . '/save'); // Ruta al directorio donde guardar los archivo
+
+$combinedPdfPath = generateUniqueFilename('MerkaPRO-GUIAS-' . $formattedTime . "-", __DIR__ . '/save'); // Ruta al directorio donde guardar los archivo
 // modificar la ultima parte de aleatorio por numero 1000 e ir aumentando
 $temp_name = explode('-', $combinedPdfPath);
 
@@ -54,7 +54,7 @@ if (count($ultimo_numero_archivo) > 0) {
 }
 $aleatorio = $ultimo_numero_archivo + 1;
 $temp_name[0] = __DIR__ . '/save/' . $temp_name[0];
-$combinedPdfPath = $temp_name[0] . '-' . $temp_name[1] . '-' . $aleatorio . '.pdf';
+$combinedPdfPath = $temp_name[0] . '-' . $temp_name[1] . '-' . $formattedTime . '-' . $aleatorio . '.pdf';
 
 
 
@@ -70,13 +70,7 @@ file_put_contents($htmlOutputPath, $dompdf->output());
 if (is_array($pdfs)) {
     $downloadedPdfs = [$htmlOutputPath]; // Incluir el HTML PDF al principio del array
     foreach ($pdfs as $pdfUrl) {
-        if (strpos($pdfUrl, 'MKP') === 0) {
-            $pdfContent = file_get_contents("https://api.laarcourier.com:9727/guias/pdfs/DescargarV2?guia=" . $pdfUrl);
-        } else if (strpos($pdfUrl, 'FAST') === 0) {
-            $pdfContent = file_get_contents("https://fast.imporsuit.com/GenerarGuia/descargar/" . $pdfUrl);
-        } else if (is_numeric($pdfUrl)) {
-            $pdfContent = file_get_contents("https://guias.imporsuit.com/Servientrega/Guia/" . $pdfUrl);
-        }
+        $pdfContent = file_get_contents("https://api.laarcourier.com:9727/guias/pdfs/DescargarV2?guia=" . $pdfUrl);
         if ($pdfContent === false) {
             exit("No se pudo obtener el PDF de la guía: $pdfUrl");
         }
