@@ -54,7 +54,7 @@ if (count($ultimo_numero_archivo) > 0) {
 }
 $aleatorio = $ultimo_numero_archivo + 1;
 $temp_name[0] = __DIR__ . '/save/' . $temp_name[0];
-$combinedPdfPath = $temp_name[0] . '-' . $temp_name[1] . '-' . $formattedTime . '-' . $aleatorio . '.pdf';
+$combinedPdfPath = $temp_name[0] . '-' . $temp_name[1] . '-' . $date . '-' . $formattedTime . '-' . $aleatorio . '.pdf';
 
 
 
