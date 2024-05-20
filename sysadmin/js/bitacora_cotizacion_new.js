@@ -79,6 +79,9 @@ function load(page) {
   if (urlParams.length > 0) {
     url += "&" + urlParams.join("&");
   }
+  if (q == "") {
+    url += "q=" + q;
+  }
 
   url += "&filtro=" + filtroG;
 
