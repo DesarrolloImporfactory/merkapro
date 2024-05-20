@@ -388,7 +388,7 @@ while ($r = $query->fetch_object()) {
                                                             <input type="hidden" id="referencia" name="referencia" value="<?php echo get_row('guia_laar', 'url_guia', 'id_pedido', $id_factura); ?>">
                                                             <input type="hidden" id="telefono" name="telefono" value="<?php echo get_row('guia_laar', 'url_guia', 'id_pedido', $id_factura); ?>">
                                                             <input id="celular" type="hidden" name="celular" value="<?php echo get_row('guia_laar', 'url_guia', 'id_pedido', $id_factura); ?>">
-                                                            <input id="numerocasa" type="hidden" name="numerocasa" class="form-control" value="<?php echo $observacion; ?>">
+                                                            <input id="numerocasa" type="hidden" name="numerocasa" class="form-control">
                                                             <input id="cod" type="hidden" name="cod">
                                                             <input id="seguro" type="hidden" name="seguro">
                                                             <input id="valorasegurado" type="hidden" name="valorasegurado" class="form-control" placeholder="Valor a aegurar">
@@ -449,7 +449,7 @@ while ($r = $query->fetch_object()) {
                                                             <input type="hidden" id="referencia" name="referencia" value="<?php echo get_row('guia_laar', 'url_guia', 'id_pedido', $id_factura); ?>">
                                                             <input type="hidden" id="telefono" name="telefono" value="<?php echo get_row('guia_laar', 'url_guia', 'id_pedido', $id_factura); ?>">
                                                             <input id="celular" type="hidden" name="celular" value="<?php echo get_row('guia_laar', 'url_guia', 'id_pedido', $id_factura); ?>">
-                                                            <input id="numerocasa" type="hidden" name="numerocasa" class="form-control" value="<?php echo $observacion; ?>">
+                                                            <input id="numerocasa" type="hidden" name="numerocasa" class="form-control" value="">
                                                             <input id="cod" type="hidden" name="cod">
                                                             <input id="seguro" type="hidden" name="seguro">
                                                             <input id="valorasegurado" type="hidden" name="valorasegurado" class="form-control" placeholder="Valor a aegurar">
@@ -510,7 +510,7 @@ while ($r = $query->fetch_object()) {
                                                             <input type="hidden" id="referencia" name="referencia" value="<?php echo get_row('guia_laar', 'url_guia', 'id_pedido', $id_factura); ?>">
                                                             <input type="hidden" id="telefono" name="telefono" value="<?php echo get_row('guia_laar', 'url_guia', 'id_pedido', $id_factura); ?>">
                                                             <input id="celular" type="hidden" name="celular" value="<?php echo get_row('guia_laar', 'url_guia', 'id_pedido', $id_factura); ?>">
-                                                            <input id="numerocasa" type="hidden" name="numerocasa" class="form-control" value="<?php echo $observacion; ?>">
+                                                            <input id="numerocasa" type="hidden" name="numerocasa" class="form-control" value="">
                                                             <input id="cod" type="hidden" name="cod">
                                                             <input id="seguro" type="hidden" name="seguro">
                                                             <input id="valorasegurado" type="hidden" name="valorasegurado" class="form-control" placeholder="Valor a aegurar">
@@ -570,7 +570,7 @@ while ($r = $query->fetch_object()) {
                                                         <input type="hidden" id="referencia" name="referencia" value="<?php echo get_row('guia_laar', 'url_guia', 'id_pedido', $id_factura); ?>">
                                                         <input type="hidden" id="telefono" name="telefono" value="<?php echo get_row('guia_laar', 'url_guia', 'id_pedido', $id_factura); ?>">
                                                         <input id="celular" type="hidden" name="celular" value="<?php echo get_row('guia_laar', 'url_guia', 'id_pedido', $id_factura); ?>">
-                                                        <input id="numerocasa" type="hidden" name="numerocasa" class="form-control" value="<?php echo $observacion; ?>">
+                                                        <input id="numerocasa" type="hidden" name="numerocasa" class="form-control" value="">
                                                         <input id="cod" type="hidden" name="cod">
                                                         <input id="seguro" type="hidden" name="seguro">
                                                         <input id="valorasegurado" type="hidden" name="valorasegurado" class="form-control" placeholder="Valor a aegurar">
@@ -737,7 +737,7 @@ while ($r = $query->fetch_object()) {
                                                                 </div>
                                                                 <div class="col-md-4">
                                                                     <span class="help-block">Numero de casa </span>
-                                                                    <input id="numerocasa" name="numerocasa" class="form-control formulario" value="<?php echo $observacion; ?>">
+                                                                    <input id="numerocasa" name="numerocasa" class="form-control formulario">
                                                                 </div>
                                                                 <div class="col-md-4">
                                                                     <span class="help-block">Observaciones para la entrega </span>
@@ -1141,8 +1141,9 @@ while ($r = $query->fetch_object()) {
         } else if (id === 2) {
             $.Notification.notify('custom', 'bottom right', 'RECUERDA!', 'SPEED REALIZA ENTREGAS EL MISMO DÍA!')
         } else if (id === 3) {
-            
-                        $("#costo_envio").val($("#precio_servientrega").text());  }
+
+            $("#costo_envio").val($("#precio_servientrega").text());
+        }
         calcular_guia_2();
     }
 
