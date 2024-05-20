@@ -130,7 +130,7 @@ if (isset($_POST['factura']) && isset($_POST['tipo'])) {
                 }
                 $transporte = $id_transporte;
                 if ($transporte == 1) {
-                    $transporte = 'Laar Courier';
+                    $transporte = ' ';
                 } else {
                     $transporte = 'Motorizado';
                 }
@@ -399,7 +399,7 @@ if (isset($_POST['factura']) && isset($_POST['tipo'])) {
                     TRANSPORTADORA
                     </td>
                     <td>
-                    TRANSPORTADORA: " . $transporte . "
+                    TRANSPORTADORA: 
                     </td>
                 </tr>
                 <tr>

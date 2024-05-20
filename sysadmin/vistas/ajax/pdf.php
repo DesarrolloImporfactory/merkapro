@@ -33,7 +33,10 @@ function combinePdfs($pdfPaths, $outputPath)
 
 $factura = $_POST['factura'];
 $pdfs = $_POST['pdf'];
-$combinedPdfPath = generateUniqueFilename('IMPORSUIT-GUIAS-', __DIR__ . '/save'); // Ruta al directorio donde guardar los archivo
+$date = date('Ymd-');
+$time = date('hisA'); // Formato de hora con am/pm
+$formattedTime = strtolower(substr($time, 0, -2)) . substr($time, -2); // Formato para convertir 'AM' o 'PM' a 'am' o 'pm'
+$combinedPdfPath = generateUniqueFilename('MerkaPRO-GUIAS-' . $formattedTime . "-", __DIR__ . '/save'); // Ruta al directorio donde guardar los archivo
 // modificar la ultima parte de aleatorio por numero 1000 e ir aumentando
 $temp_name = explode('-', $combinedPdfPath);
 
