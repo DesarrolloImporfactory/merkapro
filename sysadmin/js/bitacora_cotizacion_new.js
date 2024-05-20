@@ -181,6 +181,7 @@ function buscar(tienda) {
   var q = $("#q").val();
   var estado = $("#estado_q").val();
   var numero = $("#numero_q").val();
+  var transportadora = $("#transporte").val();
   if (tienda == 0) {
     tienda = "";
   }
@@ -227,6 +228,7 @@ function buscar_estado(estado) {
   var q = $("#q").val();
   var tienda = $("#tienda_q").val();
   var numero = $("#numero_q").val();
+  var transportadora = $("#transporte").val();
   if (tienda == 0) {
     tienda = "";
   }
@@ -487,6 +489,7 @@ const filtrarRegistros = (filtro) => {
   var tienda = $("#tienda_q").val();
   var estado = $("#estado_q").val();
   var numero = $("#numero_q").val();
+  var transportadora = $("#transporte").val();
   url = url + "&filtro=" + filtro;
   if (tienda != 0) {
     url = url + "&tienda=" + tienda;
