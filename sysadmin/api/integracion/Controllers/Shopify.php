@@ -43,8 +43,12 @@ class Shopify extends Controller
             $discount = 0;
         }
 
+        $shipping_lines = $json_decode['shipping_lines'][0]['price'];
+        if ($shipping_lines == null || $shipping_lines == "" || $shipping_lines == 0 || empty($shipping_lines)) {
+            $shipping_lines = 0;
+        }
         //$this->model->insertarPedido($nombre, $apellido, $principal, $secundaria, $provincia, $ciudad, $codigo_postal, $pais, $telefono, $email, $total, $nombre_producto, $cantidad, $precio, $sku, $line_items);
-        $this->model->insertarPedido($nombre, $apellido, $principal, $secundaria, $provincia, $ciudad, $codigo_postal, $pais, $telefono, $email, $total, $line_items, $discount);
+        $this->model->insertarPedido($nombre, $apellido, $principal, $secundaria, $provincia, $ciudad, $codigo_postal, $pais, $telefono, $email, $total, $line_items, $discount, $shipping_lines);
     }
 
     public function recibir()
