@@ -112,6 +112,10 @@ $valor_texto = "Precio de envío $" . number_format($valor_envio, 2);
         <td>$<?php echo number_format($costo, 2) ?></td>
     </tr>
     <tr>
+        <th>Costo Fullfilment </th>
+        <td>$<?php echo number_format(1.50, 2) ?></td>
+    </tr>
+    <tr>
         <th>Precio de Envío </th>
         <td>$<?php echo number_format($valor_envio, 2) ?></td>
     </tr>
@@ -121,7 +125,7 @@ $valor_texto = "Precio de envío $" . number_format($valor_envio, 2);
     </tr>
     <tr>
         <th>Monto a recibir </th>
-        <td id="monto_total_">$<?php echo number_format($valor_total - $costo - $valor_envio, 2) ?></td>
+        <td id="monto_total_">$<?php echo number_format($valor_total - $costo - $valor_envio - 1.5, 2) ?></td>
     </tr>
 </table>
 

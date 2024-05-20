@@ -1,4 +1,6 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
 function full_copy($source, $target)
 {
     if (is_dir($source)) {

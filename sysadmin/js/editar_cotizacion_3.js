@@ -472,7 +472,7 @@ function generar_guia() {
     });
   }
   if (transportadora === "3") {
-    /* var formulario = document.getElementById("datos_pedido");
+    var formulario = document.getElementById("datos_pedido");
     if (document.querySelector("#valorasegurado").value === "") {
       document.querySelector("#valorasegurado").value = 0;
     }
@@ -617,13 +617,7 @@ function generar_guia() {
           });
         }
       },
-    }); */
-    $.Notification.notify(
-      "error",
-      "bottom right",
-      "ERROR!",
-      "EL SERVICIO DE SERVIENTREGA ESTA EN MANTENIMIENTO!"
-    );
+    });
   }
   if (transportadora === "4") {
     var formulario = document.getElementById("datos_pedido");

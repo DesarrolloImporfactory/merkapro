@@ -969,10 +969,6 @@ if ($action == 'ajax' && ($server_url == "https://merkapro.ec")) {
     $sTable = "facturas_cot, clientes, users";
     $sWhere = "";
     $sWhere .= " WHERE facturas_cot.id_cliente=clientes.id_cliente and facturas_cot.id_vendedor=users.id_users";
-    if ($server_url == "https://yapando.merkapro.ec" || $server_url == "https://onlytap.merkapro.ec") {
-        $sTable .= ", detalle_fact_cot";
-        $sWhere .= " and detalle_fact_cot.numero_factura = facturas_cot.numero_factura";
-    }
     if ($_GET['q'] != "") {
         $sWhere .= " and  (facturas_cot.nombre like '%$q%' or facturas_cot.numero_factura like '%$q%')";
     }

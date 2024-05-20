@@ -33,7 +33,12 @@ function combinePdfs($pdfPaths, $outputPath)
 
 $factura = $_POST['factura'];
 $pdfs = $_POST['pdf'];
-$combinedPdfPath = generateUniqueFilename('IMPORSUIT-GUIAS-', __DIR__ . '/save'); // Ruta al directorio donde guardar los archivo
+date_default_timezone_set('America/Guayaquil');
+$date = date('Ymd');
+$time = date('hisA');
+$formattedTime = strtolower(substr($time, 0, -2)) . substr($time, -2);
+
+$combinedPdfPath = generateUniqueFilename('MerkaPRO-GUIAS-' . $formattedTime . "-", __DIR__ . '/save'); // Ruta al directorio donde guardar los archivo
 // modificar la ultima parte de aleatorio por numero 1000 e ir aumentando
 $temp_name = explode('-', $combinedPdfPath);
 
@@ -49,7 +54,7 @@ if (count($ultimo_numero_archivo) > 0) {
 }
 $aleatorio = $ultimo_numero_archivo + 1;
 $temp_name[0] = __DIR__ . '/save/' . $temp_name[0];
-$combinedPdfPath = $temp_name[0] . '-' . $temp_name[1] . '-' . $aleatorio . '.pdf';
+$combinedPdfPath = $temp_name[0] . '-' . $temp_name[1] . '-' . $date . '-' . $formattedTime . '-' . $aleatorio . '.pdf';
 
 
 
@@ -64,15 +69,27 @@ file_put_contents($htmlOutputPath, $dompdf->output());
 
 if (is_array($pdfs)) {
     $downloadedPdfs = [$htmlOutputPath]; // Incluir el HTML PDF al principio del array
+    $downloadedGuides = []; // Array para almacenar las guías ya descargadas
+
     foreach ($pdfs as $pdfUrl) {
-        $pdfContent = file_get_contents("https://api.laarcourier.com:9727/guias/pdfs/DescargarV2?guia=" . $pdfUrl);
-        if ($pdfContent === false) {
-            exit("No se pudo obtener el PDF de la guía: $pdfUrl");
+        if (!in_array($pdfUrl, $downloadedGuides)) {
+            if (strpos($pdfUrl, 'MKP') === 0) {
+                $pdfContent = file_get_contents("https://api.laarcourier.com:9727/guias/pdfs/DescargarV2?guia=" . $pdfUrl);
+            } else if (strpos($pdfUrl, 'FAST') === 0) {
+                $pdfContent = file_get_contents("https://fast.imporsuit.com/GenerarGuia/descargar/" . $pdfUrl);
+            } else if (is_numeric($pdfUrl)) {
+                $pdfContent = file_get_contents("https://guias.imporsuit.com/Servientrega/Guia/" . $pdfUrl);
+            }
+            if ($pdfContent === false) {
+                exit("No se pudo obtener el PDF de la guía: $pdfUrl");
+            }
+            $tempPdfPath = generateUniqueFilename('temp_', '/temps');
+            file_put_contents($tempPdfPath, $pdfContent);
+            array_push($downloadedPdfs, $tempPdfPath);
+            array_push($downloadedGuides, $pdfUrl); // Agregar la guía a la lista de guías descargadas
         }
-        $tempPdfPath = generateUniqueFilename('temp_', '/temps');
-        file_put_contents($tempPdfPath, $pdfContent);
-        array_push($downloadedPdfs, $tempPdfPath);
     }
+
     combinePdfs($downloadedPdfs, $combinedPdfPath);
     // Eliminar archivos temporales
     foreach ($downloadedPdfs as $filePath) {
@@ -83,7 +100,13 @@ if (is_array($pdfs)) {
 } else {
     // Manejo de un solo PDF
     $pdfUrl = $pdfs;
-    $pdfContent = file_get_contents("https://api.laarcourier.com:9727/guias/pdfs/DescargarV2?guia=" . $pdfUrl);
+    if (strpos($pdfUrl, 'MKP') === 0) {
+        $pdfContent = file_get_contents("https://api.laarcourier.com:9727/guias/pdfs/DescargarV2?guia=" . $pdfUrl);
+    } else if (strpos($pdfUrl, 'FAST') === 0) {
+        $pdfContent = file_get_contents("https://fast.imporsuit.com/GenerarGuia/descargar/" . $pdfUrl);
+    } else if (is_numeric($pdfUrl)) {
+        $pdfContent = file_get_contents("https://guias.imporsuit.com/Servientrega/Guia/" . $pdfUrl);
+    }
     if ($pdfContent === false) {
         exit("No se pudo obtener el PDF de la guía: $pdfUrl");
     }
