@@ -1,17 +1,48 @@
 var filtroG = "todas";
 $(document).ready(function () {
   load(1);
-  $.ajax({
-    type: "POST",
-    url: "../ajax/verificar_guias_pendientes.php",
-    success: function (r) {},
+
+  $("#tienda_q").select2({
+    placeholder: "Selecciona una opción",
+    allowClear: true,
+    // Puedes añadir más opciones de configuración aquí
   });
-  $(document).ready(function () {
-    $("#tienda_q").select2({
-      placeholder: "Selecciona una opción",
-      allowClear: true,
-      // Puedes añadir más opciones de configuración aquí
+
+  // filtro por fechas
+  // Inicializa el datepicker de fecha de inicio
+  $("#datepickerInicio input")
+    .datepicker({
+      format: "yyyy-mm-dd",
+      language: "es",
+      autoclose: true,
+      todayHighlight: true,
+    })
+    .on("changeDate", function (selected) {
+      var minDate = new Date(selected.date.valueOf());
+      $("#datepickerFin input").datepicker("setStartDate", minDate);
     });
+
+  // Inicializa el datepicker de fecha de fin
+  $("#datepickerFin input").datepicker({
+    format: "yyyy-mm-dd",
+    language: "es",
+    autoclose: true,
+    todayHighlight: true,
+  });
+
+  // Manejador para abrir el calendario al hacer clic en el ícono
+  $(".input-group-text").click(function () {
+    $(this).parent().prev("input").datepicker("show");
+  });
+
+  // Añadir event listener para cambios en el checkbox
+  // Inicializar marca de manipulación
+  $("#envioGratis_checkout").data("waschecked", false);
+
+  // Establecer la marca cuando el checkbox cambia
+  $("#envioGratis_checkout").change(function () {
+    $(this).data("waschecked", true); // Marcar como manipulado
+    load(1); // Llama a la función load inmediatamente si deseas aplicar el filtro instantáneamente
   });
 });
 $("#editar_linea").submit(function (event) {
@@ -53,50 +84,46 @@ $("#editar_linea").submit(function (event) {
   event.preventDefault();
 });
 function load(page) {
-  var q = $("#q").val();
+  var q = $("#q").val() || ""; // Usar '' como valor predeterminado si no hay entrada
   var tienda = $("#tienda_q").val();
   var estado = $("#estado_q").val();
   var numero = $("#numero_q").val();
   var transportadora = $("#transporte").val();
+  var fechaInicio = $("#datepickerInicio input").val() || "";
+  var fechaFin = $("#datepickerFin input").val() || "";
+
+  // Obtener el estado del checkbox
+  // Verificar si el checkbox ha sido manipulado
+  var filtroImpresas;
+  if ($("#envioGratis_checkout").data("waschecked") == true) {
+    filtroImpresas = $("#envioGratis_checkout").is(":checked") ? 1 : 0;
+  }
+
   var url = "../ajax/buscar_cotizacion_new.php?action=ajax&page=" + page;
-
-  var params = {
-    q: q,
-    tienda: tienda,
-    estado: estado,
-    numero: numero,
-    transportadora: transportadora,
-  };
-
-  // Construir los parámetros de la URL
-  var urlParams = [];
-  for (var key in params) {
-    if (params[key] != 0) {
-      urlParams.push(key + "=" + params[key]);
-    }
-  }
-
-  if (urlParams.length > 0) {
-    url += "&" + urlParams.join("&");
-  }
-  if (q == "") {
-    url += "&q=" + q;
-  }
-
-  url += "&filtro=" + filtroG;
+  url += "&q=" + encodeURIComponent(q);
+  if (tienda != 0) url += "&tienda=" + encodeURIComponent(tienda);
+  if (estado != 0) url += "&estado=" + encodeURIComponent(estado);
+  if (numero != 0) url += "&numero=" + encodeURIComponent(numero);
+  if (transportadora != 0)
+    url += "&transportadora=" + encodeURIComponent(transportadora);
+  if (fechaInicio) url += "&fechaInicio=" + encodeURIComponent(fechaInicio);
+  if (fechaFin) url += "&fechaFin=" + encodeURIComponent(fechaFin);
+  if (filtroImpresas !== undefined) url += "&filtroImpresas=" + filtroImpresas;
 
   $("#loader").fadeIn("slow");
   $.ajax({
     url: url,
-    beforeSend: function () {
+    beforeSend: function (objeto) {
       $("#loader").html('<img src="../../img/ajax-loader.gif"> Cargando...');
     },
     success: function (data) {
       $(".outer_div").html(data).fadeIn("slow");
       $("#loader").html("");
-      $('[data-toggle="tooltip"]').tooltip({
-        html: true,
-      });
+      $('[data-toggle="tooltip"]').tooltip({ html: true });
+    },
+    error: function (xhr, status, error) {
+      console.error("Error en AJAX: " + error);
+      $("#loader").html("");
     },
   });
 }
@@ -115,6 +142,9 @@ function buscar(tienda) {
   }
   if (numero == 0) {
     numero = "";
+  }
+  if (transportadora == 0) {
+    transportadora = "";
   }
 
   page = 1;

@@ -21,7 +21,13 @@ $ventas = 1;
 ?>
 
 <?php require 'includes/header_start.php'; ?>
-
+<style>
+    .flex-fill {
+        flex: 1;
+        padding: 0 10px;
+        /* Ajusta el espacio entre los controles */
+    }
+</style>
 <?php require 'includes/header_end.php'; ?>
 
 <!-- Begin page -->
@@ -40,7 +46,7 @@ $ventas = 1;
                 ?>
                     <div class="col-lg-12">
                         <div class="portlet">
-                            <div class="portlet-heading" style="background-color: #171931">
+                            <div class="portlet-heading" style="background-color: #171931;">
                                 <h3 class="portlet-title">
                                     Historial de pedidos
                                 </h3>
@@ -53,7 +59,109 @@ $ventas = 1;
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
-                            <div id="bg-primary" class="panel-collapse collapse show">
+                            <div id="bg-primary" class="panel-collapse collapse show" style="padding: 10px;">
+                                <div class="d-flex flex-column justify-content-between">
+                                    <div class="d-flex flex-row " style="width: 100%;">
+                                        <div class="d-flex flex-row align-items-end" style="width: 34%;">
+                                            <div class="flex-fill" style="margin: 0; padding-left: 0;">
+                                                <h6>Seleccione fecha de inicio:</h6>
+                                                <div class="input-group date" id="datepickerInicio">
+                                                    <input type="text" class="form-control" name="fechaInicio">
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="flex-fill" style="padding-left: 15px; ">
+                                                <h6>Seleccione fecha de fin:</h6>
+                                                <div class="input-group date" id="datepickerFin">
+                                                    <input type="text" class="form-control" name="fechaFin">
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div style=" padding-top: 10px;">
+                                                <span class="input-group-btn">
+                                                    <button type="button" class="btn btn-info waves-effect waves-light" onclick='load(1);'>
+                                                        Buscar <span class="fa fa-search"></span></button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="flex-fill" style=" padding-left: 10px; width:35%">
+                                            <label for="tienda_q" class="col-form-label">Tienda</label>
+                                            <select onchange="buscar(this.value)" id="tienda_q" class="form-control">
+                                                <option value="0">Selecciona una Tienda</option>
+                                                <?php
+                                                $query_categoria = mysqli_query($conexion, "SELECT DISTINCT tienda FROM facturas_cot");
+                                                while ($rw = mysqli_fetch_array($query_categoria)) {
+                                                    echo '<option value="' . htmlspecialchars($rw['tienda']) . '">' . htmlspecialchars($rw['tienda']) . '</option>';
+                                                }
+                                                ?>
+                                            </select>
+                                        </div>
+                                        <div class="flex-fill">
+                                            <div class=" d-flex flex-row justify-content-start">
+                                                <input class="input-change" type="checkbox" role="switch" id="envioGratis_checkout">
+                                                <label class="form-check-label" for="flexSwitchCheckChecked">Facturas Impresas</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex flex-row">
+                                        <div class="d-flex flex-column" style="width: 100%;">
+                                            <div class="d-flex flex-row justify-content-start">
+                                                <div style="width: 100%;">
+                                                    <label for="inputPassword3" class="col-sm-2 col-form-label" style="padding-left: 0;">Buscar</label>
+                                                    <div>
+                                                        <input type="text" class="form-control" id="q" placeholder="Nombre del cliente o # factura" onkeyup='load(1);'>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div style="width: 100%;">
+
+
+                                            </div>
+                                        </div>
+                                        <div style="width: 100%;">
+                                            <label style="padding-left: 20px;" for="inputPassword3" class="col-sm-2 col-form-label">Estado</label>
+                                            <div style="padding-left: 20px;">
+                                                <select onchange="buscar_estado(this.value)" name="estado_q" class="form-control" id="estado_q">
+                                                    <option value="0"> Seleccione Estado </option>
+                                                    <?php
+
+                                                    //echo "select * from estado_guia";
+                                                    $query_categoria = mysqli_query($conexion, "select * from estado_courier where codigo IN (1,2,3,4,5,6,7,8,9,10,14)");
+                                                    while ($rw = mysqli_fetch_array($query_categoria)) {
+                                                    ?>
+                                                        <option value="<?php echo $rw['codigo']; ?>"><?php echo $rw['alias']; ?></option>
+                                                    <?php
+                                                    }
+                                                    ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div style="width: 100%;">
+                                            <label style="padding-left: 20px;" for="inputPassword3" class="col-sm-2 col-form-label">Transportadora</label>
+                                            <div style="padding-left: 20px;">
+                                                <select onchange="buscar_transporte(this.value)" name="transporte" id="transporte" class="form-control">
+                                                    <option value="0"> Seleccione Transportadora</option>
+                                                    <option value="LAAR">Laar</option>
+                                                    <option value="IMPORFAST">Speed</option>
+                                                    <option value="SERVIENTREGA">Servientrega</option>
+                                                    <option value="GINTRACOM">Gintracom</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="padding-top: 20px;">
+
+
+                                    <button class="btn btn-outline-danger" onclick="pdf(event)">Generar Impresiones</button>
+                                </div>
+
+                                <hr />
                                 <div class="portlet-body">
                                     <?php
                                     include "../modal/eliminar_factura.php";
@@ -63,53 +171,7 @@ $ventas = 1;
 
                                     <form class="form-horizontal" role="form" id="datos_cotizacion">
                                         <div class="form-group row">
-                                            <div class="col">
-                                                <div class="input-group">
-                                                    <input type="text" class="form-control" id="q" placeholder="Nombre del cliente o # factura" onkeyup='load(1);'>
-                                                    <select onchange="buscar(this.value)" id="tienda_q" class="form-control">
-                                                        <option value="0"> Seleccione Tienda </option>
-                                                        <?php
 
-                                                        //echo "select * from estado_guia";
-                                                        $query_categoria = mysqli_query($conexion, "select distinct tienda from facturas_cot");
-                                                        while ($rw = mysqli_fetch_array($query_categoria)) {
-                                                        ?>
-                                                            <option value="<?php echo $rw['tienda']; ?>"><?php echo $rw['tienda']; ?></option>
-                                                        <?php
-                                                        }
-                                                        ?>
-                                                    </select>
-                                                    <select onchange="buscar_estado(this.value)" name="estado_q" class="form-control" id="estado_q">
-                                                        <option value="0"> Seleccione Estado </option>
-                                                        <?php
-
-                                                        //echo "select * from estado_guia";
-                                                        $query_categoria = mysqli_query($conexion, "select * from estado_courier where codigo IN (1,2,3,4,5,6,7,8,9,10,14)");
-                                                        while ($rw = mysqli_fetch_array($query_categoria)) {
-                                                        ?>
-                                                            <option value="<?php echo $rw['codigo']; ?>"><?php echo $rw['alias']; ?></option>
-                                                        <?php
-                                                        }
-                                                        ?>
-                                                    </select>
-
-                                                    <select onchange="buscar_transporte(this.value)" name="transporte" id="transporte" class="form-control">
-                                                        <option value="0"> Seleccione Transportadora</option>
-                                                        <option value="LAAR">Laar</option>
-                                                        <option value="IMPORFAST">Speed</option>
-                                                        <option value="SERVIENTREGA">Servientrega</option>
-                                                        <option value="GINTRACOM">Gintracom</option>
-                                                    </select>
-
-                                                    <span class="input-group-btn">
-                                                        <button type="button" class="btn btn-info waves-effect waves-light" onclick='load(1);'>
-                                                            <span class="fa fa-search"></span></button>
-                                                    </span>
-
-                                                    <button class="btn btn-outline-danger" onclick="pdf(event)">Generar Impresiones</button>
-                                                </div>
-
-                                            </div>
                                             <div class="col-md-4">
                                                 <span id="loader"></span>
                                                 <span id="modal_cot"></span>
@@ -178,6 +240,7 @@ $ventas = 1;
         if (guia == 0) {
             return false;
         }
+
         let data = await fetch('https://api.laarcourier.com:9727/guias/' + guia, {
             method: 'GET',
         })
