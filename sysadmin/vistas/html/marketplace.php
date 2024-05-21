@@ -21,13 +21,13 @@ $rw         = mysqli_fetch_array($count);
 $product_id = $rw['codigo'];
 if (preg_match('/[A-Za-z]/', $product_id)) {
 
-	$letra = preg_replace('/[^A-Za-z]+/', '', $product_id);
-	$numero = preg_replace('/[^0-9]+/', '', $product_id);
+	@$letra = preg_replace('/[^A-Za-z]+/', '', $product_id);
+	@$numero = preg_replace('/[^0-9]+/', '', $product_id);
 	@$numero = $numero + 1;
-	$letra = strtoupper($letra);
-	$letra = str_pad($letra, 3, "0", STR_PAD_RIGHT);
-	$numero = str_pad($numero, 3, "0", STR_PAD_LEFT);
-	$product_id = $letra . $numero;
+	@$letra = strtoupper($letra);
+	@$letra = str_pad($letra, 3, "0", STR_PAD_RIGHT);
+	@$numero = str_pad($numero, 3, "0", STR_PAD_LEFT);
+	@$product_id = $letra . $numero;
 } else {
 	$product_id = $product_id + 1;
 }
