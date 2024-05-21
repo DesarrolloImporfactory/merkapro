@@ -217,7 +217,7 @@ if (isset($conexion)) {
 					<!-- imagen -->
 					<div class="image-section">
 						<div class="view overlay">
-							<img class="card-img-top" id="mod_image_path">
+                                                    <img class="card-img" style="width: 100%" id="mod_image_path">
 						</div>
 					</div>
 					<!-- fin imagen -->
