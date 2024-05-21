@@ -2347,13 +2347,13 @@ mysqli_query($conexion, "UPDATE `ciudad_cotizacion` SET `trayecto_laar` = 'TP' W
 
 mysqli_query($conexion, "CREATE TABLE novedades (
 	id_novedad int not null primary key auto_increment,
-	guia_novedad varchar(10) not null,
+	guia_novedad varchar(10) not null unique,
 	cliente_novedad varchar(200) not null,
-	estado_novedad tinyint not null,
+	estado_novedad int not null,
 	novedad text null,
 	solucion_novedad text null,
 	tracking text not null,
-	fecha_novedad date not null default current_timestamp
+	fecha_novedad datetime not null default current_timestamp
 	
 );");
 
@@ -2386,7 +2386,6 @@ mysqli_query($conexion, "CREATE TABLE `atributos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;");
 
 mysqli_query($conexion, "INSERT INTO `atributos` (`id_atributo`, `nombre_atributo`) VALUES (NULL, 'TALLA'), (NULL, 'COLOR'), (NULL, 'MARCA'), (NULL, 'MODELO'), (NULL, 'MATERIAL'), (NULL, 'CAPACIDAD');");
-mysqli_query($conexion, "ALTER TABLE `novedades` ADD `fecha` DATETIME NULL DEFAULT CURRENT_TIMESTAMP AFTER `tracking`;");
 
 mysqli_query($conexion, "CREATE TABLE banner_marketplace ( id bigint(20) unsigned auto_increment NOT NULL PRIMARY KEY, fondo_banner text DEFAULT NULL NULL, titulo text DEFAULT NULL NULL, texto_banner text DEFAULT NULL NULL, texto_boton text DEFAULT NULL NULL, enlace_boton text DEFAULT NULL NULL, alineacion int(11) DEFAULT NULL NULL );");
 
@@ -2394,7 +2393,6 @@ mysqli_query($conexion, "ALTER TABLE `perfil` ADD `activar_destacados` VARCHAR(1
 
 mysqli_query($conexion, "ALTER TABLE `perfil` ADD `envioGratis_checkout` VARCHAR(100) NOT NULL DEFAULT '1' AFTER `activar_destacados`;");
 
-mysqli_query($conexion, "ALTER TABLE `novedades` CHANGE `estado_novedad` `estado_novedad` INT NOT NULL;");
 
 mysqli_query($conexion, "ALTER TABLE `detalle_fact_cot` CHANGE `desc_venta` `desc_venta` DOUBLE NULL DEFAULT NULL;");
 

@@ -90,6 +90,24 @@ $pacientes = 1;
                     </div>
                 </div>
 
+                <div class="modal fade" id="detalleNovedad" tabindex="-1" aria-labelledby="detalleNovedadLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="detalleNovedadLabel">Novedades</h5>
+                                <button type="button" class="btn-close" onclick="" data-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body" id="boody_detail">
+                                <!-- Aquí va el contenido que quieras mostrar en el modal -->
+                                <p id="modalContent">Aquí va la información de la tienda.</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" onclick="" data-dismiss="modal">Cerrar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="caja d-flex flex-column">
                     <div class="d-flex flex-row">
                         <div class="container" style="margin: 0; padding-left: 0;">
@@ -219,7 +237,7 @@ $pacientes = 1;
                                     <td class="text-center"><?php echo $numero_guia; ?></td>
 
 
-                                    <?php if (strpos($numero_guia, "IMP")  === 0) { ?>
+                                    <?php if (strpos($numero_guia, "MKP")  === 0) { ?>
                                         <td class="bg-warning text-center text-white">LAAR</td>
                                     <?php } else if (strpos($numero_guia, "FAST") === 0) { ?>
                                         <td class="bg-danger text-center text-white">SPEED</td>
@@ -238,7 +256,14 @@ $pacientes = 1;
 
                                     <td class="text-center"><?php echo $estado; ?></td>
 
-                                    <td class="text-center"><?php echo $novedad; ?> <i class='bx bxs-down-arrow text-white cursor-pointer'></i></td>
+                                    <td class="text-center">
+                                        <?php if (strpos($numero_guia, "IMP") === 0) {
+                                            echo "<button type='button' class='btn btn-sm btn-primary *:not(.disabled)' data-toggle='modal' data-target='#detalleNovedad' data-id='$id_novedad' data-guia='$numero_guia'>Ver detalle</button>";
+                                        } else {
+                                            echo $novedad;
+                                        } ?>
+
+                                    </td>
 
                                     <td class="text-center">
                                         <?php
@@ -350,6 +375,28 @@ $pacientes = 1;
                 }, 300); // Ajusta este tiempo si es necesario
             }
         });
+
+        $('#detalleNovedad').on("show.bs.modal", function(event) {
+            var button = $(event.relatedTarget); // Botón que activó el modal
+            var id = button.data('id');
+            var guia = button.data('guia');
+
+            $.ajax({
+                type: 'POST',
+                url: '../ajax/detalle_novedad.php', // Cambia esto por la URL de tu endpoint
+                data: {
+                    id: id,
+                    guia: guia
+                },
+                success: function(response) {
+                    // Aquí puedes manejar la respuesta del servidor
+                    $('#boody_detail').html(response);
+                },
+                error: function() {
+                    alert('Error al cargar los datos');
+                }
+            });
+        })
 
         $('#novedad').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget); // Botón que activó el modal
