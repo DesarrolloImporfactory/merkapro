@@ -257,7 +257,7 @@ $pacientes = 1;
                                     <td class="text-center"><?php echo $estado; ?></td>
 
                                     <td class="text-center">
-                                        <?php if (strpos($numero_guia, "IMP") === 0) {
+                                        <?php if (strpos($numero_guia, "MKP") === 0) {
                                             echo "<button type='button' class='btn btn-sm btn-primary *:not(.disabled)' data-toggle='modal' data-target='#detalleNovedad' data-id='$id_novedad' data-guia='$numero_guia'>Ver detalle</button>";
                                         } else {
                                             echo $novedad;
@@ -267,7 +267,7 @@ $pacientes = 1;
 
                                     <td class="text-center">
                                         <?php
-                                        if (strpos($numero_guia, "IMP")  === 0) {
+                                        if (strpos($numero_guia, "MKP")  === 0) {
                                             $btncolor = "btn-warning";
                                             $transporte = "LAAR";
                                         } else if (strpos($numero_guia, "FAST") === 0) {
