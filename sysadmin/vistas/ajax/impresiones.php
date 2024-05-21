@@ -252,6 +252,8 @@ if (isset($_POST['factura']) && isset($_POST['tipo'])) {
         }
     } else {
         if ($_POST['tipo'] == "multiple") {
+            $productos = []; // Array para almacenar los productos
+            $contador = 1;
             $facturas = $_POST['factura'];
             $contador = 1;
 

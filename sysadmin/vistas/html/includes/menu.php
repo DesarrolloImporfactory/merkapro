@@ -73,16 +73,16 @@ $simbolo_moneda = get_row('perfil', 'moneda', 'id_perfil', 1);
 	<!-- Button mobile view to collapse sidebar menu -->
 	<nav class="navbar-custom" style="background: #ececec">
 
-		<ul  class="list-inline float-right mb-0">
+		<ul class="list-inline float-right mb-0">
 
-			
+
 			<li class="list-inline-item notification-list hide-phone   waves-light waves-effect">
 				<i class="ti-wallet"></i>
 				<span style="color: #006ba5 !important" class="<?php echo $color ?>"><?php echo $simbolo_moneda . $total_venta ?></span>
 			</li>
 
 			<li class="list-inline-item notification-list hide-phone">
-				<a  class="nav-link waves-light waves-effect" href="#" id="btn-fullscreen">
+				<a class="nav-link waves-light waves-effect" href="#" id="btn-fullscreen">
 					<i style="color: #006ba5 !important" class="mdi mdi-crop-free noti-icon"></i>
 				</a>
 			</li>
@@ -329,7 +329,7 @@ $simbolo_moneda = get_row('perfil', 'moneda', 'id_perfil', 1);
 					<ul class="list-unstyled">
 						<li><a href="../html/wallet.php">Detalles</a></li>
 						<li><a href="../html/datos_banco.php">Datos bancarios</a></li>
-						<?php if ($dominio_completo == 'https://marketplace.imporsuit.com') { ?>
+						<?php if ($dominio_completo == 'https://merkapro.ec') { ?>
 							<li><a href="../html/solicitudes.php">Solicitudes de Pago</a></li>
 
 						<?php } ?>
@@ -345,16 +345,16 @@ $simbolo_moneda = get_row('perfil', 'moneda', 'id_perfil', 1);
 				</li-->
 
 				<?php if ($dominio_completo == 'https://merkapro.ec') { ?>
-				<li>
-					<a href="administrar_marketplace.php" class="waves-effect waves-primary"><i class="ti-home"></i><span> Adminmistrar tiendas </span></a>
-				</li>
+					<li>
+						<a href="administrar_marketplace.php" class="waves-effect waves-primary"><i class="ti-home"></i><span> Adminmistrar tiendas </span></a>
+					</li>
 				<?php } ?>
 
-				<?php if ($dominio_completo == 'https://marketplace.imporsuit.com') { ?>
+				<?php if ($dominio_completo == 'https://merkapro.ec') { ?>
 					<li>
 						<a href="javascript:void(0);" class="waves-effect waves-primary"><i class="ti-list"></i><span> Tiendas</span> <span class="menu-arrow"></span></a>
 						<ul class="list-unstyled">
-							<?php if ($dominio_completo == 'https://marketplace.imporsuit.com') { ?>
+							<?php if ($dominio_completo == 'https://merkapro.ec') { ?>
 
 								<li><a href="../html/tiendas.php">Detalles</a></li>
 							<?php } ?>

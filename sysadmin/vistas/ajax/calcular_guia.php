@@ -32,7 +32,7 @@ if ($transportadora == 1) {
     $precio_trayecto = get_row('cobertura_laar', 'precio', 'tipo_cobertura', $valor_base);
     $valor_base = $precio_trayecto;
 } else if ($transportadora == 2) {
-    if ($ciudad == 1) {
+    if ($ciudad == 1 || $ciudad == 599) {
         $valor_base = 5.5;
     } else {
         $valor_base = 6.5;
