@@ -27,16 +27,16 @@ if (preg_match('/([A-Za-z-]+)(\d+)$/', $product_id, $matches)) {
 	$numero++;
 
 	// Mantener el formato original de las letras (con guiones)
-	$letras = strtoupper($letras);
+	@$letras = strtoupper($letras);
 
 	// Asegurarse de que el número tenga al menos 3 dígitos
-	$numero = str_pad($numero, 3, "0", STR_PAD_LEFT);
+	@$numero = str_pad($numero, 3, "0", STR_PAD_LEFT);
 
 	// Combinar letras y número para formar el nuevo ID de producto
-	$product_id = $letras . $numero;
+	@$product_id = $letras . $numero;
 } else {
 	// Si el código no tiene letras (solo números), simplemente incrementar
-	$product_id = str_pad($product_id + 1, 3, "0", STR_PAD_LEFT);
+	@$product_id = str_pad($product_id + 1, 3, "0", STR_PAD_LEFT);
 }
 
 //consulta para elegir el impuesto en la modal
