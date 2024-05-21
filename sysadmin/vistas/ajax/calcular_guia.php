@@ -40,7 +40,7 @@ if ($transportadora == 1) {
 } else if ($transportadora == 3) {
     $valor_base = get_row('ciudad_cotizacion', 'trayecto_servientrega', 'ciudad', $ciudad2);
     $precio_trayecto = get_row('cobertura_servientrega', 'precio', 'tipo_cobertura', $valor_base);
-    $valor_base = $precio_trayecto;
+    $valor_base =    $precio_trayecto;
 }
 
 //echo $cod;
@@ -66,7 +66,12 @@ if ($seguro == 1) {
 } else {
     $seguro = 0;
 }
-$valor_envio = $valor_base;
+if ($transportadora == 3) {
+    $valor_envio = $valor_base + $cod + $seguro;
+} else {
+    $valor_envio = $valor_base;
+}
+
 
 $valor_texto = "Precio de envío $" . number_format($valor_envio, 2);
 

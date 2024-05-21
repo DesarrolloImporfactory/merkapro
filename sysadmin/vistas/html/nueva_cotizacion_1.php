@@ -47,7 +47,7 @@ $destino_marketplace = mysqli_connect("localhost", "imporsuit_marketplace", "imp
     .image-bn:hover {
         filter: grayscale(0%);
     }
-    
+
     .div_seleccion:hover {
         filter: grayscale(0%);
     }
@@ -275,7 +275,7 @@ $destino_marketplace = mysqli_connect("localhost", "imporsuit_marketplace", "imp
                                                                         <!-- Segunda Columna -->
                                                                         <div class="col-6 col-md-2">
                                                                             <div id="card1" onclick="seleccionar_transportadora(1)" class="card formulario p-1 div_imagen">
-                                                                                <img style="width: 100%;" id="tr1"  src="../../img_sistema/laar.png" class="card-img-top image-bn interactive-image laar_img formulario" alt="Selecciona Servientrega">
+                                                                                <img style="width: 100%;" id="tr1" src="../../img_sistema/laar.png" class="card-img-top image-bn interactive-image laar_img formulario" alt="Selecciona Servientrega">
                                                                                 <div class="card-body" style="text-align: center;">
                                                                                     <strong id="precio_laar">---</strong>
                                                                                 </div>
@@ -284,7 +284,7 @@ $destino_marketplace = mysqli_connect("localhost", "imporsuit_marketplace", "imp
                                                                         <!-- Tercera Columna -->
                                                                         <div class="col-6 col-md-2">
                                                                             <div id="card2" onclick="seleccionar_transportadora(2)" class="card formulario p-1">
-                                                                                <img style="width: 100%;" id="tr2"  src="../../img_sistema/speed.png" class="card-img-top image-bn interactive-image formulario" alt="Selecciona Guia Local">
+                                                                                <img style="width: 100%;" id="tr2" src="../../img_sistema/speed.png" class="card-img-top image-bn interactive-image formulario" alt="Selecciona Guia Local">
                                                                                 <div class="card-body" style="text-align: center;">
                                                                                     <strong id="aplica">NO APLICA</strong>
                                                                                 </div>
@@ -619,167 +619,167 @@ $destino_marketplace = mysqli_connect("localhost", "imporsuit_marketplace", "imp
 
         }
         if (transportadora === "3") {
-              //obtienne el formulario
-             var formulario = document.getElementById('formulario');
-             //crea un objeto FormData
-             if (document.querySelector("#valorasegurado").value === "") {
-                 document.querySelector("#valorasegurado").value = 0;
-             }
-             var data = new FormData(formulario);
-             data.append("nombre_destino", document.getElementById('nombred').value);
-             data.append("celular", document.getElementById('telefonod').value);
-             data.append("direccion", document.getElementById('calle_principal').value + ' ' + document.getElementById('calle_secundaria').value);
-             data.append("valor_total", document.getElementById('valor_total_').value);
-             data.append("cantidad_total", document.getElementById('cantidad_total').value);
-             data.append("costo_total", document.getElementById('costo_total').value);
-             data.append("ciudad", document.getElementById('ciudad_entrega').value);
-             data.append("productos_guia", document.getElementById('productos_guia').value);
-             data.append("identificacion", "0");
-             data.append("seguro", document.getElementById('asegurar_producto').value);
-             data.append("contenido", document.getElementById('producto_name').textContent) + "x" + document.getElementById('producto_qty').textContent;
+            //obtienne el formulario
+            var formulario = document.getElementById('formulario');
+            //crea un objeto FormData
+            if (document.querySelector("#valorasegurado").value === "") {
+                document.querySelector("#valorasegurado").value = 0;
+            }
+            var data = new FormData(formulario);
+            data.append("nombre_destino", document.getElementById('nombred').value);
+            data.append("celular", document.getElementById('telefonod').value);
+            data.append("direccion", document.getElementById('calle_principal').value + ' ' + document.getElementById('calle_secundaria').value);
+            data.append("valor_total", document.getElementById('valor_total_').value);
+            data.append("cantidad_total", document.getElementById('cantidad_total').value);
+            data.append("costo_total", document.getElementById('costo_total').value);
+            data.append("ciudad", document.getElementById('ciudad_entrega').value);
+            data.append("productos_guia", document.getElementById('productos_guia').value);
+            data.append("identificacion", "0");
+            data.append("seguro", document.getElementById('asegurar_producto').value);
+            data.append("contenido", document.getElementById('producto_name').textContent) + "x" + document.getElementById('producto_qty').textContent;
 
-             $.ajax({
-                 url: "../../../ingresar_pedido_1.php",
-                 type: "POST",
-                 data: data,
-                 contentType: false,
-                 processData: false,
-                 success: function(response) {
-                     console.log(response);
-                     let [guia, precio] = response.split(',');
-                     $('#guia').val(guia);
-                     $('#precio').val(precio);
-                     $('#modal_vuelto').modal('show');
-                     $.ajax({
-                         url: '../ajax/calcular_guia.php',
-                         type: 'post',
-                         data: data,
-                         contentType: false,
-                         processData: false,
-                         success: function(response) {
-                             $('#resultados').html(response);
-                             $('#generar_guia_btn').prop('disabled', false);
-                             $.ajax({
-                                 url: "../ajax/ultimo_pedido.php",
-                                 type: "POST",
-                                 data: data,
-                                 contentType: false,
-                                 processData: false,
-                                 success: function(response) {
-                                     $('#id_pedido_cot_').val(response);
-                                     data.set('id_pedido_cot', response);
-                                     let ciudad_texto = $('#ciudad_entrega option:selected').text();
-                                     let destino_texto = $('#destino_c').val();
-                                     data.append('ciudad_texto', ciudad_texto);
-                                     data.append('destino_texto', destino_texto);
-                                     data.append('provincia', $('#provinica  option:selected').text());
-                                     $.ajax({
-                                         url: "../ajax/datos_servi.php",
-                                         type: "POST",
-                                         data: data,
-                                         contentType: false,
-                                         processData: false,
-                                         success: function(response) {
+            $.ajax({
+                url: "../../../ingresar_pedido_1.php",
+                type: "POST",
+                data: data,
+                contentType: false,
+                processData: false,
+                success: function(response) {
+                    console.log(response);
+                    let [guia, precio] = response.split(',');
+                    $('#guia').val(guia);
+                    $('#precio').val(precio);
+                    $('#modal_vuelto').modal('show');
+                    $.ajax({
+                        url: '../ajax/calcular_guia.php',
+                        type: 'post',
+                        data: data,
+                        contentType: false,
+                        processData: false,
+                        success: function(response) {
+                            $('#resultados').html(response);
+                            $('#generar_guia_btn').prop('disabled', false);
+                            $.ajax({
+                                url: "../ajax/ultimo_pedido.php",
+                                type: "POST",
+                                data: data,
+                                contentType: false,
+                                processData: false,
+                                success: function(response) {
+                                    $('#id_pedido_cot_').val(response);
+                                    data.set('id_pedido_cot', response);
+                                    let ciudad_texto = $('#ciudad_entrega option:selected').text();
+                                    let destino_texto = $('#destino_c').val();
+                                    data.append('ciudad_texto', ciudad_texto);
+                                    data.append('destino_texto', destino_texto);
+                                    data.append('provincia', $('#provinica  option:selected').text());
+                                    $.ajax({
+                                        url: "../ajax/datos_servi.php",
+                                        type: "POST",
+                                        data: data,
+                                        contentType: false,
+                                        processData: false,
+                                        success: function(response) {
 
-                                             let datos_servi = JSON.parse(response);
-                                             let codigo = datos_servi["codigo"];
-                                             let codigo_origen = datos_servi["codigo_origen"];
-                                             data.append('codigo', codigo);
-                                             data.append('codigo_origen', codigo_origen);
-                                             let esRecaudo = $('#cod').val();
-                                             if (esRecaudo == 1) {
-                                                 $.ajax({
-                                                     url: "../../../ajax/servientrega/generar_guia_servientrega_r.php",
-                                                     type: "POST",
-                                                     data: data,
-                                                     contentType: false,
-                                                     processData: false,
-                                                     success: function(response) {
-                                                         let data_se = JSON.parse(response);
-                                                         let id_servi = data_se["id"];
-                                                         data.append('id_servi', id_servi);
-                                                         Swal.fire({
-                                                             icon: "info",
-                                                             title: "Por favor espere",
-                                                             text: "Estamos generando la guía",
-                                                             showConfirmButton: false,
-                                                             didOpen: () => {
-                                                                 Swal.showLoading();
-                                                             }
-                                                         })
-                                                         $.ajax({
-                                                             url: "../ajax/enviar_servi.php",
-                                                             type: "POST",
-                                                             data: data,
-                                                             contentType: false,
-                                                             processData: false,
-                                                             success: function(response) {
-                                                                 Swal.fire({
-                                                                     icon: "success",
-                                                                     title: "Guía generada",
-                                                                     text: "La guía ha sido generada exitosamente",
-                                                                     showConfirmButton: true,
-                                                                 }).then((result) => {
-                                                                     if (result.isConfirmed) {
-                                                                         window.location.href = `./editar_cotizacion_3.php?id_factura=` + $('#id_pedido_cot_').val();
-                                                                     }
-                                                                 })
-                                                             }
-                                                         })
-                                                     }
-                                                 })
-                                             } else if (esRecaudo == 2) {
+                                            let datos_servi = JSON.parse(response);
+                                            let codigo = datos_servi["codigo"];
+                                            let codigo_origen = datos_servi["codigo_origen"];
+                                            data.append('codigo', codigo);
+                                            data.append('codigo_origen', codigo_origen);
+                                            let esRecaudo = $('#cod').val();
+                                            if (esRecaudo == 1) {
+                                                $.ajax({
+                                                    url: "../../../ajax/servientrega/generar_guia_servientrega_r.php",
+                                                    type: "POST",
+                                                    data: data,
+                                                    contentType: false,
+                                                    processData: false,
+                                                    success: function(response) {
+                                                        let data_se = JSON.parse(response);
+                                                        let id_servi = data_se["id"];
+                                                        data.append('id_servi', id_servi);
+                                                        Swal.fire({
+                                                            icon: "info",
+                                                            title: "Por favor espere",
+                                                            text: "Estamos generando la guía",
+                                                            showConfirmButton: false,
+                                                            didOpen: () => {
+                                                                Swal.showLoading();
+                                                            }
+                                                        })
+                                                        $.ajax({
+                                                            url: "../ajax/enviar_servi.php",
+                                                            type: "POST",
+                                                            data: data,
+                                                            contentType: false,
+                                                            processData: false,
+                                                            success: function(response) {
+                                                                Swal.fire({
+                                                                    icon: "success",
+                                                                    title: "Guía generada",
+                                                                    text: "La guía ha sido generada exitosamente",
+                                                                    showConfirmButton: true,
+                                                                }).then((result) => {
+                                                                    if (result.isConfirmed) {
+                                                                        window.location.href = `./editar_cotizacion_3.php?id_factura=` + $('#id_pedido_cot_').val();
+                                                                    }
+                                                                })
+                                                            }
+                                                        })
+                                                    }
+                                                })
+                                            } else if (esRecaudo == 2) {
 
-                                                 $.ajax({
-                                                     url: "../../../ajax/servientrega/generar_guia_servientrega.php",
-                                                     type: "POST",
-                                                     data: data,
-                                                     contentType: false,
-                                                     processData: false,
-                                                     success: function(response) {
-                                                         let data_se = JSON.parse(response);
-                                                         let id_servi = data_se["id"];
-                                                         data.append('id_servi', id_servi);
-                                                         Swal.fire({
-                                                             icon: "info",
-                                                             title: "Por favor espere",
-                                                             text: "Estamos generando la guía",
-                                                             showConfirmButton: false,
-                                                             didOpen: () => {
-                                                                 Swal.showLoading();
-                                                             }
-                                                         })
-                                                         $.ajax({
-                                                             url: "../ajax/enviar_servi.php",
-                                                             type: "POST",
-                                                             data: data,
-                                                             contentType: false,
-                                                             processData: false,
-                                                             success: function(response) {
-                                                                 Swal.fire({
-                                                                     icon: "success",
-                                                                     title: "Guía generada",
-                                                                     text: "La guía ha sido generada exitosamente",
-                                                                     showConfirmButton: true,
-                                                                 }).then((result) => {
-                                                                     if (result.isConfirmed) {
-                                                                         window.location.href = `./editar_cotizacion_3.php?id_factura=` + $('#id_pedido_cot_').val();
-                                                                     }
-                                                                 })
-                                                             }
-                                                         })
-                                                     }
-                                                 })
-                                             }
-                                         }
-                                     });
-                                 }
-                             });
-                         }
+                                                $.ajax({
+                                                    url: "../../../ajax/servientrega/generar_guia_servientrega.php",
+                                                    type: "POST",
+                                                    data: data,
+                                                    contentType: false,
+                                                    processData: false,
+                                                    success: function(response) {
+                                                        let data_se = JSON.parse(response);
+                                                        let id_servi = data_se["id"];
+                                                        data.append('id_servi', id_servi);
+                                                        Swal.fire({
+                                                            icon: "info",
+                                                            title: "Por favor espere",
+                                                            text: "Estamos generando la guía",
+                                                            showConfirmButton: false,
+                                                            didOpen: () => {
+                                                                Swal.showLoading();
+                                                            }
+                                                        })
+                                                        $.ajax({
+                                                            url: "../ajax/enviar_servi.php",
+                                                            type: "POST",
+                                                            data: data,
+                                                            contentType: false,
+                                                            processData: false,
+                                                            success: function(response) {
+                                                                Swal.fire({
+                                                                    icon: "success",
+                                                                    title: "Guía generada",
+                                                                    text: "La guía ha sido generada exitosamente",
+                                                                    showConfirmButton: true,
+                                                                }).then((result) => {
+                                                                    if (result.isConfirmed) {
+                                                                        window.location.href = `./editar_cotizacion_3.php?id_factura=` + $('#id_pedido_cot_').val();
+                                                                    }
+                                                                })
+                                                            }
+                                                        })
+                                                    }
+                                                })
+                                            }
+                                        }
+                                    });
+                                }
+                            });
+                        }
 
-                     });
-                 }
-             }); 
+                    });
+                }
+            });
 
         }
         if (transportadora === "4") {
@@ -928,9 +928,9 @@ $destino_marketplace = mysqli_connect("localhost", "imporsuit_marketplace", "imp
         } else if (id === 2) {
             $.Notification.notify('custom', 'bottom right', 'RECUERDA!', 'SPEED REALIZA ENTREGAS EL MISMO DÍA!')
         } else if (id === 3) {
-            
+
             $("#costo_envio").val($("#precio_servientrega").text());
-    
+
         }
     }
 
