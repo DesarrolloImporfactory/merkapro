@@ -23,17 +23,17 @@ if (empty($_POST['quantity'])) {
 
     //GURDAMOS LAS ENTRADAS EN EL KARDEX
     //$costo_producto = get_row('productos', 'moneda', 'id_perfil', 1);
-    $sql_kardex  = mysqli_query($conexion, "select * from kardex where producto_kardex='" . $id_producto . "' order by id_kardex DESC LIMIT 1");
-    $rww         = mysqli_fetch_array($sql_kardex);
-    $costo       = $rww['costo_saldo'];
-    $tienda      = get_row('productos', 'tienda', 'id_producto', $id_producto);
-    $saldo_total = $quantity * $costo;
-    $cant_saldo  = $rww['cant_saldo'] + $quantity;
+    @$sql_kardex  = mysqli_query($conexion, "select * from kardex where producto_kardex='" . $id_producto . "' order by id_kardex DESC LIMIT 1");
+    @$rww         = mysqli_fetch_array($sql_kardex);
+    @$costo       = $rww['costo_saldo'];
+    @$tienda      = get_row('productos', 'tienda', 'id_producto', $id_producto);
+    @$saldo_total = $quantity * $costo;
+    @$cant_saldo  = $rww['cant_saldo'] + $quantity;
     //$nueva_cantidad = $cant_saldo - $cantidad;
     //$nuevo_saldo    = $cant_saldo * $precio_venta;
-    $saldo_full     = ($rww['total_saldo'] + $saldo_total);
-    $costo_promedio = ($rww['total_saldo'] + $saldo_total) / $cant_saldo;
-    $tip            = 3;
+    @$saldo_full     = ($rww['total_saldo'] + $saldo_total);
+    @$costo_promedio = ($rww['total_saldo'] + $saldo_total) / $cant_saldo;
+    @$tip            = 3;
     
     
     if($tienda=='enviado'){
