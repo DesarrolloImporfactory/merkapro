@@ -21,17 +21,17 @@ if (empty($_POST['quantity_remove'])) {
     $update = eliminar_stock($id_producto, $quantity);
 
 //GURDAMOS LAS EN EL KARDEX
-    $sql_kardex  = mysqli_query($conexion, "select * from kardex where producto_kardex='" . $id_producto . "' order by id_kardex DESC LIMIT 1");
-    $rww         = mysqli_fetch_array($sql_kardex);
-    $costo       = $rww['costo_saldo'];
-    $saldo_total = $quantity * $costo;
-    $id_producto = $rww['producto_kardex'];
-    $costo_saldo = $rww['costo_saldo'];
-    $cant_saldo  = $rww['cant_saldo'] - $quantity;
-    $tienda      = get_row('productos', 'tienda', 'id_producto', $id_producto);
+    @$sql_kardex  = mysqli_query($conexion, "select * from kardex where producto_kardex='" . $id_producto . "' order by id_kardex DESC LIMIT 1");
+    @$rww         = mysqli_fetch_array($sql_kardex);
+    @$costo       = $rww['costo_saldo'];
+    @$saldo_total = $quantity * $costo;
+    @$id_producto = $rww['producto_kardex'];
+    @$costo_saldo = $rww['costo_saldo'];
+    @$cant_saldo  = $rww['cant_saldo'] - $quantity;
+    @$tienda      = get_row('productos', 'tienda', 'id_producto', $id_producto);
     //$nueva_cantidad = $cant_saldo - $cantidad;
-    $nuevo_saldo = $cant_saldo * $costo;
-    $tip         = 4;
+    @$nuevo_saldo = $cant_saldo * $costo;
+    @$tip         = 4;
 
      if($tienda=='enviado'){
      if (isset($_SERVER['HTTPS']) &&
