@@ -121,7 +121,7 @@ if ($action == 'ajax' && ($server_url == "https://merkapro.ec")) {
     //main query to fetch the data
     $sql   = "SELECT * FROM  $sTable $sWhere LIMIT $offset,$per_page";
     $empresas = mysqli_query($conexion, "SELECT * FROM empresa_envio");
-    echo $sql;
+    //echo $sql;
     $query = mysqli_query($conexion, $sql);
     if ($filtro == 'enviado') {
         $enviado = "btn-primary";
