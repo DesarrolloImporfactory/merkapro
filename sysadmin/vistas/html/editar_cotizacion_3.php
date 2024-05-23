@@ -1508,7 +1508,9 @@ while ($r = $query->fetch_object()) {
     }
     //promesa en 3s 
     setTimeout(() => {
-        if ($('#ciudad_entrega option:selected').text() == "Ciudad *") {} else {
+        if ($('#ciudad_entrega option:selected').text() == "Ciudad *") {
+            cargar_provincia_pedido();
+        } else {
 
             calcular_guia_1(1);
             calcular_servi(1, 1);
