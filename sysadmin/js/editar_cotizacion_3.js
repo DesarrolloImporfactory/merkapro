@@ -362,10 +362,7 @@ function generar_guia() {
       "direccion",
       document.getElementById("direccion_destino").value
     );
-    data.append(
-      "valor_total",
-      Math.round(document.getElementById("valor_total_").value)
-    );
+    data.append("valor_total", document.getElementById("valor_total_").value);
     data.append(
       "cantidad_total",
       document.getElementById("cantidad_total").value
@@ -421,10 +418,7 @@ function generar_guia() {
       "direccion",
       document.getElementById("direccion_destino").value
     );
-    data.append(
-      "valor_total",
-      Math.round(document.getElementById("valor_total_").value)
-    );
+    data.append("valor_total", document.getElementById("valor_total_").value);
     data.append(
       "cantidad_total",
       document.getElementById("cantidad_total").value
@@ -482,10 +476,7 @@ function generar_guia() {
       "direccion",
       document.getElementById("direccion_destino").value
     );
-    data.append(
-      "valor_total",
-      Math.round(document.getElementById("valor_total_").value)
-    );
+    data.append("valor_total", document.getElementById("valor_total_").value);
     data.append(
       "cantidad_total",
       document.getElementById("cantidad_total").value
@@ -630,10 +621,7 @@ function generar_guia() {
       "direccion",
       document.getElementById("direccion_destino").value
     );
-    data.append(
-      "valor_total",
-      Math.round(document.getElementById("valor_total_").value)
-    );
+    data.append("valor_total", document.getElementById("valor_total_").value);
     data.append(
       "cantidad_total",
       document.getElementById("cantidad_total").value
