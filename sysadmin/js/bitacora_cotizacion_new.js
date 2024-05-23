@@ -101,6 +101,7 @@ function load(page) {
 
   var url = "../ajax/buscar_cotizacion_new.php?action=ajax&page=" + page;
   url += "&q=" + encodeURIComponent(q);
+  url += "&filtro=" + filtroG;
   if (tienda != 0) url += "&tienda=" + encodeURIComponent(tienda);
   if (estado != 0) url += "&estado=" + encodeURIComponent(estado);
   if (numero != 0) url += "&numero=" + encodeURIComponent(numero);

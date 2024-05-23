@@ -710,3 +710,26 @@ function generar_guia() {
     });
   }
 }
+
+function sanitizeInput(selector, regex) {
+  $(selector).on("input", function () {
+    var input = $(this).val();
+    var sanitizedInput = input.replace(regex, "");
+    $(this).val(sanitizedInput);
+  });
+}
+
+// Campos que permiten letras, números, espacios, comas y puntos
+const commonRegex = /[^0-9a-zA-Z\s,\.]/g;
+
+sanitizeInput("#nombredestino", commonRegex);
+sanitizeInput("#direccion_destino", commonRegex);
+sanitizeInput("#referencia", commonRegex);
+sanitizeInput("#observacion", commonRegex);
+
+// Campos que solo permiten números
+const numberRegex = /[^0-9]/g;
+
+sanitizeInput("#telefono", numberRegex);
+sanitizeInput("#identificacion", numberRegex);
+sanitizeInput("#numerocasa", commonRegex);
