@@ -1623,7 +1623,7 @@ mysqli_query($conexion, "INSERT INTO ciudad_cotizacion (id_cotizacion,provincia,
 mysqli_query($conexion, "INSERT INTO ciudad_cotizacion (id_cotizacion,provincia,ciudad,cobertura_servientrega,cobertura_laar,cobertura_gintracom,trayecto_servientrega,trayecto_laar,trayecto_gintracom,codigo_provincia_servientrega,codigo_provincia_laar,codigo_ciudad_laar,codigo_provincia_gintracom,codigo_ciudad_gintracom,codigo_ciudad_servientrega) VALUES
 	 (221,'GUAYAS','CUMANDA MILAGRO',0,1,0,'0','TE','0','0','201001002','201001002078','0','0','0'),
 	 (222,'GUAYAS','DATA DE PLAYAS',1,0,0,'TE','0','TE','','201001002','201001002077','','','573'),
-	 (223,'GUAYAS','DAULE',1,1,1,'TR','0','TE','','201001002','201001002009','1031','56326','25'),
+	 (223,'GUAYAS','DAULE',1,1,1,'TR','TE','TE','','201001002','201001002009','1031','56326','25'),
 	 (224,'GUAYAS','DURAN',1,1,1,'TR','TE','TE','','201001002','201001002002','1031','56327','24'),
 	 (225,'GUAYAS','EL DESEO',1,0,0,'TE','0','TE','','201001002','201001002049','','','726'),
 	 (226,'GUAYAS','EL EMPALME/GUAYAS',1,0,1,'TE','TE','TE','','201001002','201001002069','1031','56328','767'),
