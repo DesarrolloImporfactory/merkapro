@@ -179,7 +179,7 @@ if ($tipo_origen == 1) {
 
 $nombre_destino = $_POST['nombre_destino'];
 $ciudad_entrega = $_POST['ciudad'];
-
+$ciudad_rep = $ciudad_entrega;
 $ciudad_entrega = get_row('ciudad_cotizacion', 'codigo_ciudad_laar', 'id_cotizacion', $ciudad_entrega);
 
 $direccion = $_POST['direccion'];
@@ -307,7 +307,7 @@ if ($response) {
     @$url = $data["url"];
     //$guia=1;
     if (isset($guia)) {
-        $sql_update = "UPDATE `facturas_cot` SET `guia_enviada` = '1', `transporte`='LAAR', `estado_guia_sistema`='2'  WHERE `id_factura` = $id_pedido_cot";
+        $sql_update = "UPDATE `facturas_cot` SET `guia_enviada` = '1', `transporte`='LAAR', `estado_guia_sistema`='2', `ciudad_cot`= '$ciudad_rep'  WHERE `id_factura` = $id_pedido_cot";
         //echo $sql_update;
         $query_update = mysqli_query($conexion, $sql_update);
         echo $query_update;
@@ -391,7 +391,7 @@ if ($response) {
 
             $id_fact_destino = get_row_destino($conexion_destino, 'facturas_cot', 'id_factura', 'id_factura_origen', $id_pedido_cot);
             // echo $id_fact_destino;
-            $sql = "UPDATE facturas_cot SET  estado_factura=2,  `transporte`='LAAR', `estado_guia_sistema`='2', `guia_enviada`=1
+            $sql = "UPDATE facturas_cot SET  estado_factura=2,  `transporte`='LAAR', `estado_guia_sistema`='2', `guia_enviada`=1,  `ciudad_cot`= '$ciudad_rep'
                                 WHERE id_factura='" . $id_fact_destino . "'";
             // echo $sql;
             $query_update_destino = mysqli_query($conexion_destino, $sql);
@@ -416,7 +416,7 @@ if ($response) {
             $query_insertar_marketplace = mysqli_query($conexion_marketplace, $sql_insertar_guia_marketplace);
 
             $id_fact_marketplace = get_row_destino($conexion_marketplace, 'facturas_cot', 'id_factura', 'id_factura_origen', $id_pedido_cot);
-            $sql = "UPDATE facturas_cot SET  estado_factura=2,  `transporte`='LAAR', `estado_guia_sistema`='2', `guia_enviada`=1
+            $sql = "UPDATE facturas_cot SET  estado_factura=2,  `transporte`='LAAR', `estado_guia_sistema`='2', `guia_enviada`=1,  `ciudad_cot`= '$ciudad_rep'
                                 WHERE id_factura='" . $id_fact_marketplace . "'";
             $query_update_destino = mysqli_query($conexion_marketplace, $sql);
         } else {
@@ -461,7 +461,7 @@ if ($response) {
             $query_insertar_marketplace = mysqli_query($conexion_marketplace, $sql_insertar_guia_marketplace);
 
             $id_fact_marketplace = get_row_destino($conexion_marketplace, 'facturas_cot', 'id_factura', 'id_factura_origen', $id_pedido_cot);
-            $sql = "UPDATE facturas_cot SET  estado_factura=2,  `transporte`='LAAR', `estado_guia_sistema`='2', `guia_enviada`=1
+            $sql = "UPDATE facturas_cot SET  estado_factura=2,  `transporte`='LAAR', `estado_guia_sistema`='2', `guia_enviada`=1,  `ciudad_cot`= '$ciudad_rep'
                                 WHERE id_factura='" . $id_fact_marketplace . "'";
             $query_update_destino = mysqli_query($conexion_marketplace, $sql);
         }
