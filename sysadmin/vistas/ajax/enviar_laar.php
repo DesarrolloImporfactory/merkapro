@@ -186,7 +186,7 @@ $direccion = $_POST['direccion'];
 //echo $direccion;
 $referencia = $_POST['referencia'];
 $telefono = $_POST['telefono'];
-$celular = $_POST['celular'];
+$celular = $_POST['telefono'];
 $valorasegurado = $_POST['valorasegurado'];
 
 $numerocasa = $_POST['numerocasa'];
