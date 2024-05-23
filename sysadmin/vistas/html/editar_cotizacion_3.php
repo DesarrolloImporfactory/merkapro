@@ -1508,9 +1508,12 @@ while ($r = $query->fetch_object()) {
     }
     //promesa en 3s 
     setTimeout(() => {
-        calcular_guia_1(1);
-        calcular_servi(1, 1);
-        calcular_gintra($("#ciudad_entrega option:selected").text(), 1);
+        if ($('#ciudad_entrega option:selected').text() == "Ciudad *") {} else {
+
+            calcular_guia_1(1);
+            calcular_servi(1, 1);
+            calcular_gintra($("#ciudad_entrega option:selected").text(), 1);
+        }
     }, 1000);
 
     function calcular_gintra(id_ciudad, recaudo) {
