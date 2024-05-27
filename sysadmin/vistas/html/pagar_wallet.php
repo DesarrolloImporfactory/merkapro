@@ -12,7 +12,7 @@ $marketplace_url = $_SERVER['HTTP_HOST'];
 $marketplace_url = str_replace(["www.", ".com"], "", $marketplace_url);
 
 // Compara en minúsculas para evitar problemas de sensibilidad a mayúsculas y minúsculas
-if (strtolower($marketplace_url) !== "marketplace.imporsuit" && strtolower($marketplace_url) !== 'localhost') {
+if (strtolower($marketplace_url) !== "merkapro.ec" && strtolower($marketplace_url) !== 'localhost') {
     header("location: ../../login.php");
     exit;
 }
