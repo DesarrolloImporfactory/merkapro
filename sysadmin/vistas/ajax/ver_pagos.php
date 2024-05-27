@@ -21,8 +21,7 @@
     $dominio_actual = str_replace('.com', '', $dominio_actual);
     $dominio_actual = str_replace('.net', '', $dominio_actual);
     $action         = (isset($_REQUEST['action']) && $_REQUEST['action'] != null) ? $_REQUEST['action'] : '';
-    if ($action == 'ajax' && $dominio_actual == 'marketplace.imporsuit') {
-        $daterange = mysqli_real_escape_string($conexion, (strip_tags($_REQUEST['range'], ENT_QUOTES)));
+    if ($action == 'ajax' && $dominio_actual == 'merkapro.ec') {
         $tables = "pagos";
         $campos = "*";
         $sWhere = "tienda='" . $tienda . "'";
@@ -112,7 +111,6 @@
     } else {
         $conexion_tienda = mysqli_connect("localhost", "imporsuit_marketplace", "imporsuit_marketplace", "imporsuit_marketplace");
         $tienda = $_SERVER['HTTP_HOST'];
-        $daterange = mysqli_real_escape_string($conexion_tienda, (strip_tags($_REQUEST['range'], ENT_QUOTES)));
         $tables = "pagos";
         $campos = "*";
         $sWhere = "tienda like '%" . $tienda . "%'";
