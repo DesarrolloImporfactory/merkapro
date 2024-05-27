@@ -483,23 +483,23 @@ $pacientes = 1;
                             '<input type="hidden" name="guia" value="' + guia + '">' +
                             '<input type="hidden" name="transporte" value="' + button.data('transporte') + '">' +
                             '<strong>Actualizar Novedad:</strong>' +
-                            '<div><label for="inputPassword3" class="col-sm-2 col-form-label">Nombre</label></div> ' +
+                            '<div><label for="inputPassword3" class="col-sm-2 text-nowrap col-form-label">Nombre</label></div> ' +
                             '<div><input type="text" class="form-control" name="nombre" value="' + data.nombre + '" /> </div> ' +
-                            '<div><label for="inputPassword3" class="col-sm-2 col-form-label">Ciudad</label></div> ' +
+                            '<div><label for="inputPassword3" class="col-sm-2 text-nowrap col-form-label">Ciudad</label></div> ' +
                             '<div><input type="text" class="form-control" name="ciudad" value="' + data.ciudad + '" /> </div> ' +
-                            '<div><label for="inputPassword3" class="col-sm-2 col-form-label">Calle Principal</label></div>' +
+                            '<div><label for="inputPassword3" class="col-sm-2 text-nowrap col-form-label">Calle Principal</label></div>' +
                             '<div><input type="text" class="form-control" name="direccion" value="' + data.c_principal + '" /> </div> ' +
-                            '<div><label for="inputPassword3" class="col-sm-2 col-form-label">Calle Secundaria</label></div>' +
+                            '<div><label for="inputPassword3" class="col-sm-2 text-nowrap col-form-label">Calle Secundaria</label></div>' +
                             '<div><input type="text" class="form-control" name="direccion1" value="' + data.c_secundaria + '" /> </div> ' +
-                            '<div><label for="inputPassword3" class="col-sm-2 col-form-label">Teléfono</label></div>' +
+                            '<div><label for="inputPassword3" class="col-sm-2 text-nowrap col-form-label">Teléfono</label></div>' +
                             '<div><input type="text" class="form-control" name="telefono" value="' + data.telefono + '" /> </div> ' +
-                            '<div><label for="inputPassword3" class="col-sm-2 col-form-label">Celular</label></div>' +
+                            '<div><label for="inputPassword3" class="col-sm-2 text-nowrap col-form-label">Celular</label></div>' +
                             '<div><input type="text" class="form-control" name="celular" value="' + data.telefono + '" /> </div> ' +
-                            '<div><label for="inputPassword3" class="col-sm-2 col-form-label">Numeración</label></div>' +
+                            '<div><label for="inputPassword3" class="col-sm-2 text-nowrap col-form-label">Numeración</label></div>' +
                             '<div><input type="text" class="form-control" name="numeracion" value="' + data.numeracion + '" /> </div> ' +
-                            '<div><label for="inputPassword3" class="col-sm-2 col-form-label">Referencia</label></div>' +
+                            '<div><label for="inputPassword3" class="col-sm-2 text-nowrap col-form-label">Referencia</label></div>' +
                             '<div><input type="text" class="form-control" name="referencia" value="' + data.referencia + '" /> </div> ' +
-                            '<div><label for="inputPassword3" class="col-sm-2 col-form-label">Observación</label></div>' +
+                            '<div><label for="inputPassword3" class="col-sm-2 text-nowrap col-form-label">Observación</label></div>' +
                             '<div><input type="text" class="form-control" name="observacion" value="' + data.observacion + '" /> </div> ' +
                             '<hr />' +
                             '<strong>Actualizar Novedad:</strong>' +
