@@ -57,9 +57,8 @@ if ($data) {
         `id_factura_origen`, 
         `impreso`, 
         `facturada`, 
-        `factura_numero`) 
-    VALUES (
-        ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        `factura_numero`
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     $stmt = mysqli_prepare($conexion, $sql_insert);
 
@@ -74,7 +73,7 @@ if ($data) {
         // Vincular los parámetros
         mysqli_stmt_bind_param(
             $stmt,
-            "ssiiidiiiissssssssssssssssssssss",
+            "ssiiidiiiisssssssssssssssssssiiiiii",
             $numero_factura,
             $item['fecha_factura'],
             $item['id_cliente'],
