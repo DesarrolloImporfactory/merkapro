@@ -1,37 +1,46 @@
-<?php
-$url = "https://servientrega-ecuador.appsiscore.com/app/ws/cotizador_ser_recaudo.php?wsdl";
+<!DOCTYPE html>
+<html lang="en">
 
-$xml = <<<XML
-<soapenv:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="https://servientrega-ecuador.appsiscore.com/app/ws/">
-   <soapenv:Header/>
-   <soapenv:Body>
-      <ws:Consultar soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
-         <producto xsi:type="xsd:string">MERCANCIA PREMIER</producto>
-         <origen xsi:type="xsd:string">QUITO</origen>
-         <destino xsi:type="xsd:string">SALINAS (SANTA ELENA)-SANTA ELENA</destino>
-         <valor_mercaderia xsi:type="xsd:string">20</valor_mercaderia>
-         <piezas xsi:type="xsd:string">1</piezas>
-         <peso xsi:type="xsd:string">2</peso>
-         <alto xsi:type="xsd:string">10</alto>
-         <ancho xsi:type="xsd:string">50</ancho>
-         <largo xsi:type="xsd:string">50</largo>
-         <tokn xsi:type="xsd:string">1593aaeeb60a560c156387989856db6be7edc8dc220f9feae3aea237da6a951d</tokn>
-         <usu xsi:type="xsd:string">IMPCOMEX</usu>
-         <pwd xsi:type="xsd:string">Rtcom-ex9912</pwd>
-      </ws:Consultar>
-   </soapenv:Body>
-</soapenv:Envelope>
-XML;
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Subir documento</title>
+   <script src="https://cdn.tailwindcss.com"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
 
-$ch = curl_init($url);
+</head>
 
-curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: text/xml'));
-curl_setopt($ch, CURLOPT_POST, true);
-curl_setopt($ch, CURLOPT_POSTFIELDS, $xml);
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+<body class="bg-blue-500 min-h-screen grid place-content-center">
+   <form enctype="multipart/form-data" class="bg-white p-10 rounded-lg shadow-lg">
+      <input type="file" name="file" id="file" class="mb-5">
+      <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Subir</button>
+   </form>
 
-$response = curl_exec($ch);
+   <script>
+      document.getElementById('file').addEventListener('change', function(e) {
+         var file = e.target.files[0];
+         var reader = new FileReader();
+         reader.onload = function(e) {
+            var data = new Uint8Array(e.target.result);
+            var workbook = XLSX.read(data, {
+               type: 'array'
+            });
+            var sheet = workbook.Sheets[workbook.SheetNames[1]];
+            var json = XLSX.utils.sheet_to_json(sheet);
 
-curl_close($ch);
+            fetch('test.php', {
+               method: 'POST',
+               headers: {
+                  'Content-Type': 'application/json'
+               },
+               body: JSON.stringify(json)
+            }).then(response => response.json()).then(data => {
+               console.log(data);
+            });
+         };
+         reader.readAsArrayBuffer(file);
+      });
+   </script>
+</body>
 
-echo $response;
+</html>
