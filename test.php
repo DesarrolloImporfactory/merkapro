@@ -4,8 +4,8 @@ ini_set('display_errors', '1');
 // Decodifica el JSON recibido en el cuerpo de la solicitud
 $data = json_decode(file_get_contents('php://input'), true);
 
-require_once "sysadmin/vista/db.php";
-require_once "sysadmin/vista/php_conexion.php";
+require_once "sysadmin/vistas/db.php";
+require_once "sysadmin/vistas/php_conexion.php";
 // Conexión a la base de datos (asegúrate de tener tu conexión establecida aquí)
 // $conexion = new mysqli('localhost', 'usuario', 'contraseña', 'base_de_datos');
 
