@@ -1,4 +1,5 @@
     <?php
+    session_start();
     $tienda = $_SERVER['HTTP_REFERER'];
     //obtener &tienda=nombre_tienda
     $tienda = explode('=', $tienda);
