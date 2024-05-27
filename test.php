@@ -67,7 +67,9 @@ if ($data) {
     // Recorre cada elemento del arreglo principal
     foreach ($data as $item) {
         $numero_factura = "REQ-000" . $id_factura;
-
+        //separa celular por medio de -
+        $celular = explode('-', $item['celular']);
+        $celular = $celular[0];
         // Vincular los parámetros
         mysqli_stmt_bind_param(
             $stmt,
@@ -95,7 +97,7 @@ if ($data) {
             $item['transporte'],
 
             $item['identificacion'],
-            $item['celular'],
+            $celular,
             $item['cod'],
             $item['valor_seguro'],
             $item['drogshipin'],
