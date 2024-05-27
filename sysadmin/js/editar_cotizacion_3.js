@@ -325,6 +325,7 @@ function imprimir_factura(id_factura) {
   );
 }
 function generar_guia() {
+  $("#generar_guia_btn").prop("disabled", true);
   $("#id_pedido_cot").val(window.location.href.split("=")[1]);
 
   let monto_total = $("#monto_total_").text();

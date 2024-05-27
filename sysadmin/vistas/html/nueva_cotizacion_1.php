@@ -449,6 +449,8 @@ $destino_marketplace = mysqli_connect("localhost", "imporsuit_marketplace", "imp
     }
 
     function generar_guia() {
+        $("#generar_guia_btn").prop("disabled", true);
+
         let transportadora = $("#transp").val();
         if (transportadora == "") {
             $.Notification.notify('error', 'bottom right', 'ERROR!', 'Debes seleccionar una transportadora')
@@ -491,7 +493,6 @@ $destino_marketplace = mysqli_connect("localhost", "imporsuit_marketplace", "imp
                         processData: false,
                         success: function(response) {
                             $('#resultados').html(response);
-                            $('#generar_guia_btn').prop('disabled', false);
                             $.ajax({
                                 url: "../ajax/ultimo_pedido.php",
                                 type: "POST",
@@ -581,7 +582,6 @@ $destino_marketplace = mysqli_connect("localhost", "imporsuit_marketplace", "imp
                             //alert(response)
 
                             $('#resultados').html(response);
-                            $('#generar_guia_btn').prop('disabled', false);
                             $.ajax({
                                 url: "../ajax/ultimo_pedido.php",
                                 type: "POST",
@@ -658,7 +658,6 @@ $destino_marketplace = mysqli_connect("localhost", "imporsuit_marketplace", "imp
                         processData: false,
                         success: function(response) {
                             $('#resultados').html(response);
-                            $('#generar_guia_btn').prop('disabled', false);
                             $.ajax({
                                 url: "../ajax/ultimo_pedido.php",
                                 type: "POST",
@@ -822,7 +821,6 @@ $destino_marketplace = mysqli_connect("localhost", "imporsuit_marketplace", "imp
                         processData: false,
                         success: function(response) {
                             $('#resultados').html(response);
-                            $('#generar_guia_btn').prop('disabled', false);
                             $.ajax({
                                 url: "../ajax/ultimo_pedido.php",
                                 type: "POST",
