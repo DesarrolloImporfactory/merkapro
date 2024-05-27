@@ -274,7 +274,7 @@ GROUP BY tienda;";
             if ($_SERVER['HTTP_HOST'] == 'localhost') {
                 $or_marketplace = 'http://localhost/';
             } else {
-                $or_marketplace = 'https://marketplace.imporsuit.com/';
+                $or_marketplace = 'https://merkapro.ec/';
             }
             $archivo_origen = $or_marketplace . 'sysadmin/vistas/db1.php';
             // echo $archivo_origen;

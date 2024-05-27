@@ -230,21 +230,21 @@ if ($dominio_actual == 'merkapro.ec') {
         $sql_existe_cabecera_tienda = "SELECT * FROM cabecera_cuenta_pagar WHERE visto = '1' and tienda like '$dominio_completo%' and numero_factura like 'Proveedor%'";
         $query_existe_cabecera_tienda = mysqli_query($conexion_db, $sql_existe_cabecera_tienda);
         $row_existe_cabecera_tienda = mysqli_fetch_array($query_existe_cabecera_tienda);
-        $existe_cabecera_tienda = $row_existe_cabecera_tienda['numero_factura'];
+        $existe_cabecera_tienda = @$row_existe_cabecera_tienda['numero_factura'];
         if (empty($existe_cabecera_tienda) && $habilitar_proveedor == 1) {
             $insertar_cabecera = "INSERT INTO cabecera_cuenta_pagar (numero_factura, fecha, cliente, tienda, estado_pedido, estado_guia, total_venta, valor_pendiente, valor_cobrado, monto_recibir, visto, guia_laar) VALUES ('$num_fac_proveedor', NOW(), 'Proveedor', '$dominio_completo', '1', '7', '0', '0', '0', '0', '1','PROVEEDOR');";
             $query_insertar_cabecera = mysqli_query($conexion_db, $insertar_cabecera);
             $ganancias_proveedor = 0;
             $pendiente_proveedor = 0;
         } else {
-            $ganancias_proveedor = $row_existe_cabecera_tienda['monto_recibir'];
-            $pendiente_proveedor = $row_existe_cabecera_tienda['valor_pendiente'];
+            $ganancias_proveedor = @$row_existe_cabecera_tienda['monto_recibir'];
+            $pendiente_proveedor = @$row_existe_cabecera_tienda['valor_pendiente'];
         }
 
         $sql_existe_referido = "SELECT * FROM cabecera_cuenta_pagar WHERE visto = '1' and tienda like '$dominio_completo%' and numero_factura like 'Referido%'";
         $query_existe_referido = mysqli_query($conexion_db, $sql_existe_referido);
         $row_existe_referido = mysqli_fetch_array($query_existe_referido);
-        $existe_referido = $row_existe_referido['numero_factura'];
+        $existe_referido = @$row_existe_referido['numero_factura'];
         if (empty($existe_referido)) {
             $num_fac_referido = "Referido" . $total_referidos;
             $insertar_cabecera = "INSERT INTO cabecera_cuenta_pagar (numero_factura, fecha, cliente, tienda, estado_pedido, estado_guia, total_venta, valor_pendiente, valor_cobrado, monto_recibir, visto, guia_laar) VALUES ('$total_referidos', NOW(), 'Referido', '$dominio_completo', '1', '7', '0', '0', '0', '0', '1','REFERIDO');";
@@ -260,7 +260,7 @@ if ($dominio_actual == 'merkapro.ec') {
         $es_referido = "SELECT * FROM plataformas where url_imporsuit like '$dominio_completo%' and refiere is not null";
         $query_es_referido = mysqli_query($conexion_db, $es_referido);
         $row_es_referido = mysqli_fetch_array($query_es_referido);
-        $es_referido = $row_es_referido['refiere'];
+        $es_referido = @$row_es_referido['refiere'];
         if ($es_referido != null) {
             $es_referidos = 1;
         } else {
