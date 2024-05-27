@@ -1,6 +1,7 @@
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
+
 // Decodifica el JSON recibido en el cuerpo de la solicitud
 $data = json_decode(file_get_contents('php://input'), true);
 
@@ -58,40 +59,7 @@ if ($data) {
         `facturada`, 
         `factura_numero`) 
     VALUES (
-   ?, 
-    ?,
-     ?,
-      ?,
-       ?,
-        ?,
-         ?,
-          ?,
-           ?,
-            ?,
-             ?,
-              ?,
-               ?,
-                ?,
-                 ?,
-                  ?,
-                   ?,
-                    ?,
-                     ?,
-                      ?,
-                       ?,
-                        ?,
-                         ?,
-                          ?,
-                           ?,
-                            ?,
-                             ?,
-                              ?,
-                               ?,
-                                ?,
-                                 ?,
-                                  ?,
-                                  ?)
-    ";
+        ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     $stmt = mysqli_prepare($conexion, $sql_insert);
 
@@ -106,7 +74,7 @@ if ($data) {
         // Vincular los parámetros
         mysqli_stmt_bind_param(
             $stmt,
-            "ssiiidiiiisssssssssssssssssss",
+            "ssiiidiiiissssssssssssssssssssss",
             $numero_factura,
             $item['fecha_factura'],
             $item['id_cliente'],
@@ -134,7 +102,12 @@ if ($data) {
             $item['drogshipin'],
             $item['tienda'],
             $item['importado'],
-            $item['plataforma_importa']
+            $item['plataforma_importa'],
+            $item['estado_guia_sistema'],
+            $item['id_factura_origen'],
+            $item['impreso'],
+            $item['facturada'],
+            $item['factura_numero']
         );
 
         // Ejecutar la consulta
