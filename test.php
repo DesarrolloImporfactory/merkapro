@@ -23,8 +23,42 @@ if ($data) {
     }
 
     // Preparar la consulta de inserción
-    $sql_insert = "INSERT INTO `facturas_cot`(`numero_factura`, `fecha_factura`, `id_cliente`, `id_vendedor`, `condiciones`, `monto_factura`, `estado_factura`, `id_users_factura`, `validez`, `id_sucursal`, `nombre`, `telefono`, `provincia`, `c_principal`, `ciudad_cot`, `c_secundaria`, `referencia`, `observacion`, `guia_enviada`, `transporte`, `identificacion`, `celular`, `cod`, `valor_seguro`, `drogshipin`, `tienda`, `importado`, `plataforma_importa`) 
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    $sql_insert = "INSERT INTO `facturas_cot`(
+        `numero_factura`, 
+        `fecha_factura`, 
+        `id_cliente`, 
+        `id_vendedor`, 
+        `condiciones`, 
+        `monto_factura`, 
+        `estado_factura`, 
+        `id_users_factura`, 
+        `validez`, 
+        `id_sucursal`, 
+        `nombre`, 
+        `telefono`, 
+        `provincia`, 
+        `c_principal`, 
+        `ciudad_cot`, 
+        `c_secundaria`, 
+        `referencia`, 
+        `observacion`, 
+        `guia_enviada`, 
+        `transporte`, 
+        `identificacion`, 
+        `celular`, 
+        `cod`, 
+        `valor_seguro`, 
+        `drogshipin`, 
+        `tienda`, 
+        `importado`, 
+        `plataforma_importa`, 
+        `estado_guia_sistema`, 
+        `id_factura_origen`, 
+        `impreso`, 
+        `facturada`, 
+        `factura_numero`) 
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    ";
 
     $stmt = mysqli_prepare($conexion, $sql_insert);
 
