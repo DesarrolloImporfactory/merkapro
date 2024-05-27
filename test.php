@@ -111,6 +111,7 @@ if ($data) {
 
         // Ejecutar la consulta
         if (!mysqli_stmt_execute($stmt)) {
+            print_r($smtp);
             echo 'Error al ejecutar la consulta: ' . mysqli_stmt_error($stmt);
         }
 
