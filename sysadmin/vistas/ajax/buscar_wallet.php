@@ -33,6 +33,8 @@ if ($_GET['filtro']) {
         $band = "btn-primary";
         $bandd = "btn-secondary";
     } else {
+
+
         $band = "btn-secondary";
         $bandd = "btn-primary";
     }
