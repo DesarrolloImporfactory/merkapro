@@ -115,7 +115,7 @@ if ($dominio_actual == 'merkapro.ec') {
                         ?>
 
                             <tr>
-                                <td class="text-center"> <a href="pagar_wallet.php?id_factura=<?php echo $id_factura ?>&tienda=<?php echo $tienda ?>"> <?php echo $tienda; ?></a></td>
+                                <td class="text-center"> <a href="pagar_wallet.php?tienda=<?php echo $tienda ?>"> <?php echo $tienda; ?></a></td>
                                 <td class="text-center"><?php echo $simbolo_moneda . $total_venta; ?></td>
                                 <td class="text-center"><?php echo $simbolo_moneda . $total_pendiente; ?></td>
                                 <td class="text-center"><?php echo $guias_faltantes; ?></td>
