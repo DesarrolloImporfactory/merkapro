@@ -89,7 +89,7 @@ if ($data) {
             $item['c_principal'],
             $item['ciudad_cot'],
             $item['c_principal'],
-            $item['referencia'],
+            $item['c_principal'],
             $item['observacion'],
             $item['guia_enviada'],
             $item['transporte'],
