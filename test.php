@@ -88,7 +88,7 @@ if ($data) {
             $item['provincia'],
             $item['c_principal'],
             $item['ciudad_cot'],
-            $item['c_secundaria'],
+            "-",
             $item['referencia'],
             $item['observacion'],
             $item['guia_enviada'],
