@@ -1,4 +1,6 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
 // Decodifica el JSON recibido en el cuerpo de la solicitud
 $data = json_decode(file_get_contents('php://input'), true);
 
