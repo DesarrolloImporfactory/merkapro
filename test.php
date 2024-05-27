@@ -55,10 +55,8 @@ if ($data) {
         `plataforma_importa`, 
         `estado_guia_sistema`, 
         `id_factura_origen`, 
-        `impreso`, 
-        `facturada`, 
-        `factura_numero`
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        `impreso`
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     $stmt = mysqli_prepare($conexion, $sql_insert);
 
@@ -73,7 +71,7 @@ if ($data) {
         // Vincular los parámetros
         mysqli_stmt_bind_param(
             $stmt,
-            "ssiiidiiiisssssssssssssssssssiiiiii",
+            "ssiiidiiiisssssssssssssssssssii",
             $numero_factura,
             $item['fecha_factura'],
             $item['id_cliente'],
@@ -84,6 +82,7 @@ if ($data) {
             $item['id_users_factura'],
             $item['validez'],
             $item['id_sucursal'],
+
             $item['nombre'],
             $item['telefono'],
             $item['provincia'],
@@ -94,6 +93,7 @@ if ($data) {
             $item['observacion'],
             $item['guia_enviada'],
             $item['transporte'],
+
             $item['identificacion'],
             $item['celular'],
             $item['cod'],
@@ -105,8 +105,6 @@ if ($data) {
             $item['estado_guia_sistema'],
             $item['id_factura_origen'],
             $item['impreso'],
-            $item['facturada'],
-            $item['factura_numero']
         );
 
         // Ejecutar la consulta
