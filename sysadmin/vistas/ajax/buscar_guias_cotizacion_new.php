@@ -1024,7 +1024,7 @@ if ($action == 'ajax' && ($server_url == "https://marketplace.imporsuit.com")) {
 
     /*     $sWhere .= " and estado_guia_sistema IS NOT NULL";
  */
-    $sWhere .= " AND estado_guia_sistema!='8'  AND estado_guia_sistema!='101' AND (estado_guia_sistema!='4' AND transporte LIKE '%FAST%')";
+    $sWhere .= " AND estado_guia_sistema!='8'  AND estado_guia_sistema!='101'";
 
     $sWhere .= " order by facturas_cot.id_factura desc";
 
@@ -1047,7 +1047,7 @@ if ($action == 'ajax' && ($server_url == "https://marketplace.imporsuit.com")) {
     $reload      = '../reportes/facturas.php';
     //main query to fetch the data
     $sql   = "SELECT * FROM  $sTable $sWhere LIMIT $offset,$per_page";
-    echo $sql;
+    //echo $sql;
     $query = mysqli_query($conexion, $sql);
     $empresas = mysqli_query($conexion, "SELECT * FROM trabajadores_envio where estado=1");
     //loop through fetched data0
