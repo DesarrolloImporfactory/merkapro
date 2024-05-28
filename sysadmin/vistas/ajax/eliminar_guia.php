@@ -46,7 +46,7 @@ if (strpos($guia, "MKP") !== 0 && !is_numeric($guia)) {
 
         $deleteHttpCode = curl_getinfo($chDelete, CURLINFO_HTTP_CODE);
         if ($deleteHttpCode === 200) {
-            $sql = "UPDATE facturas_cot SET  estado_factura=8
+            $sql = "UPDATE facturas_cot SET  estado_guia_sistema=8
                                 WHERE id_factura='" . $id . "'";
             $query_update = mysqli_query($conexion, $sql);
             echo 'ok';
@@ -125,7 +125,7 @@ if ($httpCode !== 200) {
     // Verificar si la solicitud DELETE fue exitosa
     $deleteHttpCode = curl_getinfo($chDelete, CURLINFO_HTTP_CODE);
     if ($deleteHttpCode === 200) {
-        $sql = "UPDATE facturas_cot SET  estado_factura=8
+        $sql = "UPDATE facturas_cot SET  estado_guia_sistema=8
                                 WHERE id_factura='" . $id . "'";
         $query_update = mysqli_query($conexion, $sql);
         echo 'ok';
