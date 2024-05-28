@@ -975,23 +975,7 @@ if ($action == 'ajax' && ($server_url == "https://marketplace.imporsuit.com")) {
         $tienda    = $_REQUEST['tienda'];
         $sWhere .= " and  tienda='$tienda'";
     }
-    if (@$_GET['estado'] != "") {
-        $estado = $_REQUEST['estado'];
-
-        if ($estado == 100) {
-            $sWhere .= " AND (estado_guia_sistema='100' OR estado_guia_sistema='102' OR estado_guia_sistema='103')";
-        } else if ($estado == 200) {
-            $sWhere .= " AND (estado_guia_sistema='200' OR estado_guia_sistema='201' OR estado_guia_sistema='202')";
-        } else if ($estado == 300) {
-            $sWhere .= " AND estado_guia_sistema BETWEEN 300 AND 351";
-        } else if ($estado == 400) {
-            $sWhere .= " AND estado_guia_sistema BETWEEN 400 AND 403";
-        } else if ($estado == 500) {
-            $sWhere .= " AND estado_guia_sistema BETWEEN 500 AND 502";
-        } else {
-            $sWhere .= " AND estado_guia_sistema='$estado'";
-        }
-    }
+    
     if (@$_GET['transportadora'] != "") {
         $transportadora = $_REQUEST['transportadora'];
         $sWhere .= " and  transporte='$transportadora'";
