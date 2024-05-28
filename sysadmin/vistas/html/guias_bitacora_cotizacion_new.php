@@ -124,6 +124,24 @@ $ventas = 1;
                                             </div>
                                         </div>
                                         <div style="width: 100%;">
+                                            <label style="padding-left: 20px;" for="inputPassword3" class="col-sm-2 col-form-label">Estado</label>
+                                            <div style="padding-left: 20px;">
+                                                <select onchange="buscar_estado(this.value)" name="estado_q" class="form-control" id="estado_q">
+                                                    <option value="0"> Seleccione Estado </option>
+                                                    <?php
+
+                                                    //echo "select * from estado_guia";
+                                                    $query_categoria = mysqli_query($conexion, "select * from estado_courier where codigo IN (1,2,3,4,5,6,7,9,10,14,100,200,300,400.500)");
+                                                    while ($rw = mysqli_fetch_array($query_categoria)) {
+                                                    ?>
+                                                        <option value="<?php echo $rw['codigo']; ?>"><?php echo $rw['alias']; ?></option>
+                                                    <?php
+                                                    }
+                                                    ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div style="width: 100%;">
                                             <label style="padding-left: 20px;" for="inputPassword3" class="col-sm-2 col-form-label">Transportadora</label>
                                             <div style="padding-left: 20px;">
                                                 <select onchange="buscar_transporte(this.value)" name="transporte" id="transporte" class="form-control">
@@ -244,7 +262,7 @@ $ventas = 1;
         resultado["noGuia"] = result["noGuia"];
 
         $.ajax({
-            url: "./bitacora_pedidos_new.php",
+            url: "./guias_bitacora_cotizacion_new.php",
             type: "POST",
             data: {
                 "guia": resultado["noGuia"],
@@ -865,7 +883,7 @@ $ventas = 1;
 
     }
 </script>
-<script type="text/javascript" src="../../js/bitacora_pedidos_new.js"></script>
+<script type="text/javascript" src="../../js/guias_bitacora_cotizacion_new.js"></script>
 <script src="../ajax/js/wallet.js"></script>
 <?php require 'includes/footer_end.php'
 ?>

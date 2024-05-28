@@ -74,20 +74,17 @@ if ($action == 'ajax' && ($server_url == "https://marketplace.imporsuit.com")) {
     if (@$_GET['estado'] != "") {
         $estado = $_REQUEST['estado'];
 
-        if ($estado == 100) {
-            $sWhere .= " AND (estado_guia_sistema='100' OR estado_guia_sistema='102' OR estado_guia_sistema='103')";
-        } else if ($estado == 200) {
-            $sWhere .= " AND (estado_guia_sistema='200' OR estado_guia_sistema='201' OR estado_guia_sistema='202')";
-        } else if ($estado == 300) {
-            $sWhere .= " AND estado_guia_sistema BETWEEN 300 AND 351";
-        } else if ($estado == 400) {
-            $sWhere .= " AND estado_guia_sistema BETWEEN 400 AND 403";
-        } else if ($estado == 500) {
-            $sWhere .= " AND estado_guia_sistema BETWEEN 500 AND 502";
-        } else {
-            $sWhere .= " AND estado_guia_sistema='$estado'";
+        if ($estado == 8){
+            $sWhere .= " AND estado_guia_sistema='8'";
+        }else if ($estado == 101){
+            $sWhere .= " AND estado_guia_sistema='101'";
+        }else if ($estado == 4){
+            $sWhere .= " AND estado_guia_sistema='4'";
         }
+    }else {
+        $sWhere .= " AND (estado_guia_sistema='8' OR estado_guia_sistema='101' OR estado_guia_sistema='4')";
     }
+
     if (@$_GET['transportadora'] != "") {
         $transportadora = $_REQUEST['transportadora'];
         $sWhere .= " and  transporte='$transportadora'";
@@ -117,7 +114,8 @@ if ($action == 'ajax' && ($server_url == "https://marketplace.imporsuit.com")) {
         }
     }
 
-    $sWhere .= " AND facturas_cot.guia_enviada = 0 AND facturas_cot.estado_guia_sistema is null";
+    $sWhere .= " AND estado_guia_sistema='8' AND estado_guia_sistema='101'";
+
     $sWhere .= " order by facturas_cot.id_factura desc";
 
     include 'pagination.php'; //include pagination file
@@ -975,7 +973,21 @@ if ($action == 'ajax' && ($server_url == "https://marketplace.imporsuit.com")) {
         $tienda    = $_REQUEST['tienda'];
         $sWhere .= " and  tienda='$tienda'";
     }
-    
+    if (@$_GET['estado'] != "") {
+        $estado = $_REQUEST['estado'];
+
+        if ($estado == 8){
+            $sWhere .= " AND estado_guia_sistema='8'";
+        }else if ($estado == 101){
+            $sWhere .= " AND estado_guia_sistema='101'";
+        }else if ($estado == 4){
+            $sWhere .= " AND estado_guia_sistema='4'";
+        }
+    }else {
+        $sWhere .= " AND (estado_guia_sistema='8' OR estado_guia_sistema='101' OR estado_guia_sistema='4')";
+    }
+
+
     if (@$_GET['transportadora'] != "") {
         $transportadora = $_REQUEST['transportadora'];
         $sWhere .= " and  transporte='$transportadora'";
@@ -1008,7 +1020,6 @@ if ($action == 'ajax' && ($server_url == "https://marketplace.imporsuit.com")) {
     /*     $sWhere .= " and estado_guia_sistema IS NOT NULL";
  */
 
-    $sWhere .= " AND facturas_cot.guia_enviada = 0 AND facturas_cot.estado_guia_sistema is null";
     $sWhere .= " order by facturas_cot.id_factura desc";
 
 
@@ -1880,25 +1891,25 @@ if ($action == 'ajax' && ($server_url == "https://marketplace.imporsuit.com")) {
     // fin else
 }
 function formatPhoneNumber($number)
-{
-    // Eliminar caracteres no numéricos excepto el signo +
-    $number = preg_replace('/[^\d+]/', '', $number);
+    {
+        // Eliminar caracteres no numéricos excepto el signo +
+        $number = preg_replace('/[^\d+]/', '', $number);
 
-    // Verificar si el número ya tiene el código de país +593
-    if (preg_match('/^\+593/', $number)) {
-        // El número ya está correctamente formateado con +593
-        return $number;
-    } elseif (preg_match('/^593/', $number)) {
-        // El número tiene 593 al inicio pero le falta el +
-        return '+' . $number;
-    } else {
-        // Si el número comienza con 0, quitarlo
-        if (strpos($number, '0') === 0) {
-            $number = substr($number, 1);
+        // Verificar si el número ya tiene el código de país +593
+        if (preg_match('/^\+593/', $number)) {
+            // El número ya está correctamente formateado con +593
+            return $number;
+        } elseif (preg_match('/^593/', $number)) {
+            // El número tiene 593 al inicio pero le falta el +
+            return '+' . $number;
+        } else {
+            // Si el número comienza con 0, quitarlo
+            if (strpos($number, '0') === 0) {
+                $number = substr($number, 1);
+            }
+            // Agregar el código de país +593 al inicio del número
+            $number = '+593' . $number;
         }
-        // Agregar el código de país +593 al inicio del número
-        $number = '+593' . $number;
-    }
 
-    return $number;
-}
+        return $number;
+    }

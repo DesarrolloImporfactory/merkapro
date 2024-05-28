@@ -124,6 +124,17 @@ $ventas = 1;
                                             </div>
                                         </div>
                                         <div style="width: 100%;">
+                                            <label style="padding-left: 20px;" for="inputPassword3" class="col-sm-2 col-form-label">Estado</label>
+                                            <div style="padding-left: 20px;">
+                                                <select onchange="buscar_estado(this.value)" name="estado_q" class="form-control" id="estado_q">
+                                                    <option value="0"> Seleccione Estado </option>
+                                                    <option value="8">Anuladas LAAR</option>
+                                                    <option value="101">Anuladas Servientrega</option>
+                                                    <option value="4">Anuladas FAST</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div style="width: 100%;">
                                             <label style="padding-left: 20px;" for="inputPassword3" class="col-sm-2 col-form-label">Transportadora</label>
                                             <div style="padding-left: 20px;">
                                                 <select onchange="buscar_transporte(this.value)" name="transporte" id="transporte" class="form-control">
@@ -244,7 +255,7 @@ $ventas = 1;
         resultado["noGuia"] = result["noGuia"];
 
         $.ajax({
-            url: "./bitacora_pedidos_new.php",
+            url: "./guias_anuladas_bitacora_cotizacion_new.php",
             type: "POST",
             data: {
                 "guia": resultado["noGuia"],
@@ -865,7 +876,7 @@ $ventas = 1;
 
     }
 </script>
-<script type="text/javascript" src="../../js/bitacora_pedidos_new.js"></script>
+<script type="text/javascript" src="../../js/guias_anuladas_bitacora_cotizacion_new.js"></script>
 <script src="../ajax/js/wallet.js"></script>
 <?php require 'includes/footer_end.php'
 ?>
