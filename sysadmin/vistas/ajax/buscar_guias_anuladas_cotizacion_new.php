@@ -82,7 +82,7 @@ if ($action == 'ajax' && ($server_url == "https://marketplace.imporsuit.com")) {
             $sWhere .= " AND estado_guia_sistema='4' AND transporte LIKE '%FAST%'";
         }
     }else {
-        $sWhere .= " AND ((estado_guia_sistema='8' AND transporte LIKE '%LAAR%') OR (estado_guia_sistema='101' AND transporte LIKE '%SERVIENTREGA%') OR (estado_guia_sistema='4') AND transporte LIKE '%FAST%')";
+        $sWhere .= " AND (estado_guia_sistema='8' AND transporte LIKE '%LAAR%') OR (estado_guia_sistema='101' AND transporte LIKE '%SERVIENTREGA%') OR (estado_guia_sistema='4' AND transporte LIKE '%FAST%')";
     }
 
     if (@$_GET['transportadora'] != "") {
@@ -1041,7 +1041,7 @@ if ($action == 'ajax' && ($server_url == "https://marketplace.imporsuit.com")) {
     $reload      = '../reportes/facturas.php';
     //main query to fetch the data
     $sql   = "SELECT * FROM  $sTable $sWhere LIMIT $offset,$per_page";
-    echo $sql;
+    //echo $sql;
     $query = mysqli_query($conexion, $sql);
     $empresas = mysqli_query($conexion, "SELECT * FROM trabajadores_envio where estado=1");
     //loop through fetched data0

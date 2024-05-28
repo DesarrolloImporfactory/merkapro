@@ -117,7 +117,7 @@ if ($action == 'ajax' && ($server_url == "https://marketplace.imporsuit.com")) {
         }
     }
 
-    $sWhere .= " AND estado_guia_sistema!='8' AND estado_guia_sistema!='101' AND estado_guia_sistema!='4'";
+    $sWhere .= " AND (estado_guia_sistema!='8' AND transporte LIKE '%LAAR%') AND (estado_guia_sistema!='101' AND transporte LIKE '%SERVIENTREGA%') AND (estado_guia_sistema!='4' AND transporte LIKE '%FAST%')";
 
     $sWhere .= " order by facturas_cot.id_factura desc";
 
@@ -143,7 +143,7 @@ if ($action == 'ajax' && ($server_url == "https://marketplace.imporsuit.com")) {
 
 
     $empresas = mysqli_query($conexion, "SELECT * FROM empresa_envio");
-    //echo $sql;
+    echo $sql;
     $query = mysqli_query($conexion, $sql);
     if ($filtro == 'enviado') {
         $enviado = "btn-primary";
@@ -1024,7 +1024,7 @@ if ($action == 'ajax' && ($server_url == "https://marketplace.imporsuit.com")) {
 
     /*     $sWhere .= " and estado_guia_sistema IS NOT NULL";
  */
-    $sWhere .= " AND estado_guia_sistema!='8' AND estado_guia_sistema!='101' AND estado_guia_sistema!='4'";
+    $sWhere .= " AND (estado_guia_sistema!='8' AND transporte LIKE '%LAAR%') AND (estado_guia_sistema!='101' AND transporte LIKE '%SERVIENTREGA%') AND (estado_guia_sistema!='4' AND transporte LIKE '%FAST%')";
 
     $sWhere .= " order by facturas_cot.id_factura desc";
 
