@@ -899,12 +899,12 @@ if ($action == 'ajax' && ($server_url == "https://marketplace.imporsuit.com")) {
                             <?php
                             $tienda2   = $row['telefono'];
                             $telefono_tienda    = $tienda2;
-                            if (!isset($telefono_tienda)) {
+                            
 
                                 $telefonoFormateado = formatPhoneNumber($telefono_tienda);
                             ?>
                                 <a href="https://wa.me/<?php echo $telefonoFormateado ?>" style="font-size: 40px;" target="_blank"><i class="bx bxl-whatsapp-square" style="color: green"></i></a>
-                            <?php } ?>
+                            
                         </td>
 
                         <td class='text-center text-primary align-middle'> <?php if ($impreso != null && $impreso != 0) echo '<i class="ti-file"></i>'; ?> </td>
@@ -1835,12 +1835,12 @@ if ($action == 'ajax' && ($server_url == "https://marketplace.imporsuit.com")) {
                             <?php
                             $tienda2   = $row['telefono'];
                             $telefono_tienda    = $tienda2;
-                            if (!isset($telefono_tienda)) {
+                            
 
                                 $telefonoFormateado = formatPhoneNumber($telefono_tienda);
                             ?>
                                 <a href="https://wa.me/<?php echo $telefonoFormateado ?>" style="font-size: 40px;" target="_blank"><i class="bx bxl-whatsapp-square" style="color: green"></i></a>
-                            <?php } ?>
+                            
                         </td>
 
                         <td class='text-center text-primary align-middle'> <?php if ($impreso != null && $impreso != 0) echo '<i class="ti-file"></i>'; ?> </td>
