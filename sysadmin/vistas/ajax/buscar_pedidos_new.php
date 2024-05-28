@@ -1046,7 +1046,7 @@ if ($action == 'ajax' && ($server_url == "https://marketplace.imporsuit.com")) {
     $reload      = '../reportes/facturas.php';
     //main query to fetch the data
     $sql   = "SELECT * FROM  $sTable $sWhere LIMIT $offset,$per_page";
-    //echo $sql;
+    echo $sql;
     $query = mysqli_query($conexion, $sql);
     $empresas = mysqli_query($conexion, "SELECT * FROM trabajadores_envio where estado=1");
     //loop through fetched data0
