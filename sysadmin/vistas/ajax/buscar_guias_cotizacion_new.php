@@ -143,7 +143,7 @@ if ($action == 'ajax' && ($server_url == "https://marketplace.imporsuit.com")) {
 
 
     $empresas = mysqli_query($conexion, "SELECT * FROM empresa_envio");
-    echo $sql;
+    //echo $sql;
     $query = mysqli_query($conexion, $sql);
     if ($filtro == 'enviado') {
         $enviado = "btn-primary";
