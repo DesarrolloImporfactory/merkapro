@@ -75,14 +75,14 @@ if ($action == 'ajax' && ($server_url == "https://marketplace.imporsuit.com")) {
         $estado = $_REQUEST['estado'];
 
         if ($estado == 8){
-            $sWhere .= " AND estado_guia_sistema='8'";
+            $sWhere .= " AND estado_guia_sistema='8' AND transporte LIKE '%LAAR%'";
         }else if ($estado == 101){
-            $sWhere .= " AND estado_guia_sistema='101'";
+            $sWhere .= " AND estado_guia_sistema='101' AND transporte LIKE '%SERVIENTREGA%'";
         }else if ($estado == 4){
-            $sWhere .= " AND estado_guia_sistema='4'";
+            $sWhere .= " AND estado_guia_sistema='4' AND transporte LIKE '%FAST%'";
         }
     }else {
-        $sWhere .= " AND (estado_guia_sistema='8' OR estado_guia_sistema='101' OR estado_guia_sistema='4')";
+        $sWhere .= " AND ((estado_guia_sistema='8' AND transporte LIKE '%LAAR%') OR (estado_guia_sistema='101' AND transporte LIKE '%SERVIENTREGA%') OR (estado_guia_sistema='4') AND transporte LIKE '%FAST%')";
     }
 
     if (@$_GET['transportadora'] != "") {
@@ -977,14 +977,14 @@ if ($action == 'ajax' && ($server_url == "https://marketplace.imporsuit.com")) {
         $estado = $_REQUEST['estado'];
 
         if ($estado == 8){
-            $sWhere .= " AND estado_guia_sistema='8'";
+            $sWhere .= " AND estado_guia_sistema='8' AND transporte LIKE '%LAAR%'";
         }else if ($estado == 101){
-            $sWhere .= " AND estado_guia_sistema='101'";
+            $sWhere .= " AND estado_guia_sistema='101' AND transporte LIKE '%SERVIENTREGA%'";
         }else if ($estado == 4){
-            $sWhere .= " AND estado_guia_sistema='4'";
+            $sWhere .= " AND estado_guia_sistema='4' AND transporte LIKE '%FAST%'";
         }
     }else {
-        $sWhere .= " AND (estado_guia_sistema='8' OR estado_guia_sistema='101' OR estado_guia_sistema='4')";
+        $sWhere .= " AND ((estado_guia_sistema='8' AND transporte LIKE '%LAAR%') OR (estado_guia_sistema='101' AND transporte LIKE '%SERVIENTREGA%') OR (estado_guia_sistema='4') AND transporte LIKE '%FAST%')";
     }
 
 
