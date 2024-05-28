@@ -1818,7 +1818,7 @@ if ($action == 'ajax' && ($server_url == "https://marketplace.imporsuit.com")) {
                             <?php
                             $tienda2   = $row['telefono'];
                             $telefono_tienda    = $tienda2;
-                            if (!isset($telefono_tienda)) {
+                            if (isset($telefono_tienda)) {
 
                                 $telefonoFormateado = formatPhoneNumber($telefono_tienda);
                             ?>
