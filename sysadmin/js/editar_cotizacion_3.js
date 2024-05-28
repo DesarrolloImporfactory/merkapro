@@ -380,30 +380,40 @@ function generar_guia() {
     );
     data.set("id_pedido_cot", $("#id_pedido_cot").val());
     data.append("costo_envio", document.getElementById("costo_envio").value);
+
     $.ajax({
-      url: "../ajax/calcular_guia.php",
+      url: "../ajax/editar_data.php",
       type: "post",
       data: data,
       contentType: false,
       processData: false,
       success: function (response) {
-        // $("#resultados").html(response);
-        $("#generar_guia_btn").prop("disabled", false);
-      },
-    });
-    $.ajax({
-      url: "../ajax/enviar_laar.php",
-      type: "POST",
-      data: data,
-      contentType: false,
-      processData: false,
-      success: function (response) {
-        Swal.fire({
-          icon: "success",
-          title: "Guía generada",
-          text: "La guía ha sido generada exitosamente",
-        }).then(() => {
-          location.reload();
+        $.ajax({
+          url: "../ajax/calcular_guia.php",
+          type: "post",
+          data: data,
+          contentType: false,
+          processData: false,
+          success: function (response) {
+            // $("#resultados").html(response);
+            $("#generar_guia_btn").prop("disabled", false);
+          },
+        });
+        $.ajax({
+          url: "../ajax/enviar_laar.php",
+          type: "POST",
+          data: data,
+          contentType: false,
+          processData: false,
+          success: function (response) {
+            Swal.fire({
+              icon: "success",
+              title: "Guía generada",
+              text: "La guía ha sido generada exitosamente",
+            }).then(() => {
+              location.reload();
+            });
+          },
         });
       },
     });

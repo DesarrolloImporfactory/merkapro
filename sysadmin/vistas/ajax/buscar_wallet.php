@@ -33,15 +33,13 @@ if ($_GET['filtro']) {
         $band = "btn-primary";
         $bandd = "btn-secondary";
     } else {
-
-
         $band = "btn-secondary";
         $bandd = "btn-primary";
     }
 }
 //Finaliza Control de Permisos
 $action = (isset($_REQUEST['action']) && $_REQUEST['action'] != NULL) ? $_REQUEST['action'] : '';
-if ($dominio_actual == 'merkapro.ec') {
+if ($dominio_actual == 'marketplace.imporsuit') {
 
     if ($action == "ajax") {
         // escaping, additionally removing everything that could be (html/javascript-) code
@@ -75,8 +73,38 @@ if ($dominio_actual == 'merkapro.ec') {
         $query = mysqli_query($conexion, $sql);
         $query = mysqli_fetch_all($query);
 
-        if ($numrows > 0 && $dominio_actual == 'merkapro.ec') {
+        if ($numrows > 0 && $dominio_actual == 'marketplace.imporsuit') {
 ?>
+            <!-- activar modal -->
+            <div class="">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#dataUpdate">
+                    Actualizar Datos
+                </button>
+            </div>
+            <!-- modal -->
+
+            <div class="modal fade" id="dataUpdate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="tiendaModalLabel">Cargar Wallet</h5>
+                            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body" id="boody">
+                            <div class="relative">
+                                <form id="update">
+                                    <label for="start-date">Fecha Inicio</label>
+                                    <input type="text" id="start-date" name="fecha_desde" class="form-control bg-white border text-dark rounded" placeholder="&#x1F4C5; Fecha Inicio" readonly>
+                                    <button type="submit" class="btn btn-primary" id="btnFiltrar">Actualizar</button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="table-responsive">
                 <table class="table table-hover">
                     <thead class="thead-light">
@@ -84,7 +112,7 @@ if ($dominio_actual == 'merkapro.ec') {
                             <th class="text-center">Tienda </th>
                             <th class="text-center">Total Venta</th>
                             <th class="text-center">Total Utilidad</th>
-                            <th class="text-center">Guías Pendientes</th>
+                            <!--   <th class="text-center">Guías Pendientes</th> -->
                             <th colspan="3"></th>
                         </tr>
                     </thead>
@@ -117,10 +145,10 @@ if ($dominio_actual == 'merkapro.ec') {
                         ?>
 
                             <tr>
-                                <td class="text-center"> <a href="pagar_wallet.php?tienda=<?php echo $tienda ?>"> <?php echo $tienda; ?></a></td>
+                                <td class="text-center"> <a href="pagar_wallet.php?id_factura=<?php echo $id_factura ?>&tienda=<?php echo $tienda ?>"> <?php echo $tienda; ?></a></td>
                                 <td class="text-center"><?php echo $simbolo_moneda . $total_venta; ?></td>
                                 <td class="text-center"><?php echo $simbolo_moneda . $total_pendiente; ?></td>
-                                <td class="text-center"><?php echo $guias_faltantes; ?></td>
+                                <!--    <td class="text-center"><?php echo $guias_faltantes; ?></td> -->
                                 <td class="text-center">
                                     <div class="btn-group dropdown">
                                         <button type="button" class="btn btn-warning btn-sm dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="false"> <i class='fa fa-cog'></i> <i class="caret"></i> </button>
@@ -232,21 +260,21 @@ if ($dominio_actual == 'merkapro.ec') {
         $sql_existe_cabecera_tienda = "SELECT * FROM cabecera_cuenta_pagar WHERE visto = '1' and tienda like '$dominio_completo%' and numero_factura like 'Proveedor%'";
         $query_existe_cabecera_tienda = mysqli_query($conexion_db, $sql_existe_cabecera_tienda);
         $row_existe_cabecera_tienda = mysqli_fetch_array($query_existe_cabecera_tienda);
-        $existe_cabecera_tienda = @$row_existe_cabecera_tienda['numero_factura'];
+        $existe_cabecera_tienda = $row_existe_cabecera_tienda['numero_factura'];
         if (empty($existe_cabecera_tienda) && $habilitar_proveedor == 1) {
             $insertar_cabecera = "INSERT INTO cabecera_cuenta_pagar (numero_factura, fecha, cliente, tienda, estado_pedido, estado_guia, total_venta, valor_pendiente, valor_cobrado, monto_recibir, visto, guia_laar) VALUES ('$num_fac_proveedor', NOW(), 'Proveedor', '$dominio_completo', '1', '7', '0', '0', '0', '0', '1','PROVEEDOR');";
             $query_insertar_cabecera = mysqli_query($conexion_db, $insertar_cabecera);
             $ganancias_proveedor = 0;
             $pendiente_proveedor = 0;
         } else {
-            $ganancias_proveedor = @$row_existe_cabecera_tienda['monto_recibir'];
-            $pendiente_proveedor = @$row_existe_cabecera_tienda['valor_pendiente'];
+            $ganancias_proveedor = $row_existe_cabecera_tienda['monto_recibir'];
+            $pendiente_proveedor = $row_existe_cabecera_tienda['valor_pendiente'];
         }
 
         $sql_existe_referido = "SELECT * FROM cabecera_cuenta_pagar WHERE visto = '1' and tienda like '$dominio_completo%' and numero_factura like 'Referido%'";
         $query_existe_referido = mysqli_query($conexion_db, $sql_existe_referido);
         $row_existe_referido = mysqli_fetch_array($query_existe_referido);
-        $existe_referido = @$row_existe_referido['numero_factura'];
+        $existe_referido = $row_existe_referido['numero_factura'];
         if (empty($existe_referido)) {
             $num_fac_referido = "Referido" . $total_referidos;
             $insertar_cabecera = "INSERT INTO cabecera_cuenta_pagar (numero_factura, fecha, cliente, tienda, estado_pedido, estado_guia, total_venta, valor_pendiente, valor_cobrado, monto_recibir, visto, guia_laar) VALUES ('$total_referidos', NOW(), 'Referido', '$dominio_completo', '1', '7', '0', '0', '0', '0', '1','REFERIDO');";
@@ -262,7 +290,7 @@ if ($dominio_actual == 'merkapro.ec') {
         $es_referido = "SELECT * FROM plataformas where url_imporsuit like '$dominio_completo%' and refiere is not null";
         $query_es_referido = mysqli_query($conexion_db, $es_referido);
         $row_es_referido = mysqli_fetch_array($query_es_referido);
-        $es_referido = @$row_es_referido['refiere'];
+        $es_referido = $row_es_referido['refiere'];
         if ($es_referido != null) {
             $es_referidos = 1;
         } else {
@@ -768,8 +796,33 @@ if ($dominio_actual == 'merkapro.ec') {
         });
     }
 
+    flatpickr("#start-date", {
+        dateFormat: "Y-m-d",
+        locale: "es",
+        maxDate: "today",
+        disableMobile: "true"
+    });
+    flatpickr("#end-date", {
+        dateFormat: "Y-m-d",
+        locale: "es",
+        maxDate: "today",
+        disableMobile: "true"
+    });
+
     verProveedor();
 
+    $("#update").submit(function(e) {
+        e.preventDefault();
+        var url = "../ajax/cargar_wallet.php";
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: $("#update").serialize(),
+            success: function(data) {
+                $("#result").html(data);
+            }
+        });
+    });
 
     function filtrarFecha() {
         const buscar_numero2 = document.getElementById('buscar_numero2').value;

@@ -56,7 +56,7 @@ class ShopifyModel extends Query
 
             $total = $total - $discount;
         } */
-        $ultima_factura_sql = "SELECT MAX(numero_factura) AS factura FROM facturas_cot;";
+        $ultima_factura_sql = "SELECT MAX(numero_factura) AS factura FROM facturas_cot where numero_factura like '%COT%'";
         $ultima_factura = $this->select($ultima_factura_sql);
         $ultima_factura_numero = $ultima_factura[0]['factura'];
         $ciudad = strtoupper($ciudad);
