@@ -2397,7 +2397,7 @@ mysqli_query($conexion, "ALTER TABLE `perfil` ADD `envioGratis_checkout` VARCHAR
 mysqli_query($conexion, "ALTER TABLE `detalle_fact_cot` CHANGE `desc_venta` `desc_venta` DOUBLE NULL DEFAULT NULL;");
 
 
-mysqli_query($conexion, "CREATE TABLE 'shopify' ( 'id' int NOT NULL INT NOT NULL PRIMARY KEY AUTO_INCREMENT, 'json' json DEFAULT NULL);");
+mysqli_query($conexion, "CREATE TABLE shopify ( id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, json json DEFAULT NULL);");
 
 
 
