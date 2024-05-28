@@ -49,7 +49,7 @@ if (isset($_GET['id_factura'])) {
         $guia_enviada             = $rw_factura['guia_enviada'];
         $drogshipin             = $rw_factura['drogshipin'];
         $tienda            = $rw_factura['tienda'];
-        $direccion = $rw_factura['c_principal'] . ' ' . $rw_factura['c_secundaria'];
+        $direccion = $rw_factura['c_principal'] . ' y ' . $rw_factura['c_secundaria'];
         $referencia = $rw_factura['referencia'];
         $telefono = $rw_factura['telefono'];
         $observacion = $rw_factura['observacion'];
