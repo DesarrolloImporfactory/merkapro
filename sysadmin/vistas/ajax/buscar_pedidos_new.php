@@ -1839,7 +1839,7 @@ if ($action == 'ajax' && ($server_url == "https://marketplace.imporsuit.com")) {
                             $telefono_tienda    = $tienda2;
                             $telefonoFormateado = formatPhoneNumber($telefono_tienda);
                             ?>
-                            <span> <?php ?></span>
+                            <span> <?php echo $telefonoFormateado; ?></span>
                             <a href="https://wa.me/<?php echo $telefonoFormateado ?>" style="font-size: 40px;" target="_blank"><i class="bx bxl-whatsapp-square" style="color: green"></i></a>
 
                         </td>
