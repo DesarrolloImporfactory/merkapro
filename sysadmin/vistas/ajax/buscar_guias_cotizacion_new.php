@@ -1900,3 +1900,26 @@ if ($action == 'ajax' && ($server_url == "https://marketplace.imporsuit.com")) {
     }
     // fin else
 }
+function formatPhoneNumber($number)
+    {
+        // Eliminar caracteres no numéricos excepto el signo +
+        $number = preg_replace('/[^\d+]/', '', $number);
+
+        // Verificar si el número ya tiene el código de país +593
+        if (preg_match('/^\+593/', $number)) {
+            // El número ya está correctamente formateado con +593
+            return $number;
+        } elseif (preg_match('/^593/', $number)) {
+            // El número tiene 593 al inicio pero le falta el +
+            return '+' . $number;
+        } else {
+            // Si el número comienza con 0, quitarlo
+            if (strpos($number, '0') === 0) {
+                $number = substr($number, 1);
+            }
+            // Agregar el código de país +593 al inicio del número
+            $number = '+593' . $number;
+        }
+
+        return $number;
+    }
