@@ -1835,15 +1835,12 @@ if ($action == 'ajax' && ($server_url == "https://marketplace.imporsuit.com")) {
                         <td class="text-center align-middle">
 
                             <?php
-                            $tienda2   = $row['tienda'];
-                            $conexion_marketplace = new mysqli('localhost', 'imporsuit_marketplace', 'imporsuit_marketplace', 'imporsuit_marketplace');
-                            $count_tienda = mysqli_query($conexion_marketplace, "SELECT * FROM plataformas WHERE url_imporsuit LIKE '%" . $tienda2 . "%'");
-                            $row_tienda         = mysqli_fetch_array($count_tienda);
-                            $telefono_tienda    = @$row_tienda['whatsapp'];
+                            $tienda2   = $row['telefono'];
+                            $telefono_tienda    = $tienda2;
                             $telefonoFormateado = formatPhoneNumber($telefono_tienda);
                             ?>
-                            
-                            <a href="https://wa.me/<?php echo $telefono_tienda ?>" style="font-size: 40px;" target="_blank"><i class="bx bxl-whatsapp-square" style="color: green"></i></a>
+                            <span> <?php ?></span>
+                            <a href="https://wa.me/<?php echo $telefonoFormateado ?>" style="font-size: 40px;" target="_blank"><i class="bx bxl-whatsapp-square" style="color: green"></i></a>
 
                         </td>
 
