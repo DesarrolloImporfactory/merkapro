@@ -21,6 +21,7 @@
     $dominio_actual = str_replace('.com', '', $dominio_actual);
     $dominio_actual = str_replace('.net', '', $dominio_actual);
     $action         = (isset($_REQUEST['action']) && $_REQUEST['action'] != null) ? $_REQUEST['action'] : '';
+    echo $dominio_actual;
     if ($action == 'ajax' && $dominio_actual == 'merkapro.ec') {
         $tables = "pagos";
         $campos = "*";
