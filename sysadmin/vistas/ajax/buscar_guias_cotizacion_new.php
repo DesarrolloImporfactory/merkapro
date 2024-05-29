@@ -493,11 +493,10 @@ if ($action == 'ajax' && ($server_url == "https://marketplace.imporsuit.com")) {
                                                                                                                         echo "Estado no reconocido";
                                                                                                                 }
                                                                                                                 if ($guia_numero != '0') {
-                                                                                                                    if (strpos($guia_numero, "IMP") === 0) {
-                                                                                                                        echo "<script> console.log ('Numero guia: $guia_numero )</script>";
+                                                                                                                    if (strpos($guia_numero, "IMP") == 0) {
                                                                                                                         echo "<script> validar_laar('" . $guia_numero . "', '" . $numero_factura . "')</script>";
                                                                                                                         echo "<script> validar_servientrega('" . $guia_numero . "', '" . $numero_factura . "')</script>";
-                                                                                                                    } elseif (ctype_digit($guia_numero)) {
+                                                                                                                    } else if (is_numeric($guia_numero)) {
                                                                                                                         echo "<script> validar_servientrega('" . $guia_numero . "', '" . $numero_factura . "')</script>";
                                                                                                                     }
 
@@ -900,12 +899,12 @@ if ($action == 'ajax' && ($server_url == "https://marketplace.imporsuit.com")) {
                             <?php
                             $tienda2   = $row['telefono'];
                             $telefono_tienda    = $tienda2;
+                            
 
-
-                            $telefonoFormateado = formatPhoneNumber($telefono_tienda);
+                                $telefonoFormateado = formatPhoneNumber($telefono_tienda);
                             ?>
-                            <a href="https://wa.me/<?php echo $telefonoFormateado ?>" style="font-size: 40px;" target="_blank"><i class="bx bxl-whatsapp-square" style="color: green"></i></a>
-
+                                <a href="https://wa.me/<?php echo $telefonoFormateado ?>" style="font-size: 40px;" target="_blank"><i class="bx bxl-whatsapp-square" style="color: green"></i></a>
+                            
                         </td>
 
                         <td class='text-center text-primary align-middle'> <?php if ($impreso != null && $impreso != 0) echo '<i class="ti-file"></i>'; ?> </td>
@@ -1048,7 +1047,7 @@ if ($action == 'ajax' && ($server_url == "https://marketplace.imporsuit.com")) {
     $reload      = '../reportes/facturas.php';
     //main query to fetch the data
     $sql   = "SELECT * FROM  $sTable $sWhere LIMIT $offset,$per_page";
-    echo $sql;
+    //echo $sql;
     $query = mysqli_query($conexion, $sql);
     $empresas = mysqli_query($conexion, "SELECT * FROM trabajadores_envio where estado=1");
     //loop through fetched data0
@@ -1368,14 +1367,13 @@ if ($action == 'ajax' && ($server_url == "https://marketplace.imporsuit.com")) {
                                                                                                                     default:
                                                                                                                         echo "Estado no reconocido";
                                                                                                                 }
-                                                                                                                echo "<script> console.log ('Numero guia: $guia_numero )</script>";
                                                                                                                 if ($guia_numero != '0') {
 
-                                                                                                                    if (strpos($guia_numero, "IMP") === 0) {
-                                                                                                                        echo "<script> console.log ('Numero guia: $guia_numero )</script>";
+
+                                                                                                                    if (strpos($guia_numero, "IMP") == 0) {
                                                                                                                         echo "<script> validar_laar('" . $guia_numero . "', '" . $numero_factura . "')</script>";
                                                                                                                         echo "<script> validar_servientrega('" . $guia_numero . "', '" . $numero_factura . "')</script>";
-                                                                                                                    } else if (ctype_digit($guia_numero)) {
+                                                                                                                    } else if (is_numeric($guia_numero)) {
                                                                                                                         echo "<script> validar_servientrega('" . $guia_numero . "', '" . $numero_factura . "')</script>";
                                                                                                                     }
                                                                                                                     if ($drogshipin == 3 || $drogshipin == 4) {
@@ -1837,12 +1835,12 @@ if ($action == 'ajax' && ($server_url == "https://marketplace.imporsuit.com")) {
                             <?php
                             $tienda2   = $row['telefono'];
                             $telefono_tienda    = $tienda2;
+                            
 
-
-                            $telefonoFormateado = formatPhoneNumber($telefono_tienda);
+                                $telefonoFormateado = formatPhoneNumber($telefono_tienda);
                             ?>
-                            <a href="https://wa.me/<?php echo $telefonoFormateado ?>" style="font-size: 40px;" target="_blank"><i class="bx bxl-whatsapp-square" style="color: green"></i></a>
-
+                                <a href="https://wa.me/<?php echo $telefonoFormateado ?>" style="font-size: 40px;" target="_blank"><i class="bx bxl-whatsapp-square" style="color: green"></i></a>
+                            
                         </td>
 
                         <td class='text-center text-primary align-middle'> <?php if ($impreso != null && $impreso != 0) echo '<i class="ti-file"></i>'; ?> </td>
@@ -1864,7 +1862,7 @@ if ($action == 'ajax' && ($server_url == "https://marketplace.imporsuit.com")) {
                                         <!--<a class="dropdown-item" href="#" data-toggle="modal" data-target="#dataDelete" data-id="<?php echo $row['id_factura']; ?>"><i class='fa fa-trash'></i> Eliminar</a>-->
                                     <?php } ?>
 
-                                    <a class="dropdown-item" href="#" onclick="anular_guia('<?php echo get_row('guia_laar', 'guia_laar', 'id_pedido', $id_factura); ?>','<?php echo get_row('guia_laar', 'id_pedido', 'id_pedido', $id_factura); ?>')"><i class='fa fa-edit'></i> Anular</a>
+                                    <a class="dropdown-item" target="blank" href="#" onclick="boton_anular(<?php echo $id_factura_origen; ?>, <?php echo $numero_factura; ?>, <?php echo $transportadora; ?>)"><i class='fa fa-edit'></i> Anular</a>
 
                                 </div>
                             </div>
@@ -1900,25 +1898,25 @@ if ($action == 'ajax' && ($server_url == "https://marketplace.imporsuit.com")) {
     // fin else
 }
 function formatPhoneNumber($number)
-{
-    // Eliminar caracteres no numéricos excepto el signo +
-    $number = preg_replace('/[^\d+]/', '', $number);
+    {
+        // Eliminar caracteres no numéricos excepto el signo +
+        $number = preg_replace('/[^\d+]/', '', $number);
 
-    // Verificar si el número ya tiene el código de país +593
-    if (preg_match('/^\+593/', $number)) {
-        // El número ya está correctamente formateado con +593
-        return $number;
-    } elseif (preg_match('/^593/', $number)) {
-        // El número tiene 593 al inicio pero le falta el +
-        return '+' . $number;
-    } else {
-        // Si el número comienza con 0, quitarlo
-        if (strpos($number, '0') === 0) {
-            $number = substr($number, 1);
+        // Verificar si el número ya tiene el código de país +593
+        if (preg_match('/^\+593/', $number)) {
+            // El número ya está correctamente formateado con +593
+            return $number;
+        } elseif (preg_match('/^593/', $number)) {
+            // El número tiene 593 al inicio pero le falta el +
+            return '+' . $number;
+        } else {
+            // Si el número comienza con 0, quitarlo
+            if (strpos($number, '0') === 0) {
+                $number = substr($number, 1);
+            }
+            // Agregar el código de país +593 al inicio del número
+            $number = '+593' . $number;
         }
-        // Agregar el código de país +593 al inicio del número
-        $number = '+593' . $number;
-    }
 
-    return $number;
-}
+        return $number;
+    }
