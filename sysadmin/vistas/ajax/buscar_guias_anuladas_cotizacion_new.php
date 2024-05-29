@@ -82,7 +82,8 @@ if ($action == 'ajax' && ($server_url == "https://marketplace.imporsuit.com")) {
             $sWhere .= " AND estado_guia_sistema='4' AND transporte LIKE '%FAST%'";
         }
     }else {
-        $sWhere .= " AND (estado_guia_sistema='8' AND transporte LIKE '%LAAR%') OR (estado_guia_sistema='101' AND transporte LIKE '%SERVIENTREGA%') OR (estado_guia_sistema='4' AND transporte LIKE '%FAST%')";
+        $sWhere .= " AND ((estado_guia_sistema='8' AND (transporte LIKE '%LAAR%' OR transporte IS NULL OR transporte = ''))
+        OR (estado_guia_sistema='101' AND transporte LIKE '%SERVIENTREGA%'))";
     }
 
     if (@$_GET['transportadora'] != "") {
@@ -243,7 +244,10 @@ if ($action == 'ajax' && ($server_url == "https://marketplace.imporsuit.com")) {
                     //echo $provincia;
                     $ciudad_cot   = $row['ciudad_cot'];
                     //echo $ciudad_cot;
-                
+                    $ciudad_cot   = get_row('ciudad_cotizacion', 'ciudad', 'id_cotizacion', $ciudad_cot);
+                    if ($ciudad_cot == 0 || $ciudad_cot == '' || $ciudad_cot == null) {
+                        $ciudad_cot = get_row('ciudad_laar', 'nombre', 'codigo', $row['ciudad_cot']);
+                    }
 
                     $observacion   = $row['observacion'];
                     $direccion   = $row['c_principal'] . ' y ' . $row['c_secundaria'] . '-' . $row['referencia'];
@@ -487,10 +491,12 @@ if ($action == 'ajax' && ($server_url == "https://marketplace.imporsuit.com")) {
                                                                                                                         echo "Estado no reconocido";
                                                                                                                 }
                                                                                                                 if ($guia_numero != '0') {
-                                                                                                                    if (strpos($guia_numero, "IMP") == 0) {
+                                                                                                                    if (strpos($guia_numero, "IMP") === 0) {
+                                                                                                                        echo "<script> console.log ('Numero guia: $guia_numero )</script>";
                                                                                                                         echo "<script> validar_laar('" . $guia_numero . "', '" . $numero_factura . "')</script>";
                                                                                                                         echo "<script> validar_servientrega('" . $guia_numero . "', '" . $numero_factura . "')</script>";
-                                                                                                                    } else if (is_numeric($guia_numero)) {
+                                                                                                                        
+                                                                                                                    } elseif (ctype_digit($guia_numero)) {
                                                                                                                         echo "<script> validar_servientrega('" . $guia_numero . "', '" . $numero_factura . "')</script>";
                                                                                                                     }
 
@@ -977,11 +983,10 @@ if ($action == 'ajax' && ($server_url == "https://marketplace.imporsuit.com")) {
             $sWhere .= " AND estado_guia_sistema='8' AND transporte LIKE '%LAAR%'";
         }else if ($estado == 101){
             $sWhere .= " AND estado_guia_sistema='101' AND transporte LIKE '%SERVIENTREGA%'";
-        }else if ($estado == 4){
-            $sWhere .= " AND estado_guia_sistema='4' AND transporte LIKE '%FAST%'";
         }
     }else {
-        $sWhere .= " AND (estado_guia_sistema='8' AND transporte LIKE '%LAAR%') OR (estado_guia_sistema='101' AND transporte LIKE '%SERVIENTREGA%') OR (estado_guia_sistema='4' AND transporte LIKE '%FAST%')";
+        $sWhere .= " AND ((estado_guia_sistema='8' AND (transporte LIKE '%LAAR%' OR transporte IS NULL OR transporte = ''))
+        OR (estado_guia_sistema='101' AND transporte LIKE '%SERVIENTREGA%'))";
     }
 
 
@@ -1101,7 +1106,10 @@ if ($action == 'ajax' && ($server_url == "https://marketplace.imporsuit.com")) {
                     //echo $provincia;
                     $ciudad_cot   = $row['ciudad_cot'];
                     //echo $ciudad_cot;
-                    $ciudad_cot   = get_row('ciudad_cotizacion', 'ciudad', 'id_cotizacion', $ciudad_cot);
+                    $ciudad_cot   = get_row("ciudad_cotizacion", "ciudad", "id_cotizacion", $ciudad_cot);
+                    if ($ciudad_cot == 0) {
+                        $ciudad_cot = get_row('ciudad_laar', 'nombre', 'codigo', $row['ciudad_cot']);
+                    }
 
                     $observacion   = $row['observacion'];
                     $direccion   = $row['c_principal'] . ' y ' . $row['c_secundaria'] . '-' . $row['referencia'];
@@ -1358,10 +1366,12 @@ if ($action == 'ajax' && ($server_url == "https://marketplace.imporsuit.com")) {
                                                                                                                 if ($guia_numero != '0') {
 
 
-                                                                                                                    if (strpos($guia_numero, "IMP") == 0) {
+                                                                                                                    if (strpos($guia_numero, "IMP") === 0) {
+                                                                                                                        echo "<script> console.log ('Numero guia: $guia_numero )</script>";
                                                                                                                         echo "<script> validar_laar('" . $guia_numero . "', '" . $numero_factura . "')</script>";
                                                                                                                         echo "<script> validar_servientrega('" . $guia_numero . "', '" . $numero_factura . "')</script>";
-                                                                                                                    } else if (is_numeric($guia_numero)) {
+                                                                                                                        
+                                                                                                                    } elseif (ctype_digit($guia_numero)) {
                                                                                                                         echo "<script> validar_servientrega('" . $guia_numero . "', '" . $numero_factura . "')</script>";
                                                                                                                     }
                                                                                                                     if ($drogshipin == 3 || $drogshipin == 4) {
@@ -1808,7 +1818,13 @@ if ($action == 'ajax' && ($server_url == "https://marketplace.imporsuit.com")) {
 
                                 <?php
                                                                                                                     } else {
-                                                                                                                        echo '<span class="badge badge-warning text-black">GUIA NO ENVIADA</span>';
+                                                                                                                        $estado_guia_sistema_noEnviadas = get_row('facturas_cot', 'estado_guia_sistema', 'numero_factura', $numero_factura);
+                                                                                                                        
+                                                                                                                        if ((empty($transportadora)) && ($estado_guia_sistema_noEnviadas == 8)) {
+                                                                                                                            echo "<a href='#' class='badge badge-danger'><span>Anulado</span></a><BR><span class='badge badge-warning text-black'>GUIA NO ENVIADA</span>";
+                                                                                                                        } else {
+                                                                                                                            echo '<span class="badge badge-warning text-black">GUIA NO ENVIADA</span>';
+                                                                                                                        }
                                                                                                                     }
                                 ?>
 

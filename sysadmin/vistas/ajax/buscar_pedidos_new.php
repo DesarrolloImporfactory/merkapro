@@ -244,8 +244,11 @@ if ($action == 'ajax' && ($server_url == "https://marketplace.imporsuit.com")) {
                     $provincia   = get_row('provincia_laar', 'provincia', 'codigo_provincia', $id_prvo);
                     //echo $provincia;
                     $ciudad_cot   = $row['ciudad_cot'];
-                    
+                    //echo $ciudad_cot;
                     $ciudad_cot   = get_row('ciudad_cotizacion', 'ciudad', 'id_cotizacion', $ciudad_cot);
+                    if ($ciudad_cot == 0 || $ciudad_cot == '' || $ciudad_cot == null) {
+                        $ciudad_cot = get_row('ciudad_laar', 'nombre', 'codigo', $row['ciudad_cot']);
+                    }
 
                     $observacion   = $row['observacion'];
                     $direccion   = $row['c_principal'] . ' y ' . $row['c_secundaria'] . '-' . $row['referencia'];
@@ -489,10 +492,12 @@ if ($action == 'ajax' && ($server_url == "https://marketplace.imporsuit.com")) {
                                                                                                                         echo "Estado no reconocido";
                                                                                                                 }
                                                                                                                 if ($guia_numero != '0') {
-                                                                                                                    if (strpos($guia_numero, "IMP") == 0) {
+                                                                                                                    if (strpos($guia_numero, "IMP") === 0) {
+                                                                                                                        echo "<script> console.log ('Numero guia: $guia_numero )</script>";
                                                                                                                         echo "<script> validar_laar('" . $guia_numero . "', '" . $numero_factura . "')</script>";
                                                                                                                         echo "<script> validar_servientrega('" . $guia_numero . "', '" . $numero_factura . "')</script>";
-                                                                                                                    } else if (is_numeric($guia_numero)) {
+                                                                                                                        
+                                                                                                                    } elseif (ctype_digit($guia_numero)) {
                                                                                                                         echo "<script> validar_servientrega('" . $guia_numero . "', '" . $numero_factura . "')</script>";
                                                                                                                     }
 
@@ -1086,13 +1091,14 @@ if ($action == 'ajax' && ($server_url == "https://marketplace.imporsuit.com")) {
                     $id_prvo = $row['provincia'];
                     $estado_factura = $row['estado_factura'];
                     //echo  $id_prvo;
-                    
                     $provincia   = get_row('provincia_laar', 'provincia', 'codigo_provincia', $id_prvo);
                     //echo $provincia;
                     $ciudad_cot   = $row['ciudad_cot'];
-                    
+                    //echo $ciudad_cot;
                     $ciudad_cot   = get_row("ciudad_cotizacion", "ciudad", "id_cotizacion", $ciudad_cot);
-                    
+                    if ($ciudad_cot == 0) {
+                        $ciudad_cot = get_row('ciudad_laar', 'nombre', 'codigo', $row['ciudad_cot']);
+                    }
 
                     $observacion   = $row['observacion'];
                     $direccion   = $row['c_principal'] . ' y ' . $row['c_secundaria'] . '-' . $row['referencia'];
@@ -1349,10 +1355,12 @@ if ($action == 'ajax' && ($server_url == "https://marketplace.imporsuit.com")) {
                                                                                                                 if ($guia_numero != '0') {
 
 
-                                                                                                                    if (strpos($guia_numero, "IMP") == 0) {
+                                                                                                                    if (strpos($guia_numero, "IMP") === 0) {
+                                                                                                                        echo "<script> console.log ('Numero guia: $guia_numero )</script>";
                                                                                                                         echo "<script> validar_laar('" . $guia_numero . "', '" . $numero_factura . "')</script>";
                                                                                                                         echo "<script> validar_servientrega('" . $guia_numero . "', '" . $numero_factura . "')</script>";
-                                                                                                                    } else if (is_numeric($guia_numero)) {
+                                                                                                                        
+                                                                                                                    } elseif (ctype_digit($guia_numero)) {
                                                                                                                         echo "<script> validar_servientrega('" . $guia_numero . "', '" . $numero_factura . "')</script>";
                                                                                                                     }
                                                                                                                     if ($drogshipin == 3 || $drogshipin == 4) {
@@ -1841,7 +1849,7 @@ if ($action == 'ajax' && ($server_url == "https://marketplace.imporsuit.com")) {
                                         <!--<a class="dropdown-item" href="#" data-toggle="modal" data-target="#dataDelete" data-id="<?php echo $row['id_factura']; ?>"><i class='fa fa-trash'></i> Eliminar</a>-->
                                     <?php } ?>
 
-
+                                    <a class="dropdown-item" href="#" onclick="anular_guia_pedidos('<?php echo $numero_factura; ?>')"><i class='fa fa-edit'></i> Anular</a>
                                 </div>
                             </div>
 
