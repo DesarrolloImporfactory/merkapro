@@ -1855,7 +1855,7 @@ if ($action == 'ajax' && ($server_url == "https://marketplace.imporsuit.com")) {
                                     if ($permisos_eliminar == 1) { ?>
                                         <!--<a class="dropdown-item" href="#" data-toggle="modal" data-target="#dataDelete" data-id="<?php echo $row['id_factura']; ?>"><i class='fa fa-trash'></i> Eliminar</a>-->
                                     <?php } ?>
-
+                                    <a class="dropdown-item" href="#" onclick="anular_guia('<?php echo get_row('guia_laar', 'guia_laar', 'id_pedido', $id_factura); ?>','<?php echo get_row('guia_laar', 'id_pedido', 'id_pedido', $id_factura); ?>')"><i class='fa fa-edit'></i> Anular</a>
 
                                 </div>
                             </div>
