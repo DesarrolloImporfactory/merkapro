@@ -117,7 +117,7 @@ if ($action == 'ajax' && ($server_url == "https://marketplace.imporsuit.com")) {
         }
     }
 
-    $sWhere .= " AND estado_guia_sistema!='8'  AND estado_guia_sistema!='101'";
+    $sWhere .= " AND transporte IS NOT NULL AND (estado_guia_sistema NOT IN ('8', '101') OR estado_guia_sistema IS NULL)";
 
     $sWhere .= " order by facturas_cot.id_factura desc";
 
@@ -246,6 +246,7 @@ if ($action == 'ajax' && ($server_url == "https://marketplace.imporsuit.com")) {
                     //echo $provincia;
                     $ciudad_cot   = $row['ciudad_cot'];
                     //echo $ciudad_cot;
+                    $ciudad_cot   = get_row('ciudad_cotizacion', 'ciudad', 'id_cotizacion', $ciudad_cot);
                     
 
                     $observacion   = $row['observacion'];
@@ -490,7 +491,7 @@ if ($action == 'ajax' && ($server_url == "https://marketplace.imporsuit.com")) {
                                                                                                                         echo "Estado no reconocido";
                                                                                                                 }
                                                                                                                 if ($guia_numero != '0') {
-                                                                                                                    if (strpos($guia_numero, "MKP") == 0) {
+                                                                                                                    if (strpos($guia_numero, "IMP") == 0) {
                                                                                                                         echo "<script> validar_laar('" . $guia_numero . "', '" . $numero_factura . "')</script>";
                                                                                                                         echo "<script> validar_servientrega('" . $guia_numero . "', '" . $numero_factura . "')</script>";
                                                                                                                     } else if (is_numeric($guia_numero)) {
@@ -509,7 +510,7 @@ if ($action == 'ajax' && ($server_url == "https://marketplace.imporsuit.com")) {
                                                                                                                         $traking = "https://fenix.laarcourier.com/Tracking/Guiacompleta.aspx?guia=" . get_row_guia('guia_laar', 'guia_laar', 'id_pedido', $id_factura . " and tienda_venta like '%" . $server_url . "%'");
                                                                                                                     }
                                                                                                                     $estado_guia_for = get_row('guia_laar', 'estado_guia', 'guia_laar', $guia_numero);
-                                                                                                                    if ($estado_guia_for != "0" && strpos($guia_numero, "MKP")) {
+                                                                                                                    if ($estado_guia_for != "0" && strpos($guia_numero, "IMP")) {
 
                                                                                                                         switch ($estado_guia_for) {
                                                                                                                             case '1':
@@ -869,14 +870,14 @@ if ($action == 'ajax' && ($server_url == "https://marketplace.imporsuit.com")) {
                                                                                                                     }
                                                                                                                 }
                                                                                                                 if (isset($estado_guia_for)) {
-                                                                                                                    if ($traking != '' && strpos($guia_numero, "MKP") === 0) {
+                                                                                                                    if ($traking != '' && strpos($guia_numero, "IMP") === 0) {
                                                                                                                 ?>
                                     <a style="cursor: pointer;" href="<?php echo $url; ?>" target="blank"><span class="badge <?php echo $span_estado; ?>"><?php echo $estado_guia; ?></span></a><BR>
                                     <a style="cursor: pointer;" href="<?php echo $url; ?>" target="blank"><span class=""><?php echo $guia_numero; ?></span></a><BR>
 
                                     <a style="cursor: pointer;" href="<?php echo $traking; ?>" target="blank"><img width="40px" src="../../img_sistema/rastreo.png" alt="" /></a>
                                 <?php
-                                                                                                                    } else if (strpos($guia_numero, "MKP") !== 0) {
+                                                                                                                    } else if (strpos($guia_numero, "IMP") !== 0) {
                                 ?>
                                     <a style="cursor: pointer;" href="<?php echo $url; ?>" target="blank"><span class="badge <?php echo $span_estado; ?>"><?php echo $estado_guia; ?></span></a><BR>
                                     <a style="cursor: pointer;" href="<?php echo $url; ?>" target="blank"><span class=""><?php echo $guia_numero; ?></span></a><BR>
@@ -1021,7 +1022,7 @@ if ($action == 'ajax' && ($server_url == "https://marketplace.imporsuit.com")) {
 
     /*     $sWhere .= " and estado_guia_sistema IS NOT NULL";
  */
-    $sWhere .= " AND estado_guia_sistema!='8'  AND estado_guia_sistema!='101'";
+$sWhere .= " AND transporte IS NOT NULL AND (estado_guia_sistema NOT IN ('8', '101') OR estado_guia_sistema IS NULL)";
 
     $sWhere .= " order by facturas_cot.id_factura desc";
 
@@ -1044,7 +1045,7 @@ if ($action == 'ajax' && ($server_url == "https://marketplace.imporsuit.com")) {
     $reload      = '../reportes/facturas.php';
     //main query to fetch the data
     $sql   = "SELECT * FROM  $sTable $sWhere LIMIT $offset,$per_page";
-    //echo $sql;
+    echo $sql;
     $query = mysqli_query($conexion, $sql);
     $empresas = mysqli_query($conexion, "SELECT * FROM trabajadores_envio where estado=1");
     //loop through fetched data0
@@ -1107,7 +1108,10 @@ if ($action == 'ajax' && ($server_url == "https://marketplace.imporsuit.com")) {
                     //echo $provincia;
                     $ciudad_cot   = $row['ciudad_cot'];
                     //echo $ciudad_cot;
-                    $ciudad_cot   = get_row('ciudad_cotizacion', 'ciudad', 'id_cotizacion', $ciudad_cot);
+                    $ciudad_cot   = get_row("ciudad_cotizacion", "ciudad", "id_cotizacion", $ciudad_cot);
+                    if ($ciudad_cot == 0) {
+                        $ciudad_cot = get_row('ciudad_laar', 'nombre', 'codigo', $row['ciudad_cot']);
+                    }
 
                     $observacion   = $row['observacion'];
                     $direccion   = $row['c_principal'] . ' y ' . $row['c_secundaria'] . '-' . $row['referencia'];
@@ -1364,10 +1368,11 @@ if ($action == 'ajax' && ($server_url == "https://marketplace.imporsuit.com")) {
                                                                                                                 if ($guia_numero != '0') {
 
 
-                                                                                                                    if (strpos($guia_numero, "MKP") == 0) {
+                                                                                                                    if (strpos($guia_numero, "IMP") == 0) {
                                                                                                                         echo "<script> validar_laar('" . $guia_numero . "', '" . $numero_factura . "')</script>";
-                                                                                                                        echo "<script> validar_servientrega('" . $guia_numero . "', '" . $numero_factura . "')</script>";
-                                                                                                                    } else if (is_numeric($guia_numero)) {
+                                                                                                                        
+                                                                                                                    }
+                                                                                                                    if (is_numeric($guia_numero)) {
                                                                                                                         echo "<script> validar_servientrega('" . $guia_numero . "', '" . $numero_factura . "')</script>";
                                                                                                                     }
                                                                                                                     if ($drogshipin == 3 || $drogshipin == 4) {
@@ -1385,7 +1390,7 @@ if ($action == 'ajax' && ($server_url == "https://marketplace.imporsuit.com")) {
                                                                                                                     if ($guia_numero == "guia_local") {
                                                                                                                         $estado_guia_for = get_row('facturas_cot', 'estado_guia_sistema', 'numero_factura', $numero_factura);
                                                                                                                     }
-                                                                                                                    if ($estado_guia_for != "0" && strpos($guia_numero, "MKP") === 0) {
+                                                                                                                    if ($estado_guia_for != "0" && strpos($guia_numero, "IMP") === 0) {
 
                                                                                                                         switch ($estado_guia_for) {
                                                                                                                             case '1':
@@ -1761,7 +1766,7 @@ if ($action == 'ajax' && ($server_url == "https://marketplace.imporsuit.com")) {
                                                                                                                     }
                                                                                                                 }
                                                                                                                 if (isset($estado_guia_for)) {
-                                                                                                                    if ($traking != '' && strpos($guia_numero, "MKP") === 0) {
+                                                                                                                    if ($traking != '' && strpos($guia_numero, "IMP") === 0) {
                                                                                                                 ?>
                                     <a style="cursor: pointer;" href="<?php echo $url; ?>" target="blank"><span class="badge <?php echo $span_estado; ?>"><?php echo $estado_guia; ?></span></a><BR>
                                     <a style="cursor: pointer;" href="<?php echo $url; ?>" target="blank"><span class=""><?php echo $guia_numero; ?></span></a><BR>
@@ -1855,6 +1860,8 @@ if ($action == 'ajax' && ($server_url == "https://marketplace.imporsuit.com")) {
                                     if ($permisos_eliminar == 1) { ?>
                                         <!--<a class="dropdown-item" href="#" data-toggle="modal" data-target="#dataDelete" data-id="<?php echo $row['id_factura']; ?>"><i class='fa fa-trash'></i> Eliminar</a>-->
                                     <?php } ?>
+
+                                    <!-- <a class="dropdown-item" href="#" onclick="boton_anular(<?php echo $id_factura_origen; ?>, <?php echo $numero_factura; ?>, <?php echo $transportadora; ?>)"><i class='fa fa-edit'></i> Anular</a> -->
                                     <a class="dropdown-item" href="#" onclick="anular_guia('<?php echo get_row('guia_laar', 'guia_laar', 'id_pedido', $id_factura); ?>','<?php echo get_row('guia_laar', 'id_pedido', 'id_pedido', $id_factura); ?>')"><i class='fa fa-edit'></i> Anular</a>
 
                                 </div>
