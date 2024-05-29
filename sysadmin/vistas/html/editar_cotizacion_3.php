@@ -1516,9 +1516,9 @@ while ($r = $query->fetch_object()) {
                     precio = parseFloat(precio);
                     if (recaudo == 1) {
                         precio = ($('#valor_total_').val() * 0.03) + precio;
-                        $('#precio_gintra').text(`$${precio}`);
+                        $('#precio_gintra').text(`$${parseFloat(precio).toFixed(2)}`);
                     } else {
-                        $('#precio_gintra').text(`$${precio}`);
+                        $('#precio_gintra').text(`$${parseFloat(precio).toFixed(2)}`);
                     }
                 }
             }
