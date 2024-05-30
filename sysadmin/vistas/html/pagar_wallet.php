@@ -26,7 +26,7 @@ include "../permisos.php";
 
 $user_id = $_SESSION['id_users'];
 $_SESSION['tienda'] = $tienda;
-
+echo $tienda;
 get_cadena($user_id);
 $modulo = "Wallets";
 permisos($modulo, $cadena_permisos);
