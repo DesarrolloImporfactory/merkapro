@@ -37,10 +37,9 @@ $datos = "SELECT DISTINCT numero_factura, fecha, cliente, estado_guia, estado_pe
 $datos_query = mysqli_query($conexion, $datos);
 $rw = mysqli_fetch_array($datos_query);
 
-$valor_pendiente = get_row('cabecera_cuenta_pagar', 'valor_pendiente', 'numero_factura', $id_factura);
 $tiendaN = str_replace('https://', '', $tienda);
 $tiendaN = str_replace('http://', '', $tiendaN);
-$tiendaN = str_replace('.imporsuit.com', '', $tiendaN);
+$tiendaN = str_replace('.merkapro.ec', '', $tiendaN);
 $tiendaN = strtoupper($tiendaN);
 
 ?>
@@ -222,7 +221,7 @@ $tiendaN = strtoupper($tiendaN);
         var id_factura = '<?php echo $id_factura; ?>';
         var tienda = '<?php echo $tienda; ?>';
         var daterange = $('#range').val();
-        VentanaCentrada('../pdf/documentos/reporte_pagos_wallet.php?id_factura=' + id_factura + '&tienda=' + tienda + '&daterange=' + daterange, 'Reporte', '', '800', '600', 'true');
+        VentanaCentrada('../pdf/documentos/reporte_pagos_wallet.php?&tienda=' + tienda + '&daterange=' + daterange, 'Reporte', '', '800', '600', 'true');
     }
 </script>
 <?php require 'includes/footer_end.php'
