@@ -329,7 +329,7 @@ $simbolo_moneda = get_row('perfil', 'moneda', 'id_perfil', 1);
 
 					</ul>
 				</li>
-				<!--li>
+				<li>
 					<a href="javascript:void(0);" class="waves-effect waves-primary"><i class="ti-wallet"></i><span> Billetera</span> <span class="menu-arrow"></span></a>
 					<ul class="list-unstyled">
 						<li><a href="../html/wallet.php">Detalles</a></li>
@@ -339,7 +339,7 @@ $simbolo_moneda = get_row('perfil', 'moneda', 'id_perfil', 1);
 
 						<?php } ?>
 					</ul>
-				</li-->
+				</li>
 
 				<!--li>
 					<a href="javascript:void(0);" class="waves-effect waves-primary"><i class="ti-list"></i><span> Referidos</span> <span class="menu-arrow"></span></a>
