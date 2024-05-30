@@ -26,7 +26,7 @@ include "../permisos.php";
 
 $user_id = $_SESSION['id_users'];
 $_SESSION['tienda'] = $tienda;
-echo $tienda;
+
 get_cadena($user_id);
 $modulo = "Wallets";
 permisos($modulo, $cadena_permisos);
@@ -221,7 +221,7 @@ $tiendaN = strtoupper($tiendaN);
         var id_factura = '<?php echo $id_factura; ?>';
         var tienda = '<?php echo $tienda; ?>';
         var daterange = $('#range').val();
-        VentanaCentrada('../pdf/documentos/reporte_pagos_wallet.php?&tienda=' + tienda + '&daterange=' + daterange, 'Reporte', '', '800', '600', 'true');
+        VentanaCentrada('../pdf/documentos/reporte_pagos_wallet.php?id_factura=' + id_factura + '&tienda=' + tienda + '&daterange=' + daterange, 'Reporte', '', '800', '600', 'true');
     }
 </script>
 <?php require 'includes/footer_end.php'
