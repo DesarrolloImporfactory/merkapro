@@ -3,7 +3,7 @@
     $tienda = $_SERVER['HTTP_REFERER'];
     //obtener &tienda=nombre_tienda
     $tienda = explode('=', $tienda);
-    $tienda = $tienda[2];
+    $tienda = $tienda[1];
 
 
     require_once "../db.php";
@@ -21,7 +21,6 @@
     $dominio_actual = str_replace('.com', '', $dominio_actual);
     $dominio_actual = str_replace('.net', '', $dominio_actual);
     $action         = (isset($_REQUEST['action']) && $_REQUEST['action'] != null) ? $_REQUEST['action'] : '';
-    echo $dominio_actual;
     if ($action == 'ajax' && $dominio_actual == 'merkapro.ec') {
         $tables = "pagos";
         $campos = "*";
