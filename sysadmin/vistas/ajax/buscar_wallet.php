@@ -73,7 +73,7 @@ if ($dominio_actual == 'merkapro.ec') {
         $query = mysqli_query($conexion, $sql);
         $query = mysqli_fetch_all($query);
 
-        if ($numrows > 0 && $dominio_actual == 'marketplace.imporsuit') {
+        if ($numrows > 0 && $dominio_actual == 'merkapro.ec') {
 ?>
             <!-- activar modal -->
             <div class="">
