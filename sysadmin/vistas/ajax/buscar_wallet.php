@@ -290,8 +290,8 @@ if ($dominio_actual == 'merkapro.ec') {
         $es_referido = "SELECT * FROM plataformas where url_imporsuit like '$dominio_completo%' and refiere is not null";
         $query_es_referido = mysqli_query($conexion_db, $es_referido);
         $row_es_referido = mysqli_fetch_array($query_es_referido);
-        $es_referido = $row_es_referido['refiere'];
-        if ($es_referido != null) {
+
+        if (!empty($row_es_referido)) {
             $es_referidos = 1;
         } else {
             $es_referidos = 0;
