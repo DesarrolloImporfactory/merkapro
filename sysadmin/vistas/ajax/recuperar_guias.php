@@ -1,5 +1,6 @@
 <?php
-
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
 require_once '../db.php';
 require_once '../php_conexion.php';
 $sql = "SELECT * FROM guia_laar where guia_laar is not null and estado_guia in (7, 9)";
