@@ -3,8 +3,19 @@ error_reporting(E_ALL);
 ini_set('display_errors', '1');
 require_once '../db.php';
 require_once '../php_conexion.php';
-$sql = "SELECT * FROM guia_laar where guia_laar is not null and estado_guia in (7, 9)";
+
+// Verificar conexión
+if (!$conexion) {
+    die("Error en la conexión: " . mysqli_connect_error());
+}
+
+$sql = "SELECT * FROM guia_laar WHERE guia_laar IS NOT NULL AND estado_guia IN (7, 9)";
 $result = mysqli_query($conexion, $sql);
+
+if (!$result) {
+    die("Error en la consulta SELECT: " . mysqli_error($conexion));
+}
+
 $req = 00001;
 while ($rw = mysqli_fetch_array($result)) {
     $nombre = $rw['nombreD'];
@@ -20,7 +31,22 @@ while ($rw = mysqli_fetch_array($result)) {
     $valor_cobrado = 0;
     $valor_pendiente = $monto_recibir;
     $cod = $rw['cod'];
-    $insert_cuenta_pagar = "INSERT INTO cabecera_cuenta_pagar (numero_factura, fecha, cliente, tienda, estado_guia, total_venta, costo, precio_envio, monto_recibir, valor_cobrado, valor_pendiente, guia_laar, visto, cod, proveedor) VALUES ('" . $req . "-P','" . $fecha . "','" . $nombre . "','" . $tienda_venta . "','" . $estado_guia . "','" . $total_venta . "','" . $costo . "','" . $precio_envio . "','" . $monto_recibir . "','" . $valor_cobrado . "','" . $valor_pendiente . "','" . $guia_laar . "','" . 0 . "','" . $cod . "','" . $proveedor . "')";
+
+    $insert_cuenta_pagar = "INSERT INTO cabecera_cuenta_pagar 
+        (numero_factura, fecha, cliente, tienda, estado_guia, total_venta, costo, precio_envio, monto_recibir, valor_cobrado, valor_pendiente, guia_laar, visto, cod, proveedor) 
+        VALUES 
+        ('$req-P', '$fecha', '$nombre', '$tienda_venta', '$estado_guia', '$total_venta', '$costo', '$precio_envio', '$monto_recibir', '$valor_cobrado', '$valor_pendiente', '$guia_laar', 0, '$cod', '$proveedor')";
+
     $resultado_cuenta_pagar = mysqli_query($conexion, $insert_cuenta_pagar);
+
+    if (!$resultado_cuenta_pagar) {
+        echo "Error en la consulta INSERT: " . mysqli_error($conexion) . "<br>";
+        echo "Consulta: " . $insert_cuenta_pagar . "<br>";
+    } else {
+        echo "Registro insertado correctamente: " . $insert_cuenta_pagar . "<br>";
+    }
+
     $req++;
 }
+
+mysqli_close($conexion);
