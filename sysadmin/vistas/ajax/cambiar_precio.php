@@ -8,6 +8,7 @@ $id_factura = $datos['id_factura'];
 $precio = $datos['precio'];
 $total_ventassss = $datos['venta'];
 $costoss = $datos['costo'];
+$full_ = $datos['full'];
 
 $marketplace = 'imporsuit_marketplace';
 $conexion_marketplace = mysqli_connect('localhost', $marketplace, $marketplace, $marketplace);
@@ -20,20 +21,22 @@ $total_venta = $datos['total_venta'];
 $costo = $datos['costo'];
 $estado_guia = $datos['estado_guia'];
 $tienda = $datos['tienda'];
+$full = $datos['full'];
 if ($estado_guia == 9) {
     if ($tienda == "https://universalmarkethub.imporsuit.com" || $tienda == "https://yapando.imporsuit.com" || $tienda == "https://onlytap.imporsuit.com" || $tienda == "https://ecuashop.imporsuit.com") {
         $actualizada = $precio;
     } else {
 
-        $actualizada = $precio + ($precio * 0.25);
+        $actualizada = $precio;
     }
     $actualizada *= -1;
+    $actualizada = $actualizada - $full_;
 } else {
-    $actualizada = $total_ventassss - $costoss - $precio;
+    $actualizada = $total_ventassss - $costoss - $precio - $full_;
 }
 
 
-$sql = "UPDATE `cabecera_cuenta_pagar` SET `precio_envio`=$precio, `monto_recibir`='$actualizada', `valor_pendiente`='$actualizada',`total_venta`='$total_ventassss',`costo`='$costoss'  WHERE `numero_factura`='$id_factura'";
+$sql = "UPDATE `cabecera_cuenta_pagar` SET `precio_envio`=$precio, `monto_recibir`='$actualizada', `valor_pendiente`='$actualizada',`total_venta`='$total_ventassss',`costo`='$costoss', `full` = '$full_'  WHERE `numero_factura`='$id_factura'";
 $resultado = mysqli_query($conexion_marketplace, $sql);
 
 if ($resultado) {
