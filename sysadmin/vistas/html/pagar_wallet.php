@@ -45,10 +45,9 @@ $datos = "SELECT DISTINCT numero_factura, fecha, cliente, estado_guia, estado_pe
 $datos_query = mysqli_query($conexion, $datos);
 $rw = mysqli_fetch_array($datos_query);
 
-$valor_pendiente = get_row('cabecera_cuenta_pagar', 'valor_pendiente', 'numero_factura', $id_factura);
 $tiendaN = str_replace('https://', '', $tienda);
 $tiendaN = str_replace('http://', '', $tiendaN);
-$tiendaN = str_replace('.imporsuit.com', '', $tiendaN);
+$tiendaN = str_replace('.merkapro.ec', '', $tiendaN);
 $tiendaN = strtoupper($tiendaN);
 
 ?>
