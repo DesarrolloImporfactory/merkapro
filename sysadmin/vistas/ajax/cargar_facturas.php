@@ -21,7 +21,7 @@ if ($filtro == 'mayor_menor') {
 $rw = mysqli_fetch_array($consultar);
 $url_guia = "https://fenix.laarcourier.com/Tracking/Guiacompleta.aspx?guia=";
 $url_ticket = "https://api.laarcourier.com:9727/guias/pdfs/DescargarV2?guia=";
-
+$url_ticket_f = "https://fast.imporsuit.com/GenerarGuia/descargar/";
 
 
 if ($filtro == 'mayor_menor') {
@@ -50,10 +50,13 @@ if ($filtro == 'mayor_menor') {
             <th>Venta total</th>
             <th>Costo</th>
             <th>Precio Envio</th>
+            <th>Full Fillment</th>
             <th>Monto a Recibir</th>
             <th>Monto Cobrado</th>
             <th>Monto Pendiente</th>
             <th>Numero Guia</th>
+            <th>Estado</th>
+            <th>Peso</th>
             <th>Guia</th>
             <th>Ticket</th>
             <th>Ver</th>
@@ -155,6 +158,7 @@ if ($filtro == 'mayor_menor') {
                 <td><?php echo $rws['total_venta']; ?></td>
                 <td><?php echo $rws['costo']; ?></td>
                 <td><?php echo $rws['precio_envio']; ?></td>
+                <td><?php echo $rws['full']; ?></td>
                 <td><?php echo $rws['monto_recibir']; ?></td>
                 <td><?php echo $rws['valor_cobrado']; ?></td>
 
@@ -168,6 +172,24 @@ if ($filtro == 'mayor_menor') {
                         <span class="badge badge-purple">Sin Recaudo</span>
                     <?php } ?>
                 </td>
+                <td id="estados_laar_<?php echo $rws['guia_laar'] ?>" class="text-center">
+                    <?php
+                    if (strpos($rws['guia_laar'], "IMP") === 0) {
+                        echo "<script> validar_laar('" . $rws['guia_laar'] . "', '" . $numero_factura . "')</script>";
+                    }
+                    ?>
+                    PROXIMAMENTE
+                </td>
+
+                <td id="estados_laar__<?php echo $rws['guia_laar'] ?>" class="text-center">
+                    <?php
+                    if (strpos($rws['guia_laar'], "IMP") === 0) {
+                        echo "<script> validar_laar('" . $rws['guia_laar'] . "', '" . $numero_factura . "')</script>";
+                    }
+                    ?>
+                    PROXIMAMENTE
+                </td>
+
                 <td class="text-center">
                     <?php
                     if (is_numeric($rws['guia_laar'])) {
@@ -181,6 +203,8 @@ if ($filtro == 'mayor_menor') {
                     <?php
                     if (is_numeric($rws['guia_laar'])) {
                         echo "-";
+                    } elseif (strpos($rws['guia_laar'], "FAST") === 0) {
+                        echo '<a href="' . $url_ticket_f . $rws['guia_laar'] . '" target="_blank" class="btn btn-success btn-sm"><i class="fa fa-receipt"></i></a>';
                     } else {
                         echo '<a href="' . $url_ticket . $rws['guia_laar'] . '" target="_blank" class="btn btn-success btn-sm"><i class="fa fa-receipt"></i></a>';
                     }
@@ -210,4 +234,6 @@ if ($filtro == 'mayor_menor') {
             </tr>
         <?php } ?>
     </table>
+
+
 </div>

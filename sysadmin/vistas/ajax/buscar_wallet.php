@@ -2,7 +2,8 @@
 /*-------------------------
 Autor: Eduardo Vega
 ---------------------------*/
-
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
 
 include 'is_logged.php'; //Archivo verifica que el usario que intenta acceder a la URL esta logueado
 /* Connect To Database*/
@@ -112,7 +113,9 @@ if ($dominio_actual == 'merkapro.ec') {
                             <th class="text-center">Tienda </th>
                             <th class="text-center">Total Venta</th>
                             <th class="text-center">Total Utilidad</th>
-                            <!--   <th class="text-center">Guías Pendientes</th> -->
+                            <th class="text-center">Saldo Pendiente</th>
+                            <th class="text-center">Guías Pendientes</th>
+                            <th class="text-center">Excel</th>
                             <th colspan="3"></th>
                         </tr>
                     </thead>
@@ -121,8 +124,7 @@ if ($dominio_actual == 'merkapro.ec') {
                         <?php
                         foreach ($query as $row) {
                             $tienda = $row[0];
-
-                            $total_venta_sql = "SELECT SUM(subquery.total_venta) as total_ventas, SUM(subquery.total_pendiente) as total_pendiente FROM ( SELECT numero_factura, MAX(total_venta) as total_venta, MAX(valor_pendiente) as total_pendiente FROM cabecera_cuenta_pagar WHERE tienda = '$tienda' and visto = '1' GROUP BY numero_factura ) as subquery;";
+                            $total_venta_sql = "SELECT SUM(subquery.total_venta) as total_ventas, SUM(subquery.total_pendiente) as total_pendiente, SUM(subquery.monto_recibir) as monto_recibir FROM ( SELECT numero_factura, MAX(total_venta) as total_venta, MAX(valor_pendiente) as total_pendiente, MAX(monto_recibir) as monto_recibir FROM cabecera_cuenta_pagar WHERE tienda = '$tienda' and visto = '1' GROUP BY numero_factura ) as subquery;";
 
                             $query_total_venta = mysqli_query($conexion, $total_venta_sql);
                             $row_total_venta = mysqli_fetch_array($query_total_venta);
@@ -141,14 +143,36 @@ if ($dominio_actual == 'merkapro.ec') {
                             $row_guias_faltantes = mysqli_fetch_array($query_guias_faltantes);
                             $guias_faltantes = $row_guias_faltantes[0];
 
+                            $sql_total_pagos = "SELECT SUM(valor) from pagos where tienda = '$tienda'";
+                            $valor_total_pagos_query = mysqli_query($conexion, $sql_total_pagos);
+                            $valor_total_pagos_SQL = mysqli_fetch_array($valor_total_pagos_query);
+                            $valor_total_pagos = $valor_total_pagos_SQL['SUM(valor)'];
+
+                            $monto_recibir = $row_total_venta['monto_recibir'];
+                            if ($valor_total_pagos > $monto_recibir) {
+                                $monto_recibir = $valor_total_pagos - $monto_recibir;
+                                $monto_recibir *= -1;
+                                $monto_recibir = number_format($monto_recibir, 2);
+                            } else {
+                                $monto_recibir = number_format($monto_recibir, 2);
+                            }
+
+
 
                         ?>
 
                             <tr>
-                                <td class="text-center"> <a href="pagar_wallet.php?tienda=<?php echo $tienda ?>"> <?php echo $tienda; ?></a></td>
+                                <td class="text-center"> <a href="pagar_wallet.php?id_factura=&tienda=<?php echo $tienda ?>"> <?php echo $tienda; ?></a></td>
                                 <td class="text-center"><?php echo $simbolo_moneda . $total_venta; ?></td>
                                 <td class="text-center"><?php echo $simbolo_moneda . $total_pendiente; ?></td>
-                                <!--    <td class="text-center"><?php echo $guias_faltantes; ?></td> -->
+                                <td class="text-center"><?php echo $simbolo_moneda . $monto_recibir; ?></td>
+                                <td class="text-center"><?php echo $guias_faltantes; ?></td>
+                                <td class="text-center">
+                                    <!-- descargar excel -->
+                                    <div class="container">
+                                        <button id="downloadExcel" class="btn btn-success" onclick="descargarExcel('<?php echo $tienda; ?>')">Descargar Excel</button>
+                                    </div>
+                                </td>
                                 <td class="text-center">
                                     <div class="btn-group dropdown">
                                         <button type="button" class="btn btn-warning btn-sm dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="false"> <i class='fa fa-cog'></i> <i class="caret"></i> </button>
@@ -158,7 +182,7 @@ if ($dominio_actual == 'merkapro.ec') {
                                             if ($permisos_eliminar == 1) { ?>
                                                 <!--<a class="dropdown-item" href="#" data-toggle="modal" data-target="#dataDelete" data-id="<?php echo $row['id_factura']; ?>"><i class='fa fa-trash'></i> Eliminar</a>-->
                                             <?php } ?>
-                                            <a href="pagar_wallet.php?tienda=<?php echo $tienda ?>" class="dropdown-item"> <i class="ti-wallet"></i> Pagar </a>
+                                            <a href="pagar_wallet.php?id_factura=&tienda=<?php echo $tienda ?>" class="dropdown-item"> <i class="ti-wallet"></i> Pagar </a>
 
                                         </div>
 
@@ -236,72 +260,6 @@ if ($dominio_actual == 'merkapro.ec') {
         $query = mysqli_query($conexion_db, $sql);
         $simbolo_moneda = get_row('perfil', 'moneda', 'id_perfil', 1);
         //loop through fetched data
-        //verifica si es provvedor
-        $es_proveedor = "SELECT habilitar_proveedor from perfil;";
-        $query_es_proveedor = mysqli_query($conexion, $es_proveedor);
-        $row_es_proveedor = mysqli_fetch_array($query_es_proveedor);
-        $habilitar_proveedor = $row_es_proveedor['habilitar_proveedor'];
-
-        //consulta si existe la cabecera de la cuenta por pagar de proveedor
-        $existe_cabecera = "SELECT COUNT(numero_factura) as num FROM cabecera_cuenta_pagar WHERE visto = '1' and numero_factura like 'Proveedor%'";
-        $query_existe_cabecera = mysqli_query($conexion_db, $existe_cabecera);
-        $row_existe_cabecera = mysqli_fetch_array($query_existe_cabecera);
-        $existe_cabecera = $row_existe_cabecera['num'];
-        $total_proveedores = $existe_cabecera + 1;
-        $num_fac_proveedor = "Proveedor" . $total_proveedores;
-
-        $existe_cabecera_referido = "SELECT COUNT(numero_factura) as num FROM cabecera_cuenta_pagar WHERE visto = '1' and numero_factura like 'Referido%'";
-        $query_existe_cabecera_referido = mysqli_query($conexion_db, $existe_cabecera_referido);
-        $row_existe_cabecera_referido = mysqli_fetch_array($query_existe_cabecera_referido);
-        $existe_cabecera_referido = $row_existe_cabecera_referido['num'];
-        $total_referidos = $existe_cabecera_referido + 1;
-        $num_fac_referido = "Referido" . $total_referidos;
-
-        $sql_existe_cabecera_tienda = "SELECT * FROM cabecera_cuenta_pagar WHERE visto = '1' and tienda like '$dominio_completo%' and numero_factura like 'Proveedor%'";
-        $query_existe_cabecera_tienda = mysqli_query($conexion_db, $sql_existe_cabecera_tienda);
-        $row_existe_cabecera_tienda = mysqli_fetch_array($query_existe_cabecera_tienda);
-        $existe_cabecera_tienda = $row_existe_cabecera_tienda['numero_factura'];
-        if (empty($existe_cabecera_tienda) && $habilitar_proveedor == 1) {
-            $insertar_cabecera = "INSERT INTO cabecera_cuenta_pagar (numero_factura, fecha, cliente, tienda, estado_pedido, estado_guia, total_venta, valor_pendiente, valor_cobrado, monto_recibir, visto, guia_laar) VALUES ('$num_fac_proveedor', NOW(), 'Proveedor', '$dominio_completo', '1', '7', '0', '0', '0', '0', '1','PROVEEDOR');";
-            $query_insertar_cabecera = mysqli_query($conexion_db, $insertar_cabecera);
-            $ganancias_proveedor = 0;
-            $pendiente_proveedor = 0;
-        } else {
-            $ganancias_proveedor = $row_existe_cabecera_tienda['monto_recibir'];
-            $pendiente_proveedor = $row_existe_cabecera_tienda['valor_pendiente'];
-        }
-
-        $sql_existe_referido = "SELECT * FROM cabecera_cuenta_pagar WHERE visto = '1' and tienda like '$dominio_completo%' and numero_factura like 'Referido%'";
-        $query_existe_referido = mysqli_query($conexion_db, $sql_existe_referido);
-        $row_existe_referido = mysqli_fetch_array($query_existe_referido);
-        $existe_referido = $row_existe_referido['numero_factura'];
-        if (empty($existe_referido)) {
-            $num_fac_referido = "Referido" . $total_referidos;
-            $insertar_cabecera = "INSERT INTO cabecera_cuenta_pagar (numero_factura, fecha, cliente, tienda, estado_pedido, estado_guia, total_venta, valor_pendiente, valor_cobrado, monto_recibir, visto, guia_laar) VALUES ('$total_referidos', NOW(), 'Referido', '$dominio_completo', '1', '7', '0', '0', '0', '0', '1','REFERIDO');";
-            $query_insertar_cabecera = mysqli_query($conexion_db, $insertar_cabecera);
-            $ganancias_referido = 0;
-            $pendiente_referido = 0;
-        } else {
-            $ganancias_referido = $row_existe_referido['monto_recibir'];
-            $pendiente_referido = $row_existe_referido['valor_pendiente'];
-        }
-
-        //consulta si es un referido 
-        $es_referido = "SELECT * FROM plataformas where url_imporsuit like '$dominio_completo%' and refiere is not null";
-        $query_es_referido = mysqli_query($conexion_db, $es_referido);
-        $row_es_referido = mysqli_fetch_array($query_es_referido);
-
-        if (!empty($row_es_referido)) {
-            $es_referidos = 1;
-        } else {
-            $es_referidos = 0;
-        }
-
-        if ($es_referidos == 1) {
-            $ganancias_proveedor = 0;
-            $pendiente_proveedor = 0;
-        }
-
 
         $total_pendiente_a_la_tienda_sql = "SELECT 
         SUM(CASE WHEN subquery.numero_factura NOT LIKE 'proveedor%' AND subquery.numero_factura NOT LIKE 'referido%' THEN subquery.total_venta ELSE 0 END) AS total_ventas,
@@ -333,20 +291,36 @@ if ($dominio_actual == 'merkapro.ec') {
         $row_guias_faltantes = mysqli_fetch_array($query_guias_faltantes);
         $guias_faltantes = $row_guias_faltantes[0];
 
+        $sql_total_pagos = "SELECT SUM(valor) from pagos where tienda = '$dominio_completo'";
+        $valor_total_pagos_query = mysqli_query($conexion_db, $sql_total_pagos);
+        $valor_total_pagos_SQL = mysqli_fetch_array($valor_total_pagos_query);
+        $valor_total_pagos = $valor_total_pagos_SQL['SUM(valor)'];
+
+        // ver ganancias como referido y proveedor
+        $sql_referidos = "SELECT SUM(monto_recibir) FROM `cabecera_cuenta_pagar` WHERE tienda = '$dominio_completo' and numero_factura like '%-R'";
+        $ganancias_referido_query = mysqli_query($conexion_db, $sql_referidos);
+        $ganancias_referido_SQL = mysqli_fetch_array($ganancias_referido_query);
+        if (empty($ganancias_referido_SQL['SUM(monto_recibir)'])) {
+            $ganancias_referido = 0;
+        } else {
+            $ganancias_referido = $ganancias_referido_SQL['SUM(monto_recibir)'];
+        }
+
+        $sql_proveedor = "SELECT SUM(monto_recibir) FROM `cabecera_cuenta_pagar` WHERE tienda = '$dominio_completo' and numero_factura like '%-P'";
+        $ganancias_proveedor_query = mysqli_query($conexion_db, $sql_proveedor);
+        $ganancias_proveedor_SQL = mysqli_fetch_array($ganancias_proveedor_query);
+        if (empty($ganancias_proveedor_SQL['SUM(monto_recibir)'])) {
+            $ganancias_proveedor = 0;
+        } else {
+            $ganancias_proveedor = $ganancias_proveedor_SQL['SUM(monto_recibir)'];
+        }
         if ($numrows > 0) { {
             ?>
-                <form id="filter-form">
-                    <label for="fecha">Fecha:</label>
-                    <input type="date" name="fecha" id="fecha">
-                    <label for="estado">Estado de Pedido:</label>
-                    <select name="estado" id="estado">
-                        <option value="0">Todos</option>
-                        <option value="1">Confirmar</option>
-                        <option value="2">Pick y Pack</option>
-                        <!-- Agrega más opciones según tus estados de pedido -->
-                    </select>
-                    <button class="btn btn-outline-primary" type="button" onclick="filterData()">Filtrar</button>
-                </form>
+                <!-- descargar excel -->
+                <div class="container">
+                    <button id="downloadExcel" class="btn btn-success" onclick="descargarExcel('<?php echo $dominio_completo; ?>')">Descargar Excel</button>
+                </div>
+
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="col-lg-12 col-md-6">
@@ -388,22 +362,22 @@ if ($dominio_actual == 'merkapro.ec') {
                                     <i class="mdi mdi-cash-multiple text-success"></i>
                                     <div class="wid-icon-info text-right">
                                         <p class="text-muted m-b-5 font-13 font-bold text-uppercase">TOTAL ABONADO</p>
-                                        <h4 class="m-t-0 m-b-5 counter font-bold text-success"><?php echo $simbolo_moneda . '' . number_format($total_valor_cobrado, 2); ?></h4>
+                                        <h4 class="m-t-0 m-b-5 counter font-bold text-success"><?php echo $simbolo_moneda . '' . number_format($valor_total_pagos, 2); ?></h4>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <?php
                         $url_ubicacion = $_SERVER["HTTP_HOST"];
-                        $sql_deuda = "SELECT SUM(valor_pendiente) FROM `cabecera_cuenta_pagar` WHERE tienda = '$dominio_completo' AND `valor_pendiente` < 0 AND visto = '1' ORDER by monto_recibir ASC;";
+                        $sql_deuda = "SELECT SUM(monto_recibir) FROM `cabecera_cuenta_pagar` WHERE tienda = '$dominio_completo' AND `monto_recibir` < 0 AND visto = '1' ORDER by monto_recibir ASC;";
                         $valor_total_pendiente_query = mysqli_query($conexion_db, $sql_deuda);
                         $valor_total_pendiente_SQL = mysqli_fetch_array($valor_total_pendiente_query);
-                        $valor_total_pendiente_deuda = $valor_total_pendiente_SQL['SUM(valor_pendiente)'];
+                        $valor_total_pendiente_deuda = $valor_total_pendiente_SQL['SUM(monto_recibir)'];
 
-                        $sql_Ganancia = "SELECT SUM(valor_pendiente) FROM `cabecera_cuenta_pagar` WHERE tienda = '$dominio_completo' AND `monto_recibir` > 0 AND visto = '1' ORDER by monto_recibir ASC;";
+                        $sql_Ganancia = "SELECT SUM(monto_recibir) FROM `cabecera_cuenta_pagar` WHERE tienda = '$dominio_completo' AND `monto_recibir` > 0 AND visto = '1' ORDER by monto_recibir ASC;";
                         $valor_total_Ganancia_query = mysqli_query($conexion_db, $sql_Ganancia);
                         $valor_total_Ganancia_SQL = mysqli_fetch_array($valor_total_Ganancia_query);
-                        $valor_total_Ganancia = $valor_total_Ganancia_SQL['SUM(valor_pendiente)'];
+                        $valor_total_Ganancia = $valor_total_Ganancia_SQL['SUM(monto_recibir)'];
 
                         ?>
 
@@ -424,7 +398,7 @@ if ($dominio_actual == 'merkapro.ec') {
                                 <div>
                                     <i class="mdi mdi-exclamation text-danger "></i>
                                     <div class="wid-icon-info text-right">
-                                        <p class="text-muted m-b-5 font-13 font-bold text-uppercase">Deuda total</p>
+                                        <p class="text-muted m-b-5 font-13 font-bold text-uppercase">Descuentos de Devolución</p>
                                         <h4 class="m-t-0 m-b-5 counter font-bold text-danger"><?php echo $simbolo_moneda . '' . number_format($valor_total_pendiente_deuda, 2); ?></h4>
                                     </div>
                                 </div>
@@ -439,11 +413,17 @@ if ($dominio_actual == 'merkapro.ec') {
                                             &nbsp;
                                         </div>
 
+                                        <?php
+                                        $sql_billetera = "SELECT saldo FROM billeteras WHERE tienda = '$dominio_completo'";
+                                        $query_billetera = mysqli_query($conexion_db, $sql_billetera);
+                                        $row_billetera = mysqli_fetch_array($query_billetera);
+                                        $saldo_billetera = $row_billetera['saldo'];
+                                        ?>
 
 
                                         <div class="">
                                             <p class="text-muted m-b-5 font-13 font-bold text-uppercase">SALDO PENDIENTE A TIENDA</p>
-                                            <h4 class="m-t-0 m-b-5 counter font-bold text-danger"><?php echo $simbolo_moneda . '' . number_format($total_valor_pendiente, 2); ?></h4>
+                                            <h4 class="m-t-0 m-b-5 counter font-bold text-danger"><?php echo $simbolo_moneda . '' . number_format($saldo_billetera, 2); ?></h4>
                                         </div>
                                     </div>
                                 </div>
@@ -485,6 +465,7 @@ if ($dominio_actual == 'merkapro.ec') {
                                 <th class="text-center">Total Venta</th>
                                 <th class="text-center">Costo</th>
                                 <th class="text-center">Precio de Envio</th>
+                                <th class="text-center">Full Fillment</th>
                                 <th class="text-center">Monto a recibir</th>
                                 <th class="text-center">Valor cobrado</th>
                                 <th class="text-center">Valor pendiente</th>
@@ -507,6 +488,7 @@ if ($dominio_actual == 'merkapro.ec') {
                                 $estado_factura = $row['estado_pedido'];
                                 $guia_enviada   = $row['guia_enviada'];
                                 $valor_cobrado = $row['valor_cobrado'];
+                                $full = $row['full'];
                                 $valor_pendiente = $row['valor_pendiente'];
                                 $id_factura_origen = $row['id_factura_origen'];
                                 $guia_laar = "select guia_laar from guia_laar where tienda_venta ='$dominio_completo' AND id_pedido = '$id_factura_origen'";
@@ -588,6 +570,7 @@ if ($dominio_actual == 'merkapro.ec') {
                                     <td class="text-center"><?php echo $simbolo_moneda . $total_venta; ?></td>
                                     <td class="text-center"><?php echo $simbolo_moneda . $costo; ?></td>
                                     <td class="text-center"><?php echo $simbolo_moneda . $precio_envio; ?></td>
+                                    <td class="text-center"><?php echo $simbolo_moneda . $full; ?></td>
                                     <td class="text-center"><?php echo $simbolo_moneda . $monto_recibir; ?></td>
                                     <td class="text-center"><?php echo $simbolo_moneda . $valor_cobrado; ?></td>
                                     <td class="text-center"><?php echo $simbolo_moneda . $valor_pendiente; ?></td>
@@ -611,18 +594,11 @@ if ($dominio_actual == 'merkapro.ec') {
             <?php
             }
         } else {
-            ?><form id="filter-form">
-                <label for="fecha">Fecha:</label>
-                <input type="date" name="fecha" id="fecha">
-                <label for="estado">Estado de Pedido:</label>
-                <select name="estado" id="estado">
-                    <option value="0">Todos</option>
-                    <option value="1">Confirmar</option>
-                    <option value="2">Pick y Pack</option>
-                    <!-- Agrega más opciones según tus estados de pedido -->
-                </select>
-                <button class="btn btn-outline-primary" type="button" onclick="filterData()">Filtrar</button>
-            </form>
+            ?>
+            <!-- descargar excel -->
+            <div class="container">
+                <button id="downloadExcel" class="btn btn-success" onclick="descargarExcel('<?php echo $dominio_completo; ?>')">Descargar Excel</button>
+            </div>
             <div class="row">
 
                 <div class="col-lg-4">
@@ -703,7 +679,7 @@ if ($dominio_actual == 'merkapro.ec') {
                             <div>
                                 <i class="mdi mdi-exclamation text-danger "></i>
                                 <div class="wid-icon-info text-right">
-                                    <p class="text-muted m-b-5 font-13 font-bold text-uppercase">Deuda total</p>
+                                    <p class="text-muted m-b-5 font-13 font-bold text-uppercase">Descuentos de Devolución</p>
                                     <h4 class="m-t-0 m-b-5 counter font-bold text-danger"><?php echo $simbolo_moneda . '' . number_format($valor_total_pendiente_deuda, 2); ?></h4>
                                 </div>
                             </div>
@@ -718,11 +694,16 @@ if ($dominio_actual == 'merkapro.ec') {
                                         &nbsp;
                                     </div>
 
-
+                                    <?php
+                                    $sql_billetera = "SELECT * FROM billeteras WHERE tienda = '$dominio_completo'";
+                                    $query_billetera = mysqli_query($conexion_db, $sql_billetera);
+                                    $row_billetera = mysqli_fetch_array($query_billetera);
+                                    $total_billetera = $row_billetera['saldo'];
+                                    ?>
 
                                     <div class="">
                                         <p class="text-muted m-b-5 font-13 font-bold text-uppercase">SALDO PENDIENTE A TIENDA</p>
-                                        <h4 class="m-t-0 m-b-5 counter font-bold text-danger"><?php echo $simbolo_moneda . '' . number_format($total_valor_pendiente, 2); ?></h4>
+                                        <h4 class="m-t-0 m-b-5 counter font-bold text-danger"><?php echo $simbolo_moneda . '' . number_format($total_billetera, 2); ?></h4>
                                     </div>
                                 </div>
                             </div>
@@ -827,5 +808,29 @@ if ($dominio_actual == 'merkapro.ec') {
     function filtrarFecha() {
         const buscar_numero2 = document.getElementById('buscar_numero2').value;
 
+    }
+
+    function descargarExcel(tienda) {
+        fetch(`../ajax/descargar_excel.php?tienda=${encodeURIComponent(tienda)}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.blob();
+            })
+            .then(blob => {
+                console.log(blob);
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.style.display = 'none';
+                a.href = url;
+                a.download = 'datos.csv';
+                document.body.appendChild(a);
+                a.click();
+                window.URL.revokeObjectURL(url);
+            })
+            .catch(error => {
+                alert('Error: ' + error);
+            });
     }
 </script>

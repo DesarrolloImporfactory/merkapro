@@ -14,20 +14,26 @@ if ($cantidad == 0 || $cantidad == "") {
 $marketplace_query_url = 'imporsuit_marketplace';
 $marketplace_conexionquery = mysqli_connect('localhost', $marketplace_query_url, $marketplace_query_url, $marketplace_query_url);
 
-$query_total_ventas = "SELECT SUM(valor_pendiente) AS total_pendiente_a_la_tienda FROM cabecera_cuenta_pagar WHERE tienda = '$tienda'";
+$query_total_ventas = "SELECT saldo from billeteras WHERE tienda = '$tienda'";
 
 $resultado_total_ventas = mysqli_query($marketplace_conexionquery, $query_total_ventas);
 $datos_total_ventas = mysqli_fetch_assoc($resultado_total_ventas);
 
 
 
-$total_pendiente_a_la_tienda = $datos_total_ventas['total_pendiente_a_la_tienda'];
+$total_pendiente_a_la_tienda = $datos_total_ventas['saldo'];
 
 if ($cantidad > $total_pendiente_a_la_tienda) {
     echo "mayor";
     exit();
 }
+date_default_timezone_set('America/Guayaquil');
+$fecha = date('Y-m-d H:i:s');
+$monto = number_format($cantidad, 2);
+$sql_historial = "INSERT INTO `historial_billetera`(`fecha`, `motivo`, `monto`,`tipo`, `id_billetera`) VALUES ('$fecha', 'Realizo una solicitud de pago', '$monto','Solicitud', (SELECT id_billetera FROM billeteras where tienda ='$tienda') );";
+$resultado_historial = mysqli_query($marketplace_conexionquery, $sql_historial);
 
+echo mysqli_error($marketplace_conexionquery);
 
 // Gestionar mensaje con phpmailer
 require_once '../../PHPMailer/PHPMailer.php';
@@ -52,7 +58,8 @@ $telefono = $datos_correo['telefono'];
 
 include '../../PHPMailer/Mail_pago.php';
 
-
+$sql_insertar = "INSERT INTO `solicitudes_pago`(`cantidad`, `id_cuenta`) VALUES ('$cantidad', (SELECT id_cuenta FROM datos_banco_usuarios where tienda ='$tienda') );";
+$resultado_insertar = mysqli_query($marketplace_conexionquery, $sql_insertar);
 $mail = new PHPMailer(true);
 try {
     //Server settings
@@ -75,8 +82,7 @@ try {
     $mail->Body = $message_body;
 
 
-    $sql_insertar = "INSERT INTO `solicitudes_pago`(`cantidad`, `id_cuenta`) VALUES ('$cantidad', (SELECT id_cuenta FROM datos_banco_usuarios where tienda ='$tienda') );";
-    $resultado_insertar = mysqli_query($marketplace_conexionquery, $sql_insertar);
+
     if ($mail->send()) {
     } else {
         echo $mail->ErrorInfo;

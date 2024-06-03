@@ -30,73 +30,28 @@ if (empty($_POST['abono'])) {
     $user_id  = $_SESSION['id_users'];
     $fecha    = date("Y-m-d H:i:s");
 
-    $consultar = mysqli_query($conexion, "SELECT * FROM `cabecera_cuenta_pagar` WHERE tienda ='$tienda' AND `valor_pendiente` != 0 AND visto ='1' ORDER by monto_recibir ASC;");
-    $i = 0;
-    while ($rws = mysqli_fetch_assoc($consultar)) {
-        if ($abono > 0) {
-            $bct = 0;
+    $numero_factura = $_POST['comprobante'];
 
-            $saldo = $rws['valor_pendiente'] - $abono;
+    $sql_pago = "INSERT INTO `pagos`(`fecha`, `numero_documento`, `valor`, `forma_pago`, `tienda`, `imagen`) VALUES ('$fecha', '$numero_factura', $total_abonado, '$forma_pago', '$tienda', '$url_ubicacion');";
+    $resultado_pago = mysqli_query($conexion, $sql_pago);
 
-            if ($saldo < 0) {
-                $abono = -$saldo;
-                $bct = $rws['monto_recibir'];
-                $saldo = 0;
-                $cobrado = $rws['monto_recibir'];
-            } elseif ($saldo == 0) {
-                if ($rws['guia_laar'] == "PROVEEDOR" || $rws['guia_laar'] == "REFERIDO") {
-                    $cobrado = $rws['monto_recibir'];
-                } else {
+    date_default_timezone_set('America/Guayaquil');
+    $fecha = date('Y-m-d H:i:s');
 
-                    $cobrado = $rws['total_venta'] - $rws['costo'] - $rws['precio_envio'];
-                }
-                $bct = $abono;
-                $abono = 0;
-            } else {
-                $cobrado = $rws['valor_cobrado'] + $abono;
-                $bct = $abono;
-                $abono = 0;
-            }
+    $sql_billetera = "SELECT * FROM billeteras WHERE tienda = '$tienda'";
+    $resultado_billetera = mysqli_query($conexion, $sql_billetera);
+    $rw_billetera = mysqli_fetch_array($resultado_billetera);
+    $id_billetera = $rw_billetera['id_billetera'];
 
+    $sql_historial = "INSERT INTO `historial_billetera`(`fecha`, `motivo`, `monto`,`tipo`, `id_billetera`) VALUES ('$fecha', 'Retiro de dinero de la tienda', '$total_abonado','Salida', '$id_billetera');";
+    $resultado_historial = mysqli_query($conexion, $sql_historial);
 
-            $numero_factura = $rws['numero_factura'];
+    echo mysqli_error($conexion);
 
-            $sql_update = "UPDATE `cabecera_cuenta_pagar` SET `valor_cobrado`='$cobrado', valor_pendiente='$saldo' WHERE `numero_factura`='$numero_factura';";
-            $query_update = mysqli_query($conexion, $sql_update);
-
-            if ($i == 0) {
-                $sql_pago = "INSERT INTO `pagos`(`fecha`, `numero_documento`, `valor`, `forma_pago`, `tienda`, `imagen`) VALUES ('$fecha', '$numero_factura', $total_abonado, '$forma_pago', '$tienda', '$url_ubicacion');";
-                $query_pago = mysqli_query($conexion, $sql_pago);
-            }
-
-            $i++;
-
-            $sql_detalle_pago = "INSERT INTO `detalle_cuenta_pagar`(`valor`, `id_cabecera_cpp`, `signo`, `metodo_pago`, `id_pago`) VALUES " .
-                "($bct, (SELECT MAX(id_cabecera) FROM `cabecera_cuenta_pagar` WHERE numero_factura = '$numero_factura'), '+', '$forma_pago', (SELECT MAX(id_pago) FROM `pagos`));";
-            $query_detalle_pago = mysqli_query($conexion, $sql_detalle_pago);
-
-            $comprobar = mysqli_query($conexion, "SELECT * FROM cabecera_cuenta_pagar WHERE numero_factura='$numero_factura'");
-            $rww = mysqli_fetch_array($comprobar);
-
-            if ($rww['monto_recibir'] == 0) {
-                $up_credito = mysqli_query($conexion, "UPDATE cabecera_cuenta_pagar SET estado_factura=1 WHERE numero_factura='$numero_factura'");
-                echo "<script>
-                $.Notification.notify('info','bottom center','NOTIFICACIÓN', 'LA FACTURA SE HA CANCELADO EN SU TOTALIDAD')
-                </script>";
-            }
-
-            if ($rww) {
-                $messages[] = "El Abono ha sido ingresado satisfactoriamente. $numero_factura";
-            } else {
-                $errors[] = "Lo siento, algo ha salido mal. Intenta nuevamente. " . mysqli_error($conexion);
-            }
-        } else {
-            break;
-        }
-    }
-} else {
-    $errors[] = "Error desconocido.";
+    $sql_billetera = "UPDATE billeteras SET saldo = ROUND(saldo - '$total_abonado', 2) WHERE tienda = '$tienda'";
+    $resultado_billetera = mysqli_query($conexion, $sql_billetera);
 }
+
 
 require_once '../../PHPMailer/PHPMailer.php';
 require_once '../../PHPMailer/SMTP.php';

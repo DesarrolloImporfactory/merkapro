@@ -18,23 +18,29 @@ $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https://' 
 $dominio_completo =     $protocol . $_SERVER['HTTP_HOST'];
 
 
-$query_total_ventas = "SELECT SUM(valor_pendiente) AS total_pendiente_a_la_tienda FROM cabecera_cuenta_pagar WHERE tienda = '$dominio_completo' and visto='1'";
-$total_venta = mysqli_query($marketplace_conexion_2, $query_total_ventas);
+$sql_billetera = "SELECT saldo FROM billeteras WHERE tienda = '$dominio_completo'";
+$datos = mysqli_query($marketplace_conexion_2, $sql_billetera);
+$datos = mysqli_fetch_assoc($datos);
+if ($datos) {
+	$billetera = $datos['saldo'];
+} else {
+	$billetera = 0;
+}
 
-@$total_venta = mysqli_fetch_assoc($total_venta);
-@$total_venta = $total_venta['total_pendiente_a_la_tienda'];
+
 $color = '';
 $pais = get_row('perfil', 'pais', 'id_perfil', 1);
-if ($total_venta == null) {
-	$total_venta = 0;
+if ($billetera == null) {
+	$billetera = 0;
 	$color = 'text-white';
-} elseif ($total_venta > 0) {
+} elseif ($billetera > 0) {
 	$color = 'text-success';
 } else {
 
 	$color = 'text-danger';
 }
-$total_venta = number_format($total_venta, 2, '.', ',');
+
+$total_venta = number_format($billetera, 2, '.', ',');
 $simbolo_moneda = get_row('perfil', 'moneda', 'id_perfil', 1);
 ?>
 <div class="topbar" style="background: #ececec">
@@ -78,7 +84,7 @@ $simbolo_moneda = get_row('perfil', 'moneda', 'id_perfil', 1);
 
 			<li class="list-inline-item notification-list hide-phone   waves-light waves-effect">
 				<i class="ti-wallet"></i>
-				<span style="color: #006ba5 !important" class="<?php echo $color ?>"><?php echo $simbolo_moneda . $total_venta ?></span>
+				<span style="color: #006ba5 !important" class="<?php echo $color ?>"><?php echo $simbolo_moneda . $billetera ?></span>
 			</li>
 
 			<li class="list-inline-item notification-list hide-phone">
