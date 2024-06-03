@@ -12,14 +12,14 @@ if (isset($_GET['tienda'])) {
     $tienda = $conexion_marketplace->real_escape_string($_GET['tienda']);
 
     // Consulta a la base de datos
-    $sql = "SELECT * FROM cabecera_cuenta_pagar WHERE tienda = '$tienda' AND visto = 1";
+    $sql = "SELECT * FROM cabecera_cuenta_pagar WHERE tienda = '$tienda' ";
     $query = mysqli_query($conexion_marketplace, $sql);
 
     if (mysqli_num_rows($query) > 0) {
         // Configurar cabeceras para la descarga del archivo CSV
         header('Content-Type: text/csv; charset=utf-8');
         header('Content-Disposition: attachment; filename="datos.csv"');
-        
+
         $output = fopen('php://output', 'w');
 
         // Obtener los encabezados de la tabla
@@ -43,4 +43,3 @@ if (isset($_GET['tienda'])) {
 
     $conexion_marketplace->close();
 }
-?>
