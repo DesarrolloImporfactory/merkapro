@@ -218,7 +218,7 @@ if ($action == 'ajax' && ($server_url == "https://marketplace.imporsuit.com")) {
                     <th class="text-center">Cliente</th>
                     <th class="text-center">Localidad</th>
                     <th class="text-center">Tienda</th>
-                    <?php if ($server_url === "https://marketplace.imporsuit.com") { ?>
+                    <?php if ($server_url === "https://merkapro.ec") { ?>
                         <th class="text-center">Proveedor</th>
                     <?php } ?>
                     <th class="text-center">Transportadora</th>
@@ -247,7 +247,8 @@ if ($action == 'ajax' && ($server_url == "https://marketplace.imporsuit.com")) {
                     $ciudad_cot   = $row['ciudad_cot'];
                     //echo $ciudad_cot;
                     $ciudad_cot   = get_row('ciudad_cotizacion', 'ciudad', 'id_cotizacion', $ciudad_cot);
-                    
+
+
 
                     $observacion   = $row['observacion'];
                     $direccion   = $row['c_principal'] . ' y ' . $row['c_secundaria'] . '-' . $row['referencia'];
@@ -367,7 +368,7 @@ if ($action == 'ajax' && ($server_url == "https://marketplace.imporsuit.com")) {
                                     $proveedor_url = $proveedor;
                                     $proveedor = str_replace('https://', '', $proveedor);
                                     $proveedor = str_replace('http://', '', $proveedor);
-                                    $proveedor = str_replace('.imporsuit.com', '', $proveedor);
+                                    $proveedor = str_replace('.merkapro.ec', '', $proveedor);
                                     $proveedor = strtoupper($proveedor);
                                 } else {
                                     $proveedor = "NO ENCONTRADO BUG";
@@ -385,7 +386,7 @@ if ($action == 'ajax' && ($server_url == "https://marketplace.imporsuit.com")) {
                             $proveedor_url = $proveedor;
                             $proveedor = str_replace('https://', '', $proveedor);
                             $proveedor = str_replace('http://', '', $proveedor);
-                            $proveedor = str_replace('.imporsuit.com', '', $proveedor);
+                            $proveedor = str_replace('.merkapro.ec', '', $proveedor);
                             $proveedor = strtoupper($proveedor);
 
                             break;
@@ -398,7 +399,7 @@ if ($action == 'ajax' && ($server_url == "https://marketplace.imporsuit.com")) {
 
                     $tienda = str_replace('https://', '', $tienda);
                     $tienda = str_replace('http://', '', $tienda);
-                    $tienda = str_replace('.imporsuit.com', '', $tienda);
+                    $tienda = str_replace('.merkapro.ec', '', $tienda);
                     $tienda = strtoupper($tienda);
                     $badge_transportadoras = "badge ";
                     if ($transportadora == "SERVIENTREGA") {
@@ -419,7 +420,7 @@ if ($action == 'ajax' && ($server_url == "https://marketplace.imporsuit.com")) {
                         <td class="text-center align-middle"><span class="text-link" onclick="abrirModalTienda('<?php echo $tienda; ?>')" data-bs-toggle="modal" data-bs-target="#tiendaModal"> <?php echo $tienda; ?></span>
                         </td>
 
-                        <?php if ($server_url === "https://marketplace.imporsuit.com") { ?>
+                        <?php if ($server_url === "https://merkapro.ec") { ?>
                             <td class="text-center align-middle"><span class="text-link" onclick="abrirModalTienda('<?php echo $proveedor; ?>')"> <?php echo $proveedor; ?></span></td>
                         <?php } ?>
                         <td class="text-center align-middle"><?php if (empty($transportadora)) {
@@ -491,10 +492,10 @@ if ($action == 'ajax' && ($server_url == "https://marketplace.imporsuit.com")) {
                                                                                                                         echo "Estado no reconocido";
                                                                                                                 }
                                                                                                                 if ($guia_numero != '0') {
-                                                                                                                    if (strpos($guia_numero, "IMP") == 0) {
+                                                                                                                    if (strpos($guia_numero, "MKP") == 0) {
                                                                                                                         echo "<script> validar_laar('" . $guia_numero . "', '" . $numero_factura . "')</script>";
-                                                                                                                        echo "<script> validar_servientrega('" . $guia_numero . "', '" . $numero_factura . "')</script>";
-                                                                                                                    } else if (is_numeric($guia_numero)) {
+                                                                                                                    }
+                                                                                                                    if (is_numeric($guia_numero)) {
                                                                                                                         echo "<script> validar_servientrega('" . $guia_numero . "', '" . $numero_factura . "')</script>";
                                                                                                                     }
 
@@ -510,7 +511,7 @@ if ($action == 'ajax' && ($server_url == "https://marketplace.imporsuit.com")) {
                                                                                                                         $traking = "https://fenix.laarcourier.com/Tracking/Guiacompleta.aspx?guia=" . get_row_guia('guia_laar', 'guia_laar', 'id_pedido', $id_factura . " and tienda_venta like '%" . $server_url . "%'");
                                                                                                                     }
                                                                                                                     $estado_guia_for = get_row('guia_laar', 'estado_guia', 'guia_laar', $guia_numero);
-                                                                                                                    if ($estado_guia_for != "0" && strpos($guia_numero, "IMP")) {
+                                                                                                                    if ($estado_guia_for != "0" && strpos($guia_numero, "MKP")) {
 
                                                                                                                         switch ($estado_guia_for) {
                                                                                                                             case '1':
@@ -870,14 +871,14 @@ if ($action == 'ajax' && ($server_url == "https://marketplace.imporsuit.com")) {
                                                                                                                     }
                                                                                                                 }
                                                                                                                 if (isset($estado_guia_for)) {
-                                                                                                                    if ($traking != '' && strpos($guia_numero, "IMP") === 0) {
+                                                                                                                    if ($traking != '' && strpos($guia_numero, "MKP") === 0) {
                                                                                                                 ?>
                                     <a style="cursor: pointer;" href="<?php echo $url; ?>" target="blank"><span class="badge <?php echo $span_estado; ?>"><?php echo $estado_guia; ?></span></a><BR>
                                     <a style="cursor: pointer;" href="<?php echo $url; ?>" target="blank"><span class=""><?php echo $guia_numero; ?></span></a><BR>
 
                                     <a style="cursor: pointer;" href="<?php echo $traking; ?>" target="blank"><img width="40px" src="../../img_sistema/rastreo.png" alt="" /></a>
                                 <?php
-                                                                                                                    } else if (strpos($guia_numero, "IMP") !== 0) {
+                                                                                                                    } else if (strpos($guia_numero, "MKP") !== 0) {
                                 ?>
                                     <a style="cursor: pointer;" href="<?php echo $url; ?>" target="blank"><span class="badge <?php echo $span_estado; ?>"><?php echo $estado_guia; ?></span></a><BR>
                                     <a style="cursor: pointer;" href="<?php echo $url; ?>" target="blank"><span class=""><?php echo $guia_numero; ?></span></a><BR>
@@ -897,12 +898,12 @@ if ($action == 'ajax' && ($server_url == "https://marketplace.imporsuit.com")) {
                             <?php
                             $tienda2   = $row['telefono'];
                             $telefono_tienda    = $tienda2;
-                            
 
-                                $telefonoFormateado = formatPhoneNumber($telefono_tienda);
+
+                            $telefonoFormateado = formatPhoneNumber($telefono_tienda);
                             ?>
-                                <a href="https://wa.me/<?php echo $telefonoFormateado ?>" style="font-size: 40px;" target="_blank"><i class="bx bxl-whatsapp-square" style="color: green"></i></a>
-                            
+                            <a href="https://wa.me/<?php echo $telefonoFormateado ?>" style="font-size: 40px;" target="_blank"><i class="bx bxl-whatsapp-square" style="color: green"></i></a>
+
                         </td>
 
                         <td class='text-center text-primary align-middle'> <?php if ($impreso != null && $impreso != 0) echo '<i class="ti-file"></i>'; ?> </td>
@@ -1022,7 +1023,7 @@ if ($action == 'ajax' && ($server_url == "https://marketplace.imporsuit.com")) {
 
     /*     $sWhere .= " and estado_guia_sistema IS NOT NULL";
  */
-$sWhere .= " AND transporte IS NOT NULL AND (estado_guia_sistema NOT IN ('8', '101') OR estado_guia_sistema IS NULL)";
+    $sWhere .= " AND transporte IS NOT NULL AND (estado_guia_sistema NOT IN ('8', '101') OR estado_guia_sistema IS NULL)";
 
     $sWhere .= " order by facturas_cot.id_factura desc";
 
@@ -1109,9 +1110,6 @@ $sWhere .= " AND transporte IS NOT NULL AND (estado_guia_sistema NOT IN ('8', '1
                     $ciudad_cot   = $row['ciudad_cot'];
                     //echo $ciudad_cot;
                     $ciudad_cot   = get_row("ciudad_cotizacion", "ciudad", "id_cotizacion", $ciudad_cot);
-                    if ($ciudad_cot == 0) {
-                        $ciudad_cot = get_row('ciudad_laar', 'nombre', 'codigo', $row['ciudad_cot']);
-                    }
 
                     $observacion   = $row['observacion'];
                     $direccion   = $row['c_principal'] . ' y ' . $row['c_secundaria'] . '-' . $row['referencia'];
@@ -1232,7 +1230,7 @@ $sWhere .= " AND transporte IS NOT NULL AND (estado_guia_sistema NOT IN ('8', '1
                                     $proveedor_url = $proveedor;
                                     $proveedor = str_replace('https://', '', $proveedor);
                                     $proveedor = str_replace('http://', '', $proveedor);
-                                    $proveedor = str_replace('.imporsuit.com', '', $proveedor);
+                                    $proveedor = str_replace('.merkapro.ec', '', $proveedor);
                                     $proveedor = strtoupper($proveedor);
                                 } else {
                                     $proveedor = "NO ENCONTRADO BUG";
@@ -1250,7 +1248,7 @@ $sWhere .= " AND transporte IS NOT NULL AND (estado_guia_sistema NOT IN ('8', '1
                             $proveedor_url = $proveedor;
                             $proveedor = str_replace('https://', '', $proveedor);
                             $proveedor = str_replace('http://', '', $proveedor);
-                            $proveedor = str_replace('.imporsuit.com', '', $proveedor);
+                            $proveedor = str_replace('.merkapro.ec', '', $proveedor);
                             $proveedor = strtoupper($proveedor);
 
                             break;
@@ -1286,7 +1284,7 @@ $sWhere .= " AND transporte IS NOT NULL AND (estado_guia_sistema NOT IN ('8', '1
                         <td class="text-center align-middle"><span class="text-link" onclick="abrirModalTienda('<?php echo $tienda; ?>')" data-bs-toggle="modal" data-bs-target="#tiendaModal"> <?php echo $tienda; ?></span>
                         </td>
 
-                        <?php if ($server_url === "https://marketplace.imporsuit.com") { ?>
+                        <?php if ($server_url === "https://merkapro.ec") { ?>
                             <td class="text-center align-middle"><span class="text-link" onclick="abrirModalTienda('<?php echo $proveedor; ?>')"> <?php echo $proveedor; ?></span></td>
                         <?php } ?>
                         <td class="text-center align-middle"><?php if (empty($transportadora)) {
@@ -1368,9 +1366,8 @@ $sWhere .= " AND transporte IS NOT NULL AND (estado_guia_sistema NOT IN ('8', '1
                                                                                                                 if ($guia_numero != '0') {
 
 
-                                                                                                                    if (strpos($guia_numero, "IMP") == 0) {
+                                                                                                                    if (strpos($guia_numero, "MKP") == 0) {
                                                                                                                         echo "<script> validar_laar('" . $guia_numero . "', '" . $numero_factura . "')</script>";
-                                                                                                                        
                                                                                                                     }
                                                                                                                     if (is_numeric($guia_numero)) {
                                                                                                                         echo "<script> validar_servientrega('" . $guia_numero . "', '" . $numero_factura . "')</script>";
@@ -1390,7 +1387,7 @@ $sWhere .= " AND transporte IS NOT NULL AND (estado_guia_sistema NOT IN ('8', '1
                                                                                                                     if ($guia_numero == "guia_local") {
                                                                                                                         $estado_guia_for = get_row('facturas_cot', 'estado_guia_sistema', 'numero_factura', $numero_factura);
                                                                                                                     }
-                                                                                                                    if ($estado_guia_for != "0" && strpos($guia_numero, "IMP") === 0) {
+                                                                                                                    if ($estado_guia_for != "0" && strpos($guia_numero, "MKP") === 0) {
 
                                                                                                                         switch ($estado_guia_for) {
                                                                                                                             case '1':
@@ -1766,7 +1763,7 @@ $sWhere .= " AND transporte IS NOT NULL AND (estado_guia_sistema NOT IN ('8', '1
                                                                                                                     }
                                                                                                                 }
                                                                                                                 if (isset($estado_guia_for)) {
-                                                                                                                    if ($traking != '' && strpos($guia_numero, "IMP") === 0) {
+                                                                                                                    if ($traking != '' && strpos($guia_numero, "MKP") === 0) {
                                                                                                                 ?>
                                     <a style="cursor: pointer;" href="<?php echo $url; ?>" target="blank"><span class="badge <?php echo $span_estado; ?>"><?php echo $estado_guia; ?></span></a><BR>
                                     <a style="cursor: pointer;" href="<?php echo $url; ?>" target="blank"><span class=""><?php echo $guia_numero; ?></span></a><BR>
@@ -1834,12 +1831,12 @@ $sWhere .= " AND transporte IS NOT NULL AND (estado_guia_sistema NOT IN ('8', '1
                             <?php
                             $tienda2   = $row['telefono'];
                             $telefono_tienda    = $tienda2;
-                            
 
-                                $telefonoFormateado = formatPhoneNumber($telefono_tienda);
+
+                            $telefonoFormateado = formatPhoneNumber($telefono_tienda);
                             ?>
-                                <a href="https://wa.me/<?php echo $telefonoFormateado ?>" style="font-size: 40px;" target="_blank"><i class="bx bxl-whatsapp-square" style="color: green"></i></a>
-                            
+                            <a href="https://wa.me/<?php echo $telefonoFormateado ?>" style="font-size: 40px;" target="_blank"><i class="bx bxl-whatsapp-square" style="color: green"></i></a>
+
                         </td>
 
                         <td class='text-center text-primary align-middle'> <?php if ($impreso != null && $impreso != 0) echo '<i class="ti-file"></i>'; ?> </td>
@@ -1898,25 +1895,25 @@ $sWhere .= " AND transporte IS NOT NULL AND (estado_guia_sistema NOT IN ('8', '1
     // fin else
 }
 function formatPhoneNumber($number)
-    {
-        // Eliminar caracteres no numéricos excepto el signo +
-        $number = preg_replace('/[^\d+]/', '', $number);
+{
+    // Eliminar caracteres no numéricos excepto el signo +
+    $number = preg_replace('/[^\d+]/', '', $number);
 
-        // Verificar si el número ya tiene el código de país +593
-        if (preg_match('/^\+593/', $number)) {
-            // El número ya está correctamente formateado con +593
-            return $number;
-        } elseif (preg_match('/^593/', $number)) {
-            // El número tiene 593 al inicio pero le falta el +
-            return '+' . $number;
-        } else {
-            // Si el número comienza con 0, quitarlo
-            if (strpos($number, '0') === 0) {
-                $number = substr($number, 1);
-            }
-            // Agregar el código de país +593 al inicio del número
-            $number = '+593' . $number;
-        }
-
+    // Verificar si el número ya tiene el código de país +593
+    if (preg_match('/^\+593/', $number)) {
+        // El número ya está correctamente formateado con +593
         return $number;
+    } elseif (preg_match('/^593/', $number)) {
+        // El número tiene 593 al inicio pero le falta el +
+        return '+' . $number;
+    } else {
+        // Si el número comienza con 0, quitarlo
+        if (strpos($number, '0') === 0) {
+            $number = substr($number, 1);
+        }
+        // Agregar el código de país +593 al inicio del número
+        $number = '+593' . $number;
     }
+
+    return $number;
+}
