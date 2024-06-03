@@ -1261,7 +1261,7 @@ if ($action == 'ajax' && ($server_url == "https://marketplace.imporsuit.com")) {
 
                     $tienda = str_replace('https://', '', $tienda);
                     $tienda = str_replace('http://', '', $tienda);
-                    $tienda = str_replace('.imporsuit.com', '', $tienda);
+                    $tienda = str_replace('.merkapro.ec', '', $tienda);
                     $tienda = strtoupper($tienda);
                     $badge_transportadoras = "badge ";
                     if ($transportadora == "SERVIENTREGA") {

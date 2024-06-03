@@ -9,7 +9,8 @@ if (!$conexion) {
     die("Error en la conexión: " . mysqli_connect_error());
 }
 
-$sql = "SELECT * FROM guia_laar WHERE guia_laar IS NOT NULL AND estado_guia IN (7, 9)";
+$sql = "SELECT * FROM guia_laar WHERE guia_laar IS NOT NULL";
+
 $result = mysqli_query($conexion, $sql);
 
 if (!$result) {
@@ -18,8 +19,21 @@ if (!$result) {
 
 $req = 00001;
 while ($rw = mysqli_fetch_array($result)) {
-    $nombre = $rw['nombreD'];
-    $guia_laar = $rw['guia_laar'];
+
+    if (strpos($rw['guia_laar'], "MKP") === 0) {
+
+        $guia_laar = $rw['guia_laar'];
+        $url_laar = "https://api.laarcourier.com:9727/guias/" . $guia_laar;
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url_laar);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        $output = curl_exec($ch);
+        curl_close($ch);
+        print_r($output);
+    }
+
+    /* $nombre = $rw['nombreD'];
     $proveedor = $rw['tienda_proveedor'];
     $tienda_venta = $rw['tienda_venta'];
     $fecha = $rw['fecha'];
@@ -46,7 +60,7 @@ while ($rw = mysqli_fetch_array($result)) {
         echo "Registro insertado correctamente: " . $insert_cuenta_pagar . "<br>";
     }
 
-    $req++;
+    $req++; */
 }
 
 mysqli_close($conexion);
