@@ -174,7 +174,7 @@ if ($filtro == 'mayor_menor') {
                 </td>
                 <td id="estados_laar_<?php echo $rws['guia_laar'] ?>" class="text-center">
                     <?php
-                    if (strpos($rws['guia_laar'], "IMP") === 0) {
+                    if (strpos($rws['guia_laar'], "MKP") === 0) {
                         echo "<script> validar_laar('" . $rws['guia_laar'] . "', '" . $numero_factura . "')</script>";
                     }
                     ?>
@@ -183,7 +183,7 @@ if ($filtro == 'mayor_menor') {
 
                 <td id="estados_laar__<?php echo $rws['guia_laar'] ?>" class="text-center">
                     <?php
-                    if (strpos($rws['guia_laar'], "IMP") === 0) {
+                    if (strpos($rws['guia_laar'], "MKP") === 0) {
                         echo "<script> validar_laar('" . $rws['guia_laar'] . "', '" . $numero_factura . "')</script>";
                     }
                     ?>
