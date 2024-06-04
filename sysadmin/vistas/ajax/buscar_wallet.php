@@ -707,7 +707,7 @@ if ($dominio_actual == 'merkapro.ec') {
 
                                     <div class="">
                                         <p class="text-muted m-b-5 font-13 font-bold text-uppercase">SALDO PENDIENTE A TIENDA</p>
-                                        <h4 class="m-t-0 m-b-5 counter font-bold text-danger"><?php echo $simbolo_moneda . '' . number_format($total_billetera, 2); ?></h4>
+                                        <h4 class="m-t-0 m-b-5 counter font-bold text-danger"><?php echo $simbolo_moneda . '' . number_format($saldo_billetera, 2); ?></h4>
                                     </div>
                                 </div>
                             </div>
