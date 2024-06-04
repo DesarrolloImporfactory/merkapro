@@ -698,7 +698,11 @@ if ($dominio_actual == 'merkapro.ec') {
                                     $sql_billetera = "SELECT * FROM billeteras WHERE tienda = '$dominio_completo'";
                                     $query_billetera = mysqli_query($conexion_db, $sql_billetera);
                                     $row_billetera = mysqli_fetch_array($query_billetera);
-                                    $total_billetera = $row_billetera['saldo'];
+                                    if (empty($row_billetera)) {
+                                        $saldo_billetera = 0;
+                                    } else {
+                                        $saldo_billetera = $row_billetera['saldo'];
+                                    }
                                     ?>
 
                                     <div class="">
