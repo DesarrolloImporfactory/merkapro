@@ -22,7 +22,7 @@ $valor_total_pendiente = $valor_total_tienda_SQL['total_pendiente'];
 $valor_total_cobrado = $valor_total_tienda_SQL['total_cobrado'];
 $valor_total_monto_recibir = $valor_total_tienda_SQL['monto_recibir'];
 
-$sql_billeteras = "SELECT * FROM billetera WHERE tienda = '$tienda'";
+$sql_billeteras = "SELECT * FROM billeteras WHERE tienda = '$tienda'";
 $valor_total_billetera_query = mysqli_query($conexion, $sql_billeteras);
 $valor_total_billetera_SQL = mysqli_fetch_array($valor_total_billetera_query);
 $valor_total_billetera = $valor_total_billetera_SQL['saldo'];
