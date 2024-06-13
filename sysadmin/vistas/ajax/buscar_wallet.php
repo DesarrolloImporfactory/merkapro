@@ -45,9 +45,9 @@ if ($dominio_actual == 'merkapro.ec') {
     if ($action == "ajax") {
         // escaping, additionally removing everything that could be (html/javascript-) code
         $q = mysqli_real_escape_string($conexion, (strip_tags($_REQUEST['q'], ENT_QUOTES)));
-        $sTable = "cabecera_cuenta_pagar ccp, facturas_cot fc";
+        $sTable = "cabecera_cuenta_pagar ccp";
         $sWhere = "";
-        $sWhere .= " WHERE ccp.numero_factura=fc.numero_factura";
+        $sWhere .= "";
         if ($_GET['q'] != "") {
             $sWhere .= " and ccp.tienda like '%$q%'";
         }
@@ -486,11 +486,11 @@ if ($dominio_actual == 'merkapro.ec') {
                                 $precio_envio = $row['precio_envio'];
                                 $monto_recibir = $row['monto_recibir'];
                                 $estado_factura = $row['estado_pedido'];
-                                $guia_enviada   = $row['guia_enviada'];
+
                                 $valor_cobrado = $row['valor_cobrado'];
                                 $full = $row['full'];
                                 $valor_pendiente = $row['valor_pendiente'];
-                                $id_factura_origen = $row['id_factura_origen'];
+
                                 $guia_laar = "select guia_laar from guia_laar where tienda_venta ='$dominio_completo' AND id_pedido = '$id_factura_origen'";
                                 $query_guia_laar = mysqli_query($conexion_db, $guia_laar);
                                 $row_guia_laar = mysqli_fetch_array($query_guia_laar);
