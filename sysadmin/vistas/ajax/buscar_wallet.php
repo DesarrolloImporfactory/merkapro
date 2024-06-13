@@ -492,6 +492,16 @@ if ($dominio_actual == 'merkapro.ec') {
                                 $valor_pendiente = $row['valor_pendiente'];
                                 $guia_laar = $row['guia_laar'];
 
+                                $guia_enviada = $row["estado_guia"];
+
+                                $label_class = '';
+                                if ($guia_enviada == 7) {
+                                    $label_class = 'badge-success';
+                                } else if ($guia_enviada == 9) {
+                                    $label_class = 'badge-danger';
+                                } else {
+                                    $label_class = 'badge-warning';
+                                }
 
                                 $url_laar = "https://fenix.laarcourier.com/Tracking/Guiacompleta.aspx?guia=" . $guia_laar;
                                 $drogshipin_sql = "SELECT * FROM facturas_cot WHERE numero_factura = '$id_factura'";
