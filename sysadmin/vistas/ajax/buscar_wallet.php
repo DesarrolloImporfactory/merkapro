@@ -222,9 +222,9 @@ if ($dominio_actual == 'merkapro.ec') {
         $sDominio = 'imporsuit_marketplace';
         $conexion_db = mysqli_connect('localhost', $sDominio, $sDominio, $sDominio);
         $q = mysqli_real_escape_string($conexion_db, (strip_tags($_REQUEST['q'], ENT_QUOTES)));
-        $sTable = "cabecera_cuenta_pagar, facturas_cot";
+        $sTable = "cabecera_cuenta_pagar";
         $sWhere = "";
-        $sWhere .= " WHERE  cabecera_cuenta_pagar.tienda = '$dominio_completo' and cabecera_cuenta_pagar.numero_factura=facturas_cot.numero_factura and visto ='1' ";
+        $sWhere .= " WHERE  cabecera_cuenta_pagar.tienda = '$dominio_completo' and visto ='1' ";
         $filtro = isset($_GET['filtro']) ? $_GET['filtro'] : 'todos';
         //obtiene ?tienda=tienda
         if ($filtro == 'mayor_menor') {
