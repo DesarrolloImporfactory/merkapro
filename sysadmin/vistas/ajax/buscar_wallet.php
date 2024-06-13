@@ -496,10 +496,13 @@ if ($dominio_actual == 'merkapro.ec') {
 
                                 $label_class = '';
                                 if ($guia_enviada == 7) {
+                                    $guia_enviada = "Entregada";
                                     $label_class = 'badge-success';
                                 } else if ($guia_enviada == 9) {
+                                    $guia_enviada = "Devuelta";
                                     $label_class = 'badge-danger';
                                 } else {
+                                    $guia_enviada = "En Proceso";
                                     $label_class = 'badge-warning';
                                 }
 
