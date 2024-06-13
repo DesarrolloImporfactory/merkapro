@@ -490,66 +490,14 @@ if ($dominio_actual == 'merkapro.ec') {
                                 $valor_cobrado = $row['valor_cobrado'];
                                 $full = $row['full'];
                                 $valor_pendiente = $row['valor_pendiente'];
+                                $guia_laar = $row['guia_laar'];
 
-                                $guia_laar = "select guia_laar from guia_laar where tienda_venta ='$dominio_completo' AND id_pedido = '$id_factura_origen'";
-                                $query_guia_laar = mysqli_query($conexion_db, $guia_laar);
-                                $row_guia_laar = mysqli_fetch_array($query_guia_laar);
-                                $guia_laar = $row_guia_laar['guia_laar'];
-                                switch ($estado_guia) {
-                                    case 1:
-                                        $guia_enviada = "Pendiente";
-                                        $label_class = 'badge-purple';
-                                        break;
-                                    case 2:
-                                        $guia_enviada = "Por recolectar";
-                                        $label_class = 'badge-info';
-                                        break;
-                                    case 3:
-                                        $guia_enviada = "Recolectado";
-                                        $label_class = 'badge-success';
-                                        break;
-                                    case 4:
-                                        $guia_enviada = "En bodega";
-                                        $label_class = 'badge-warning';
-                                        break;
-                                    case 5:
-                                        $guia_enviada = "En transito";
-                                        $label_class = 'badge-primary';
-                                        break;
-                                    case 6:
-                                        $guia_enviada = "Zona de entrega";
-                                        $label_class = 'badge-dark';
-                                        break;
-                                    case 7:
-                                        $guia_enviada = "Entregado";
-                                        $label_class = 'badge-success';
-                                        break;
-                                    case 8:
-                                        $guia_enviada = "Anulado";
-                                        $label_class = 'badge-danger';
-                                        break;
-                                    case 9:
-                                        $guia_enviada = "Devuelto";
-                                        $label_class = 'badge-danger';
-                                        break;
-                                    case 10:
-                                        $guia_enviada = "Facturado  ";
-                                        $label_class = 'badge-success';
-                                        break;
-                                }
-                                $simbolo_moneda = get_row('perfil', 'moneda', 'id_perfil', 1);
-                                if ($valor_pendiente == 0) {
-                                    $color_row = "table-success";
-                                } elseif ($valor_pendiente < 0) {
-                                    $color_row = "table-danger";
-                                } else {
-                                    $color_row = "table-warning";
-                                }
+
                                 $url_laar = "https://fenix.laarcourier.com/Tracking/Guiacompleta.aspx?guia=" . $guia_laar;
                                 $drogshipin_sql = "SELECT * FROM facturas_cot WHERE numero_factura = '$id_factura'";
                                 $query_drogshipin = mysqli_query($conexion_db, $drogshipin_sql);
                                 $row_drogshipin = mysqli_fetch_array($query_drogshipin);
-                                $drogshipin = $row_drogshipin['drogshipin'];
+
                             ?>
                                 <input type="hidden" value="<?php echo $estado_factura; ?>" id="estado<?php echo $id_factura; ?>">
 
@@ -558,11 +506,7 @@ if ($dominio_actual == 'merkapro.ec') {
                                     <td class="text-center"><a href="<?php echo $url_laar; ?>" class="badge badge-pink"> <?php echo $guia_laar; ?> </a> <br> <?php
                                                                                                                                                                 $numero_factura = $row['numero_factura'];
 
-                                                                                                                                                                if ($drogshipin == 0 || $drogshipin == 4) {
-                                                                                                                                                                    echo '<span class="badge badge-purple">LOCAL</span>';
-                                                                                                                                                                } else {
-                                                                                                                                                                    echo ' <span class="badge badge-purple">DROPSHIPIN</span>';
-                                                                                                                                                                } ?> </td>
+                                                                                                                                                                ?></td>
                                     <td class="text-center"><?php echo $fecha; ?></td>
                                     <td class="text-center"><?php echo $nombre_cliente; ?></td>
                                     <td class="text-center"><?php echo $tienda; ?></td>
