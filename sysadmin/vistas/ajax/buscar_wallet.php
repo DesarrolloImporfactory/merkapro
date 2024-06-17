@@ -38,8 +38,7 @@ if ($_GET['filtro']) {
         $bandd = "btn-primary";
     }
 }
-echo $dominio_actual;
-//Finaliza Control de Permisos
+
 $action = (isset($_REQUEST['action']) && $_REQUEST['action'] != NULL) ? $_REQUEST['action'] : '';
 if ($dominio_actual == 'merkapro.ec' || $dominio_actual === "77.37.67.232") {
 
@@ -75,7 +74,7 @@ if ($dominio_actual == 'merkapro.ec' || $dominio_actual === "77.37.67.232") {
         $query = mysqli_query($conexion, $sql);
         $query = mysqli_fetch_all($query);
 
-        if ($numrows > 0 && $dominio_actual == 'merkapro.ec') {
+        if ($numrows > 0 && ($dominio_actual == 'merkapro.ec' || $dominio_actual === "77.37.67.232")) {
 ?>
             <!-- activar modal -->
             <div class="">
