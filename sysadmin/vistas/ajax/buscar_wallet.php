@@ -38,6 +38,7 @@ if ($_GET['filtro']) {
         $bandd = "btn-primary";
     }
 }
+echo $dominio_actual;
 //Finaliza Control de Permisos
 $action = (isset($_REQUEST['action']) && $_REQUEST['action'] != NULL) ? $_REQUEST['action'] : '';
 if ($dominio_actual == 'merkapro.ec' || $dominio_actual == '77.37.67.232') {
