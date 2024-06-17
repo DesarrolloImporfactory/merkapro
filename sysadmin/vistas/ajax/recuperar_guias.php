@@ -10,21 +10,7 @@ if (!$conexion) {
 }
 
 $sql = "SELECT * 
-FROM guia_laar 
-WHERE guia_laar IN (
-    'MKP251', 'MKP253', 'MKP254', 'MKP255', 'MKP257', 'MKP258', 'MKP334', 'MKP344',
-    'MKP382', 'MKP383', 'MKP386', 'MKP390', 'MKP391', 'MKP398', 'MKP399', 'MKP400',
-    'MKP406', 'MKP408', 'MKP409', 'MKP410', 'MKP411', 'MKP415', 'MKP416', 'MKP418',
-    'MKP422', 'MKP424', 'MKP426', 'MKP462', 'MKP465', 'MKP466', 'MKP474', 'MKP476',
-    'MKP481', 'MKP486', 'MKP488', 'MKP489', 'MKP491', 'MKP496', 'MKP497', 'MKP498',
-    'MKP503', 'MKP507', 'MKP508', 'MKP514', 'MKP520', 'MKP521', 'MKP523', 'MKP527',
-    'MKP529', 'MKP530', 'MKP532', 'MKP533', 'MKP534', 'MKP553', 'MKP557', 'MKP559',
-    'MKP560', 'MKP561', 'MKP564', 'MKP566', 'MKP567', 'MKP569', 'MKP571', 'MKP572',
-    'MKP590', 'MKP592', 'MKP593', 'MKP595', 'MKP597', 'MKP598', 'MKP599', 'MKP619',
-    'MKP620', 'MKP621', 'MKP622', 'MKP626', 'MKP628', 'MKP629', 'MKP631', 'MKP637',
-    'MKP638', 'MKP640', 'MKP641', 'MKP642', 'MKP645', 'MKP646', 'MKP647', 'MKP648',
-    'MKP651', 'MKP653', 'MKP654', 'MKP657'
-)";
+FROM guia_laar where tienda_venta = 'https://simbastore.merkapro.ec' and estado_guia in (7,9)";
 $result = mysqli_query($conexion, $sql);
 
 if (!$result) {
