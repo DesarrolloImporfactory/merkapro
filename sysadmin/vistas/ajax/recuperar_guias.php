@@ -16,7 +16,7 @@ $result = mysqli_query($conexion, $sql);
 if (!$result) {
     die("Error en la consulta SELECT: " . mysqli_error($conexion));
 }
-$req = 800;
+$req = 1800;
 while ($rw = mysqli_fetch_array($result)) {
     $nombre = $rw['nombreD'];
     $guia_laar = $rw['guia_laar'];
